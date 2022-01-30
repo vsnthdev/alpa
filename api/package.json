@@ -6,7 +6,7 @@
         "clean": "rimraf dist tsconfig.tsbuildinfo",
         "build": "tsc --incremental false",
         "watch": "tsc --watch",
-        "start": "node dist/index.js"
+        "start": "nodemon"
     },
     "dependencies": {
         "chalk": "^5.0.0",
@@ -22,6 +22,7 @@
         "@types/glob": "^7.2.0",
         "@types/ioredis": "^4.28.7",
         "@types/js-yaml": "^4.0.5",
-        "@types/slash": "^3.0.0"
+        "@types/slash": "^3.0.0",
+        "nodemon": "^2.0.15"
     }
 }

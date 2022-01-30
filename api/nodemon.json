@@ -1,0 +1,12 @@
+{
+    "exec": "node dist/index.js",
+    "ext": "js,json",
+    "verbose": false,
+    "quiet": true,
+    "ignore": [
+        "./src"
+    ],
+    "watch": [
+        "./dist"
+    ]
+}
