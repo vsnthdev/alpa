@@ -10,6 +10,7 @@
     },
     "dependencies": {
         "chalk": "^5.0.0",
+        "fastify": "^3.27.0",
         "ioredis": "^4.28.3",
         "itivrutaha": "^2.0.12",
         "js-yaml": "^4.1.0"

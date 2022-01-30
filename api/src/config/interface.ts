@@ -16,4 +16,8 @@ export interface AlpaAPIConfig {
             codes: number
         }
     }
+    server: {
+        host: string
+        port: string
+    }
 }
