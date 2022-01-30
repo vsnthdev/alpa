@@ -4,11 +4,8 @@
  */
 
 import itivrutaha from 'itivrutaha';
+import { Logger } from 'itivrutaha/dist/class';
 
-export let log
-
-export default async (): Promise<void> => {
-    log = await itivrutaha.createNewLogger({
-        appName: '@alpa/api'
-    })
-}
+export default async (): Promise<Logger> => await itivrutaha.createNewLogger({
+    appName: '@alpa/api'
+})

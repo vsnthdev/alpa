@@ -9,6 +9,12 @@
         "start": "node dist/index.js"
     },
     "dependencies": {
-        "itivrutaha": "^2.0.12"
+        "chalk": "^5.0.0",
+        "ioredis": "^4.28.3",
+        "itivrutaha": "^2.0.12",
+        "js-yaml": "^4.1.0"
+    },
+    "devDependencies": {
+        "@types/js-yaml": "^4.0.5"
     }
 }

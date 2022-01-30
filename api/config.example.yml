@@ -1,0 +1,14 @@
+#
+#  Example configuration file to config @alpa/api project.
+#  Created On 30 January 2022
+#
+
+auth:
+    username: alpa
+    password: short_lived
+database:
+    host: localhost
+    port: 6379
+    password: null
+    channels:
+        codes: 0
