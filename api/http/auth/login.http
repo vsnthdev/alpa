@@ -1,0 +1,12 @@
+# 
+#   Logs into the API by generating a token stored within 🍪.
+#   Created On 30 January 2022
+# 
+
+POST http://localhost:1727/login
+Content-Type: application/json
+
+{
+    "username": "alpa",
+    "password": "short_lived"
+}
