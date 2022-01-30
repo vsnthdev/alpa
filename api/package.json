@@ -2,7 +2,12 @@
     "name": "@alpa/api",
     "version": "0.0.0",
     "type": "module",
-    "scripts": {},
+    "scripts": {
+        "clean": "rimraf dist tsconfig.tsbuildinfo",
+        "build": "tsc --incremental false",
+        "watch": "tsc --watch",
+        "start": "node dist/index.js"
+    },
     "dependencies": {},
     "devDependencies": {}
 }
