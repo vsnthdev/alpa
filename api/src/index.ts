@@ -3,4 +3,6 @@
  *  Created On 30 January 2022
  */
 
-console.log('hey 👋')
+import logger, { log } from './logger.js';
+
+await logger()
