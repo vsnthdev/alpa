@@ -15,3 +15,4 @@ database:
 server:
     host: localhost
     port: 1727
+    secret: [CREATE A 64 CHARACTER RANDOM STRING HERE]
