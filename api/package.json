@@ -15,6 +15,7 @@
         "js-yaml": "^4.1.0"
     },
     "devDependencies": {
+        "@types/ioredis": "^4.28.7",
         "@types/js-yaml": "^4.0.5"
     }
 }
