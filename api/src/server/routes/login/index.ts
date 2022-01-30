@@ -9,6 +9,10 @@ const getHandler = (config: AlpaAPIConfig) => {
 
         const token = await rep.jwtSign({
             username: config.auth.username
+        }, {
+            sign: {
+                expiresIn: 259200,
+            }
         })
 
         return rep.setCookie('token', token, {
@@ -17,7 +21,8 @@ const getHandler = (config: AlpaAPIConfig) => {
             secure: true,
             httpOnly: true,
             sameSite: true,
-            signed: true
+            signed: true,
+            maxAge: 259200
         }).status(200).send({
             message: 'Login success'
         })
