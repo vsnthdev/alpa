@@ -14,9 +14,11 @@ import dirname from 'es-dirname';
 import cookie from 'fastify-cookie';
 import boom from 'fastify-boom';
 
+
 export interface RouteImpl {
     path: string
     method: string
+    opts: any
     getHandler: (config: AlpaAPIConfig) => (req: FastifyRequest, rep: FastifyReply) => Promise<FastifyReply>
 }
 
@@ -33,7 +35,8 @@ const loadRoutes = async (fastify: FastifyInstance, config: AlpaAPIConfig): Prom
         const { default: route }: { default: RouteImpl } = await import(`file://${file}`)
 
         route.method = route.method.toLowerCase()
-        fastify[route.method](route.path, route.getHandler(config))
+        if (!route.opts) route.opts = {}
+        fastify[route.method](route.path, route.opts, route.getHandler(config))
     }
 }
 
