@@ -15,7 +15,7 @@ const getHandler = (config: AlpaAPIConfig) => async (req: FastifyRequest, rep: F
 })
 
 export default {
-    path: '/auth/logout',
+    path: '/api/auth/logout',
     method: 'DELETE',
     opts: {
         preValidation: [auth]

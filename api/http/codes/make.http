@@ -3,7 +3,7 @@
 #   Created On 02 February 2022
 # 
 
-POST http://localhost:1727/codes
+POST http://localhost:1727/api/codes
 Content-Type: application/json
 Cookie: token={{$dotenv TOKEN}}
 

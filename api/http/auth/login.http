@@ -3,7 +3,7 @@
 #   Created On 30 January 2022
 # 
 
-POST http://localhost:1727/auth/login
+POST http://localhost:1727/api/auth/login
 Content-Type: application/json
 
 {

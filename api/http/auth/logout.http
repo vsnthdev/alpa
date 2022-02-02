@@ -3,5 +3,5 @@
 #   Created On 02 February 2022
 # 
 
-DELETE http://localhost:1727/auth/logout
+DELETE http://localhost:1727/api/auth/logout
 Cookie: token={{$dotenv TOKEN}}

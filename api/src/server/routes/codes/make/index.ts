@@ -32,7 +32,7 @@ const getHandler = (config: AlpaAPIConfig, db: ConnectionsList) => async (req: F
 }
 
 export default {
-    path: '/codes',
+    path: '/api/codes',
     method: 'POST',
     opts: {
         preValidation: [auth]

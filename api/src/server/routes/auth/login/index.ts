@@ -27,7 +27,7 @@ const getHandler = (config: AlpaAPIConfig) => async (req: FastifyRequest, rep: F
 }
 
 export default {
-    path: '/auth/login',
+    path: '/api/auth/login',
     method: 'POST',
     getHandler,
 }
