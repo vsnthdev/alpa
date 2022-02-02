@@ -4,4 +4,4 @@
 # 
 
 DELETE http://localhost:1727/auth/logout
-Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFscGEiLCJpYXQiOjE2NDM4MjMwMTksImV4cCI6MTY0NDA4MjIxOX0.DN1IhEj2uwcR8nTroid6GgTvFCOpEacDizwCwjNQ_wA.QNfZBUzq2W%2BQUsWeClTE1hfbs02gBqTizh8h4kXJ9NM; Max-Age=259200; Domain=0.0.0.0; Path=/; HttpOnly; Secure; SameSite=Strict
+Cookie: token={{$dotenv TOKEN}}
