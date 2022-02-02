@@ -22,13 +22,20 @@ const getHandler = (config: AlpaAPIConfig, db: ConnectionsList) => async (req: F
     const code = body.code
     delete body.code
 
-    if (await db.codes.exists(code)) throw boom.conflict('That code already exists')
+    const exists = await db.codes.exists(code)
+    if (exists && Boolean(req.query['force']) == false) throw boom.conflict('That code already exists')
 
     await db.codes.set(code, JSON.stringify(body))
 
-    return rep.status(201).send({
-        message: 'Created a new code'
-    })
+    if (exists) {
+        return rep.status(200).send({
+            message: 'Updated the code'
+        })
+    } else {
+        return rep.status(201).send({
+            message: 'Created a new code'
+        })
+    }
 }
 
 export default {
