@@ -12,6 +12,7 @@ import glob from 'glob';
 import path from 'path';
 import dirname from 'es-dirname';
 import cookie from 'fastify-cookie';
+import boom from 'fastify-boom';
 
 export interface RouteImpl {
     path: string
@@ -53,6 +54,8 @@ export default async (log: Logger, config: AlpaAPIConfig): Promise<void> => new 
     fastify.register(cookie, {
         secret: config.server.secret
     })
+
+    fastify.register(boom)
 
     loadRoutes(fastify, config)
         .then(() => fastify.listen(config.server.port, config.server.host, (err, address) => {
