@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify"
-import { AlpaAPIConfig } from "../../../config/interface.js";
+import { AlpaAPIConfig } from "../../../../config/interface.js";
 
 const getHandler = (config: AlpaAPIConfig) => {
     return async (req: FastifyRequest, rep: FastifyReply): Promise<any> => {
@@ -30,7 +30,7 @@ const getHandler = (config: AlpaAPIConfig) => {
 }
 
 export default {
-    path: '/',
+    path: '/auth/login',
     method: 'POST',
     getHandler,
 }

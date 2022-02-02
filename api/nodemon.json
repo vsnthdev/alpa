@@ -1,5 +1,5 @@
 {
-    "exec": "node dist/index.js",
+    "exec": "node dist/index.js --verbose",
     "ext": "js,json",
     "verbose": false,
     "quiet": true,

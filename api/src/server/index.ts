@@ -11,7 +11,6 @@ import jwt from 'fastify-jwt';
 import glob from 'glob';
 import path from 'path';
 import dirname from 'es-dirname';
-import slash from 'slash';
 import cookie from 'fastify-cookie';
 
 export interface RouteImpl {
@@ -21,16 +20,6 @@ export interface RouteImpl {
 }
 
 export let fastify: FastifyInstance
-
-// copied from 👇
-// https://stackoverflow.com/questions/6680825/return-string-without-trailing-slash
-const stripTrailingSlash = str => str.endsWith('/') ? str.slice(0, -1) : str
-
-const getPath = (file: string, addition: string): string => {
-    file = file.substring(path.join(dirname(), 'routes').length + 1)
-    const base = path.basename(file)
-    return '/' + path.join(file.slice(0, -base.length - 1), addition)
-}
 
 const loadRoutes = async (fastify: FastifyInstance, config: AlpaAPIConfig): Promise<void> => {
     const globStr = path.join(dirname(), 'routes', '**', 'index.js')
@@ -42,10 +31,7 @@ const loadRoutes = async (fastify: FastifyInstance, config: AlpaAPIConfig): Prom
     for (const file of files) {
         const { default: route }: { default: RouteImpl } = await import(`file://${file}`)
 
-        // apply the path transformation
-        route.path = stripTrailingSlash(slash(getPath(file, route.path)))
         route.method = route.method.toLowerCase()
-
         fastify[route.method](route.path, route.getHandler(config))
     }
 }
@@ -70,7 +56,11 @@ export default async (log: Logger, config: AlpaAPIConfig): Promise<void> => new 
 
     loadRoutes(fastify, config)
         .then(() => fastify.listen(config.server.port, config.server.host, (err, address) => {
-                log.success(`${chalk.whiteBright.bold('@alpa/api')} listening at ${chalk.gray.underline(`http://${config.server.host}:${config.server.port}`)}`)
+                // log the error and terminate execution
+                err && log.error(err, 2)
+
+                // log the success and resolve promise
+                log.success(`${chalk.whiteBright.bold('@alpa/api')} listening at ${chalk.gray.underline(`http://${config.server.host}:${config.server.port}`)}`)               
                 resolve()
             }))
 })
