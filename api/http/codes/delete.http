@@ -1,0 +1,2 @@
+DELETE http://localhost:1727/api/codes/abcd
+Cookie: token={{$dotenv TOKEN}}
