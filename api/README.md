@@ -7,7 +7,8 @@
 | ❌ | `GET` | `/api` | Responds with API version details. |
 | ✅ | `POST` | `/api/auth/login` | Sets the token as a 🍪 |
 | ✅ | `DELETE` | `/api/auth/logout` | Removes the 🍪 which has been set |
-| ❌ | `GET` | `/api/codes` | List out all codes with pagination. |
+| ✅ | `GET` | `/api/codes` | List out all codes with pagination. |
+| ✅ | `GET` | `/api/codes/:code` | Returns full API response on a code. |
 | ✅ | `POST` | `/api/codes` | Create a new short code. |
 | ❌ | `PATCH` | `/api/codes` | Update a given code. |
 | ❌ | `DELETE` | `/api/codes` | Delete a short code. |
