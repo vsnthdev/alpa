@@ -5,12 +5,13 @@
 
 import { FastifyReply, FastifyRequest } from 'fastify'
 import fp from 'fastify-plugin'
+import boom from 'boom';
 
 const func: any = async (req: FastifyRequest, rep: FastifyReply) => {
     try {
         await req.jwtVerify()
     } catch (err) {
-        rep.send(err)
+        throw boom.unauthorized()
     }
 }
 

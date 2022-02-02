@@ -13,18 +13,18 @@ import path from 'path';
 import dirname from 'es-dirname';
 import cookie from 'fastify-cookie';
 import boom from 'fastify-boom';
-
+import { ConnectionsList } from '../database.js';
 
 export interface RouteImpl {
     path: string
     method: string
     opts: any
-    getHandler: (config: AlpaAPIConfig) => (req: FastifyRequest, rep: FastifyReply) => Promise<FastifyReply>
+    getHandler: (config: AlpaAPIConfig, db: ConnectionsList) => (req: FastifyRequest, rep: FastifyReply) => Promise<FastifyReply>
 }
 
 export let fastify: FastifyInstance
 
-const loadRoutes = async (fastify: FastifyInstance, config: AlpaAPIConfig): Promise<void> => {
+const loadRoutes = async (fastify: FastifyInstance, config: AlpaAPIConfig, db: ConnectionsList): Promise<void> => {
     const globStr = path.join(dirname(), 'routes', '**', 'index.js')
     const files = glob.sync(globStr, {
         nodir: true,
@@ -36,11 +36,11 @@ const loadRoutes = async (fastify: FastifyInstance, config: AlpaAPIConfig): Prom
 
         route.method = route.method.toLowerCase()
         if (!route.opts) route.opts = {}
-        fastify[route.method](route.path, route.opts, route.getHandler(config))
+        fastify[route.method](route.path, route.opts, route.getHandler(config, db))
     }
 }
 
-export default async (log: Logger, config: AlpaAPIConfig): Promise<void> => new Promise((resolve, reject) => {
+export default async (log: Logger, config: AlpaAPIConfig, db: ConnectionsList): Promise<void> => new Promise((resolve, reject) => {
     fastify = Fastify({
         // TODO: implement a custom logger, and attach it here
         logger: false
@@ -60,7 +60,7 @@ export default async (log: Logger, config: AlpaAPIConfig): Promise<void> => new 
 
     fastify.register(boom)
 
-    loadRoutes(fastify, config)
+    loadRoutes(fastify, config, db)
         .then(() => fastify.listen(config.server.port, config.server.host, (err, address) => {
                 // log the error and terminate execution
                 err && log.error(err, 2)

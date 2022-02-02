@@ -1,0 +1,17 @@
+# 
+#   Creates a new short code.
+#   Created On 02 February 2022
+# 
+
+POST http://localhost:1727/codes
+Content-Type: application/json
+Cookie: token={{$dotenv TOKEN}}
+
+{
+    "code": "abcd",
+    "links": [
+        {
+            "url": "https://vasanthdeveloper.com"
+        }
+    ]
+}

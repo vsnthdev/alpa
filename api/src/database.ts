@@ -8,7 +8,7 @@ import { Logger } from 'itivrutaha/dist/class'
 import { AlpaAPIConfig } from './config/interface.js'
 import chalk from 'chalk';
 
-interface ConnectionsList {
+export interface ConnectionsList {
     codes: Redis.Redis
 }
 
