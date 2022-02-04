@@ -2,7 +2,12 @@
     "name": "@alpa/app",
     "version": "0.0.0",
     "type": "module",
-    "scripts": {},
-    "dependencies": {},
-    "devDependencies": {}
+    "scripts": {
+        "clean": "rimraf dist tsconfig.tsbuildinfo",
+        "start": "vite",
+        "build": "vite build"
+    },
+    "devDependencies": {
+        "vite": "^2.7.13"
+    }
 }

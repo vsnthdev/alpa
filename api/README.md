@@ -10,7 +10,7 @@
 | ✅ | `GET` | `/api/codes` | List out all codes with pagination. |
 | ✅ | `GET` | `/api/codes/:code` | Returns full API response on a code. |
 | ✅ | `POST` | `/api/codes` | Create a new short code. |
-| ❌ | `DELETE` | `/api/codes` | Delete a short code. |
+| ✅ | `DELETE` | `/api/codes` | Delete a short code. |
 
 ## 💡 Route Schema
 ```js
