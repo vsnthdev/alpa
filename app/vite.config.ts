@@ -4,6 +4,7 @@
  */
 
 import { defineConfig } from 'vite'
+import { createHtmlPlugin } from 'vite-plugin-html';
 
 export default defineConfig({
     clearScreen: false,
@@ -18,5 +19,10 @@ export default defineConfig({
         fs: {
             strict: false
         }
-    }
+    },
+    plugins: [
+        createHtmlPlugin({
+            minify: true
+        })
+    ]
 })
