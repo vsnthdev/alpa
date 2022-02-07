@@ -5,7 +5,7 @@
 
 POST http://localhost:1727/api/codes
 Content-Type: application/json
-Cookie: token={{$dotenv TOKEN}}
+Authorization: Bearer {{$dotenv TOKEN}}
 
 {
     "code": "abcd",

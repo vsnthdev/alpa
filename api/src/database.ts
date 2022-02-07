@@ -10,6 +10,7 @@ import chalk from 'chalk';
 
 export interface ConnectionsList {
     codes: Redis.Redis
+    tokens: Redis.Redis
 }
 
 export default async (log: Logger, { database }: AlpaAPIConfig) => {
@@ -20,12 +21,14 @@ export default async (log: Logger, { database }: AlpaAPIConfig) => {
     }
 
     const conn: ConnectionsList = {
-        codes: null
+        codes: null,
+        tokens: null
     }
 
     const failedConnecting = () => log.error('Failed connecting to the database.', 2)
 
     conn.codes = new Redis({ ...base, ...{ db: database.channels.codes } } as any)
+    conn.tokens = new Redis({ ...base, ...{ db: database.channels.tokens } } as any)
     
     for (const key in conn) {
         const db = conn[key] as Redis.Redis

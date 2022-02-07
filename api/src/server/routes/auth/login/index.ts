@@ -13,16 +13,9 @@ const getHandler = (config: AlpaAPIConfig) => async (req: FastifyRequest, rep: F
         }
     })
 
-    return rep.setCookie('token', token, {
-        domain: config.server.host,
-        path: '/',
-        secure: true,
-        httpOnly: true,
-        sameSite: true,
-        signed: true,
-        maxAge: 259200
-    }).status(200).send({
-        message: 'Login was successful'
+    return rep.status(200).send({
+        message: 'Login was successful',
+        token,
     })
 }
 

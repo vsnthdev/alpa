@@ -1,7 +1,7 @@
 # 
-#   Deletes the JWT 🍪 if the user is already logged in.
+#   Blacklists the JWT if the user is already logged in.
 #   Created On 02 February 2022
 # 
 
 DELETE http://localhost:1727/api/auth/logout
-Cookie: token={{$dotenv TOKEN}}
+Authorization: Bearer {{$dotenv TOKEN}}

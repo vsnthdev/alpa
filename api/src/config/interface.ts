@@ -14,6 +14,7 @@ export interface AlpaAPIConfig {
         password?: string
         channels: {
             codes: number
+            tokens: number
         }
     }
     server: {

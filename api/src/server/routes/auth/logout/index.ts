@@ -1,18 +1,17 @@
-import { FastifyReply, FastifyRequest } from "fastify"
+import { FastifyReply, FastifyRequest, FastifyInstance } from "fastify"
 import { AlpaAPIConfig } from "../../../../config/interface"
+import { ConnectionsList } from "../../../../database";
 import auth from '../../../plugins/auth.js';
 
-const getHandler = (config: AlpaAPIConfig) => async (req: FastifyRequest, rep: FastifyReply): Promise<any> => rep.clearCookie('token', {
-    domain: config.server.host,
-    path: '/',
-    secure: true,
-    httpOnly: true,
-    sameSite: true,
-    signed: true,
-    maxAge: 259200
-}).status(200).send({
-    message: 'Successfully logged out'
-})
+const getHandler = (config: AlpaAPIConfig, db: ConnectionsList, fastify: FastifyInstance) => async (req: FastifyRequest, rep: FastifyReply): Promise<any> => {
+    const token = req.headers.authorization.slice(7)
+    const decoded = fastify.jwt.decode(token)
+    const secondsRemaining = decoded['exp'] - Math.round((new Date()).getTime() / 1000)
+
+    await db.tokens.set(token, '1', 'EX', secondsRemaining)
+
+    return rep.status(204).send('')
+}
 
 export default {
     path: '/api/auth/logout',

@@ -2,7 +2,6 @@
     "extends": "../tsconfig.base.json",
     "compilerOptions": {
         "strict": true,
-        "rootDir": "src",
         "outDir": "dist",
         "jsx": "preserve",
         "target": "ESNext",

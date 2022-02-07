@@ -12,6 +12,7 @@ database:
     password: null
     channels:
         codes: 0
+        tokens: 1
 server:
     host: localhost
     port: 1727

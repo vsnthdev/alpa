@@ -11,7 +11,6 @@ import jwt from 'fastify-jwt';
 import glob from 'glob';
 import path from 'path';
 import dirname from 'es-dirname';
-import cookie from 'fastify-cookie';
 import boom from 'fastify-boom';
 import { ConnectionsList } from '../database.js';
 
@@ -19,7 +18,7 @@ export interface RouteImpl {
     path: string
     method: string
     opts: any
-    getHandler: (config: AlpaAPIConfig, db: ConnectionsList) => (req: FastifyRequest, rep: FastifyReply) => Promise<FastifyReply>
+    getHandler: (config: AlpaAPIConfig, db: ConnectionsList, fastify: FastifyInstance) => (req: FastifyRequest, rep: FastifyReply) => Promise<FastifyReply>
 }
 
 export let fastify: FastifyInstance
@@ -36,7 +35,7 @@ const loadRoutes = async (fastify: FastifyInstance, config: AlpaAPIConfig, db: C
 
         route.method = route.method.toLowerCase()
         if (!route.opts) route.opts = {}
-        fastify[route.method](route.path, route.opts, route.getHandler(config, db))
+        fastify[route.method](route.path, route.opts, route.getHandler(config, db, fastify))
     }
 }
 
@@ -47,14 +46,6 @@ export default async (log: Logger, config: AlpaAPIConfig, db: ConnectionsList): 
     })
 
     fastify.register(jwt, {
-        secret: config.server.secret,
-        cookie: {
-            cookieName: 'token',
-            signed: true
-        }
-    })
-
-    fastify.register(cookie, {
         secret: config.server.secret
     })
 
