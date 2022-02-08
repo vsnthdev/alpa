@@ -6,6 +6,7 @@
 export interface AlpaAPIConfig {
     auth: {
         username: string
+        email: string
         password: string
     }
     database: {

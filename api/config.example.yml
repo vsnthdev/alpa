@@ -5,6 +5,7 @@
 
 auth:
     username: alpa
+    email: alpa@example.com
     password: short_lived
 database:
     host: localhost

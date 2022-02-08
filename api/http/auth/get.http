@@ -1,0 +1,8 @@
+# 
+#   Gets user information of the authenticated user using
+#   Gravatar API.
+#   Created On 08 February 2022
+# 
+
+GET http://localhost:1727/api/auth
+Authorization: Bearer {{$dotenv TOKEN}}

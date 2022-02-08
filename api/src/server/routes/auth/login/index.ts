@@ -6,7 +6,8 @@ const getHandler = (config: AlpaAPIConfig) => async (req: FastifyRequest, rep: F
     if (!req.body || [req.body['username'], req.body['password'], req.body['username'] == config.auth.username, req.body['password'] == config.auth.password].map(elm => Boolean(elm)).includes(false)) throw boom.unauthorized()
 
     const token = await rep.jwtSign({
-        username: config.auth.username
+        username: config.auth.username,
+        email: config.auth.email,
     }, {
         sign: {
             expiresIn: 259200,
