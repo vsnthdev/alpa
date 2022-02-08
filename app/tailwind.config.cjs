@@ -15,6 +15,7 @@ module.exports = {
             black: '#000000',
             white: '#FFFFFF',
             slate: colors.slate,
+            blue: colors.blue,
         },
         fontFamily: {
             body: [
