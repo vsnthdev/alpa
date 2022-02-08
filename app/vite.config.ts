@@ -6,6 +6,8 @@
 import { defineConfig } from 'vite'
 import { createHtmlPlugin } from 'vite-plugin-html';
 import solidPlugin from 'vite-plugin-solid';
+import autoprefixer from 'autoprefixer';
+import tailwindcss from 'tailwindcss';
 
 export default defineConfig({
     clearScreen: false,
@@ -19,6 +21,14 @@ export default defineConfig({
     server: {
         fs: {
             strict: false
+        }
+    },
+    css: {
+        postcss: {
+            plugins: [
+                autoprefixer(),
+                tailwindcss()
+            ]
         }
     },
     plugins: [

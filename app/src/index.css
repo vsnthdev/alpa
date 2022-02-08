@@ -1,0 +1,8 @@
+/*
+ *  Entry Cascading Stylesheet file. Contains mainly TailwindCSS imports.
+ *  Created On 08 February 2022
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
