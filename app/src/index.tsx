@@ -3,5 +3,8 @@
  *  Created On 04 February 2022
  */
 
-
+import { App } from './App';
+import { Router } from 'solid-app-router';
 import { render } from 'solid-js/web'
+
+render(() => <Router><App/></Router>, document.body)
