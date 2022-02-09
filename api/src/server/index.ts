@@ -13,6 +13,7 @@ import path from 'path';
 import dirname from 'es-dirname';
 import boom from 'fastify-boom';
 import { ConnectionsList } from '../database.js';
+import cors from 'fastify-cors';
 
 export interface RouteImpl {
     path: string
@@ -47,6 +48,13 @@ export default async (log: Logger, config: AlpaAPIConfig, db: ConnectionsList): 
 
     fastify.register(jwt, {
         secret: config.server.secret
+    })
+
+    fastify.register(cors, {
+        methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+        credentials: true,
+        origin: '*',
+        allowedHeaders: ['Authorization']
     })
 
     fastify.register(boom)
