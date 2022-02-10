@@ -54,7 +54,7 @@ export default async (log: Logger, config: AlpaAPIConfig, db: ConnectionsList): 
         methods: ['GET', 'POST', 'PATCH', 'DELETE'],
         credentials: true,
         origin: '*',
-        allowedHeaders: ['Authorization']
+        allowedHeaders: ['Authorization', 'Content-Type']
     })
 
     fastify.register(boom)
