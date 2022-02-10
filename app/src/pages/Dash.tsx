@@ -3,6 +3,8 @@
  *  Created On 08 February 2022
  */
 
-export default () => <main>
+import { ReactElement } from 'react';
+
+export const Dash = (): ReactElement => <main>
     <h1 className="text-3xl">Dash</h1>
 </main>
