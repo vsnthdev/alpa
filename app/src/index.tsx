@@ -3,9 +3,9 @@
  *  Created On 04 February 2022
  */
 
-import { App } from './App';
-import { Router } from 'solid-app-router';
-import { render } from 'solid-js/web'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { App } from './App'
 import './index.css';
 
-render(() => <Router><App/></Router>, document.body)
+ReactDOM.render(<React.StrictMode><App/></React.StrictMode> ,document.body)

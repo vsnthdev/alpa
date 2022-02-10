@@ -5,9 +5,9 @@
 
 import { defineConfig } from 'vite'
 import { createHtmlPlugin } from 'vite-plugin-html';
-import solidPlugin from 'vite-plugin-solid';
 import autoprefixer from 'autoprefixer';
 import tailwindcss from 'tailwindcss';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
     clearScreen: false,
@@ -32,7 +32,7 @@ export default defineConfig({
         }
     },
     plugins: [
-        solidPlugin(),
+        react(),
         createHtmlPlugin({
             minify: true
         }),

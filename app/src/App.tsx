@@ -3,18 +3,9 @@
  *  Created On 08 February 2022
  */
 
-import { routes } from './routes';
-import { useRoutes } from 'solid-app-router';
-import { Header } from './components/Header/Header';
+import { ReactElement } from 'react';
 
-export const App = () => {
-    // load up the configured routes
-    const Routes = useRoutes(routes)
+export const App = (): ReactElement => <main>
+    <h1>Hello World</h1>
+</main>
 
-    return (<>
-        {/* The header component */}
-        <Header />
-
-        <Routes/>
-    </>)
-}
