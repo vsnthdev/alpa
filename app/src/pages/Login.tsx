@@ -8,7 +8,7 @@ import { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 
 export const Login = (): ReactElement => <main className="h-full flex justify-center items-center px-10">
-    <div className="-mt-44 w-full flex justify-center items-center">
+    <div className="-mt-20 w-full flex justify-center items-center">
         {/* login card */}
         <div className="bg-white p-8 flex flex-col rounded-xl border-2 border-slate-200 max-w-md">
             {/* card information */}
@@ -17,16 +17,22 @@ export const Login = (): ReactElement => <main className="h-full flex justify-ce
             
             {/* input fields */}
             <div className="space-y-4">
+                {/* host */}
+                <div className="flex flex-col items-center space-y-2">
+                    <label className="mr-auto">API Host</label>
+                    <input className="w-full font-semibold px-3 py-2 border-2 outline-none border-slate-200 focus:border-blue-500 rounded-md" type="text" id="host" placeholder="http://localhost:1727" autoFocus />
+                </div>
+
                 {/* username */}
                 <div className="flex flex-col items-center space-y-2">
                     <label className="mr-auto">Username</label>
-                    <input className="w-full font-semibold px-3 py-2 border-2 outline-none border-slate-200 focus:border-blue-500 rounded-md" type="text" id="username" placeholder="Username" autoFocus />
+                    <input className="w-full font-semibold px-3 py-2 border-2 outline-none border-slate-200 focus:border-blue-500 rounded-md" type="text" id="username" placeholder="alpa" />
                 </div>
 
                 {/* password */}
                 <div className="flex flex-col items-center space-y-2">
                     <label className="mr-auto">Password</label>
-                    <input className="w-full font-semibold px-3 py-2 border-2 outline-none border-slate-200 focus:border-blue-500 rounded-md" type="password" id="password" placeholder="Password" />
+                    <input className="w-full font-semibold px-3 py-2 border-2 outline-none border-slate-200 focus:border-blue-500 rounded-md" type="password" id="password" placeholder="B^a8K7DD" />
                 </div>
 
                 {/* login button */}
