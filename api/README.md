@@ -8,7 +8,6 @@
 | ✅ | `POST` | `/api/auth/login` | Responds with a token. |
 | ✅ | `DELETE` | `/api/auth/logout` | Blacklists the token to prevent usage. |
 | ✅ | `GET` | `/api/codes` | List out all codes with pagination. |
-| ✅ | `GET` | `/api/codes/:code` | Returns full API response on a code. |
 | ✅ | `POST` | `/api/codes` | Create a new short code. |
 | ✅ | `DELETE` | `/api/codes` | Delete a short code. |
 
