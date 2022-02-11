@@ -33,6 +33,13 @@ interface PushBackToLoginOptions {
 }
 
 export const pushBackToLogin = ({ apiHost, apiToken, navigate, setIsLoggedIn }: PushBackToLoginOptions) => {
+    const sub = () => {
+        localStorage.removeItem('apiToken')
+        setIsLoggedIn(false)
+        navigate('/')
+        progress.done()
+    }
+
     progress.start()
     axios({
         method: 'DELETE',
@@ -40,11 +47,10 @@ export const pushBackToLogin = ({ apiHost, apiToken, navigate, setIsLoggedIn }: 
         headers: {
             Authorization: `Bearer ${apiToken}`
         }
-    }).then(() => {
-        localStorage.removeItem('apiToken')
-        setIsLoggedIn(false)
-        navigate('/')
-        progress.done()
+    }).then(() => sub()).catch(e => {
+        // if the token is no longer authorized, we simply
+        // clean up the token and redirect to login page
+        if (JSON.parse(JSON.stringify(e)).status == 401) sub()
     })
     
 }
