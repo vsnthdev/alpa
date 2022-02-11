@@ -10,5 +10,5 @@ import startServer from './server/index.js';
 
 await getLog()
 await getConfig()
-const db = await getDatabase()
-await startServer(db)
+await getDatabase()
+await startServer()

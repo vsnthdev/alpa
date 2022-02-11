@@ -15,6 +15,7 @@ import boom from 'fastify-boom';
 import { ConnectionsList } from '../database.js';
 import cors from 'fastify-cors';
 import { config } from '../config/index.js';
+import { db } from '../database.js';
 
 export interface RouteImpl {
     path: string
@@ -41,7 +42,7 @@ const loadRoutes = async (fastify: FastifyInstance, config: AlpaAPIConfig, db: C
     }
 }
 
-export default async (db: ConnectionsList): Promise<void> => new Promise((resolve, reject) => {
+export default async (): Promise<void> => new Promise((resolve, reject) => {
     fastify = Fastify({
         // TODO: implement a custom logger, and attach it here
         logger: false

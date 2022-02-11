@@ -13,6 +13,8 @@ export interface ConnectionsList {
     tokens: Redis.Redis
 }
 
+export let db: ConnectionsList
+
 export default async () => {
     const { database } = config
     const base = {
@@ -21,22 +23,21 @@ export default async () => {
         password: database.password
     }
 
-    const conn: ConnectionsList = {
+    db = {
         codes: null,
         tokens: null
     }
 
     const failedConnecting = () => log.error('Failed connecting to the database.', 2)
 
-    conn.codes = new Redis({ ...base, ...{ db: database.channels.codes } } as any)
-    conn.tokens = new Redis({ ...base, ...{ db: database.channels.tokens } } as any)
+    db.codes = new Redis({ ...base, ...{ db: database.channels.codes } } as any)
+    db.tokens = new Redis({ ...base, ...{ db: database.channels.tokens } } as any)
     
-    for (const key in conn) {
-        const db = conn[key] as Redis.Redis
-        db.on('error', failedConnecting)
-        await db.info()
+    for (const key in db) {
+        const conn = db[key] as Redis.Redis
+        conn.on('error', failedConnecting)
+        await conn.info()
     }
 
     log.success(`Connected to Redis database at ${chalk.gray.underline(`redis://${base.host}:${base.port}`)}`)
-    return conn
 }
