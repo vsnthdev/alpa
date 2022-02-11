@@ -1,2 +1,7 @@
 GET http://localhost:1727/api/codes
 Authorization: Bearer {{$dotenv TOKEN}}
+
+###
+
+GET http://localhost:1727/api/codes?cursor=10
+Authorization: Bearer {{$dotenv TOKEN}}
