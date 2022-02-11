@@ -4,7 +4,7 @@
  */
 
 import Fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
-import { Logger } from 'itivrutaha/dist/class';
+import { log } from '../logger.js';
 import { AlpaAPIConfig } from '../config/interface';
 import chalk from 'chalk';
 import jwt from 'fastify-jwt';
@@ -40,7 +40,7 @@ const loadRoutes = async (fastify: FastifyInstance, config: AlpaAPIConfig, db: C
     }
 }
 
-export default async (log: Logger, config: AlpaAPIConfig, db: ConnectionsList): Promise<void> => new Promise((resolve, reject) => {
+export default async (config: AlpaAPIConfig, db: ConnectionsList): Promise<void> => new Promise((resolve, reject) => {
     fastify = Fastify({
         // TODO: implement a custom logger, and attach it here
         logger: false

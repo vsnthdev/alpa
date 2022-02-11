@@ -11,9 +11,9 @@ import { promise } from '@vsnthdev/utilities-node';
 import yaml from 'js-yaml';
 
 import type { AlpaAPIConfig } from './interface.js'
-import { Logger } from 'itivrutaha/dist/class';
+import { log } from '../logger.js';
 
-export default async (log: Logger): Promise<AlpaAPIConfig> => {
+export default async (): Promise<AlpaAPIConfig> => {
     const loc = path.join(dirname(), '..', '..', 'config.yml')
 
     const { err, returned: str } = await promise.handle(

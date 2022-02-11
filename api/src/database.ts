@@ -4,7 +4,7 @@
  */
 
 import Redis from 'ioredis'
-import { Logger } from 'itivrutaha/dist/class'
+import { log } from './logger.js';
 import { AlpaAPIConfig } from './config/interface.js'
 import chalk from 'chalk';
 
@@ -13,7 +13,7 @@ export interface ConnectionsList {
     tokens: Redis.Redis
 }
 
-export default async (log: Logger, { database }: AlpaAPIConfig) => {
+export default async ({ database }: AlpaAPIConfig) => {
     const base = {
         host: database.host,
         port: database.port,
