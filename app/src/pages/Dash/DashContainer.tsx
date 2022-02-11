@@ -10,11 +10,22 @@ import { useNavigate } from 'react-router-dom';
 import { DashContent } from './DashContent';
 import progress from 'nprogress';
 
+export interface Code {
+    code: string
+}
+
+export interface CodeResponse {
+    codes: Code[]
+    loading: boolean
+}
+
 export const Dash = (): ReactElement => {
     const apiToken = localStorage.getItem('apiToken')
     const apiHost = localStorage.getItem('apiHost')
+
     const navigate = useNavigate()
-    const [ profile, setProfile ] = useState({} as any)
+    const [ loading, setLoading ] = useState(true)
+    const [ codes, setCodes ] = useState({ codes: [], loading: true } as CodeResponse)
 
     const pushBackToLogin = () => {
         localStorage.removeItem('apiToken')
@@ -23,18 +34,19 @@ export const Dash = (): ReactElement => {
     }
 
     // check if the token is valid, while fetching
-    // the user info on load
+    // the codes of using the token
     useEffect(() => {
         progress.start()
         axios({
             method: 'GET',
-            url: `${apiHost}/api/auth`,
+            url: `${apiHost}/api/codes`,
             headers: {
                 Authorization: `Bearer ${apiToken}`
             }
         }).then(({status, data}) => {
             if (status == 200) {
-                setProfile(data)
+                setCodes(data)
+                setLoading(false)
             } else {
                 pushBackToLogin()
             }
@@ -44,8 +56,8 @@ export const Dash = (): ReactElement => {
     }, [])
 
     return <main>
-        { Object.keys(profile).length > 0
-        ? <DashContent profile={profile}></DashContent>
+        { loading == false
+        ? <DashContent codes={codes}></DashContent>
         : "" }
     </main>
 }

@@ -9,16 +9,18 @@ import { Header } from './components/Header/Header';
 import { Login } from './pages/Login/Login';
 import { Dash } from './pages/Dash/DashContainer';
 
-export const App = (): ReactElement => <StrictMode>
-    <BrowserRouter>
-        {/* the header */}
-        <Header/>
+export const App = (): ReactElement => {
+    return <StrictMode>
+        <BrowserRouter>
+            {/* the header */}
+            <Header/>
 
-        {/* the routes link to their pages */}
-        <Routes>
-            <Route path='/' element={<Login/>}></Route>
-            <Route path='/dash' element={<Dash/>}></Route>
-        </Routes>
-    </BrowserRouter>
-</StrictMode>
+            {/* the routes link to their pages */}
+            <Routes>
+                <Route path='/' element={<Login/>}></Route>
+                <Route path='/dash' element={<Dash/>}></Route>
+            </Routes>
+        </BrowserRouter>
+    </StrictMode>
+}
 

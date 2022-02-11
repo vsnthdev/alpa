@@ -5,13 +5,13 @@
 
 import { ReactElement, useEffect } from "react";
 import progress from 'nprogress';
+import { CodeResponse } from './DashContainer';
 
-export const DashContent = ({profile}: { profile: any}): ReactElement => {
+export const DashContent = ({codes}: { codes: CodeResponse}): ReactElement => {
     // stop the progress bar
     useEffect(() => {
         progress.done()
-        console.log(profile)
     }, [])
 
-    return <><h1>Welcome {profile.username}</h1></>
+    return <><h1>Welcome {JSON.stringify(codes.codes)}</h1></>
 }
