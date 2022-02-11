@@ -8,7 +8,13 @@ import progress from 'nprogress';
 import { CodeResponse } from './DashContainer';
 import { CodeBlock } from '../../components/CodeBlock/CodeBlock';
 
-export const DashContent = ({codes}: { codes: CodeResponse}): ReactElement => {
+interface DashContentOptions {
+    apiHost: string
+    apiToken: string
+    codes: CodeResponse
+}
+
+export const DashContent = ({apiHost, apiToken, codes}: DashContentOptions): ReactElement => {
     // stop the progress bar
     useEffect(() => {
         progress.done()
@@ -17,7 +23,7 @@ export const DashContent = ({codes}: { codes: CodeResponse}): ReactElement => {
     return <div className="py-24 container mx-auto flex flex-col items-center">
         <h1 className="text-3xl font-semibold mb-16 md:text-4xl">Recently created</h1>
         <div className="flex flex-col w-full max-w-3xl px-8 items-center space-y-8">
-            { codes.codes.map(code => <CodeBlock key={code.code} code={code}></CodeBlock> ) }
+            { codes.codes.map(code => <CodeBlock apiHost={apiHost} apiToken={apiToken} key={code.code} code={code}></CodeBlock> ) }
         </div>
     </div>
 }

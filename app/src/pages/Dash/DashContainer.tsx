@@ -88,7 +88,7 @@ export const Dash = ({ setIsLoggedIn }: { setIsLoggedIn: any }): ReactElement =>
 
     return <main>
         { loading == false
-        ? <DashContent codes={codes}></DashContent>
+        ? <DashContent apiHost={apiHost} apiToken={apiToken} codes={codes}></DashContent>
         : "" }
     </main>
 }
