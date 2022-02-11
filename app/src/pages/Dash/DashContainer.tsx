@@ -10,8 +10,14 @@ import { useNavigate } from 'react-router-dom';
 import { DashContent } from './DashContent';
 import progress from 'nprogress';
 
+interface CodeLink {
+    url: string
+}
+
 export interface Code {
     code: string
+    links: CodeLink[]
+    tags: string[]
 }
 
 export interface CodeResponse {
