@@ -6,8 +6,8 @@
 import { ReactElement, StrictMode } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Header } from './components/Header/Header';
-import { Login } from './pages/Login';
-import { Dash } from './pages/Dash';
+import { Login } from './pages/Login/Login';
+import { Dash } from './pages/Dash/DashContainer';
 
 export const App = (): ReactElement => <StrictMode>
     <BrowserRouter>

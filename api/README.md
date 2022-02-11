@@ -5,7 +5,6 @@
 | ❌ | `GET` | `/` | Redirects to a pre-configured URL. |
 | ✅ | `GET` | `/:code` | Performs a redirect if found or redirects to a 404 page. |
 | ❌ | `GET` | `/api` | Responds with API version details. |
-| ✅ | `GET` | `/api/auth` | Gets profile information of an authenticated user. |
 | ✅ | `POST` | `/api/auth/login` | Responds with a token. |
 | ✅ | `DELETE` | `/api/auth/logout` | Blacklists the token to prevent usage. |
 | ✅ | `GET` | `/api/codes` | List out all codes with pagination. |

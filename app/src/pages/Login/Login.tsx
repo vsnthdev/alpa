@@ -4,9 +4,10 @@
  *  Created On 08 February 2022
  */
 
-import { ReactElement, useState } from 'react';
+import { ReactElement, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import progress from 'nprogress';
 
 export const Login = (): ReactElement => {
     const navigate = useNavigate()
@@ -25,12 +26,18 @@ export const Login = (): ReactElement => {
     const setApiHost = (host: string) => {
         // set API host in state
         updateApiHost(host)
-
+    
         // set API host in localStorage
         localStorage.setItem('apiHost', host)
     }
 
+    const openDashboard = () => navigate('/dash', {
+        replace: true
+    })
+
     const loginUser = async () => {
+        progress.start()
+
         try {
             const { status, data } = await axios({
                 method: 'POST',
@@ -43,12 +50,17 @@ export const Login = (): ReactElement => {
     
             if (status == 200) {
                 localStorage.setItem('apiToken', data.token)
-                navigate('/dash')
+                openDashboard()
             }
         } catch {
             console.log('failed login attempt')
         }
     }
+
+    // check if an existing token exists
+    useEffect(() => {
+        if (Boolean(localStorage.getItem('apiToken'))) openDashboard()
+    }, [])
 
     return <main className="h-full flex justify-center items-center px-10">
         <div className="-mt-20 w-full flex justify-center items-center">
