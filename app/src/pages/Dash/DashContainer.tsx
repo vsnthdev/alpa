@@ -6,7 +6,7 @@
 
 import { ReactElement, useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { DashContent } from './DashContent';
 import progress from 'nprogress';
 
@@ -25,19 +25,37 @@ export interface CodeResponse {
     loading: boolean
 }
 
-export const Dash = (): ReactElement => {
-    const apiToken = localStorage.getItem('apiToken')
-    const apiHost = localStorage.getItem('apiHost')
+interface PushBackToLoginOptions {
+    apiHost: string
+    apiToken: string
+    navigate: NavigateFunction
+    setIsLoggedIn: any
+}
+
+export const pushBackToLogin = ({ apiHost, apiToken, navigate, setIsLoggedIn }: PushBackToLoginOptions) => {
+    progress.start()
+    axios({
+        method: 'DELETE',
+        url: `${apiHost}/api/auth/logout`,
+        headers: {
+            Authorization: `Bearer ${apiToken}`
+        }
+    }).then(() => {
+        localStorage.removeItem('apiToken')
+        setIsLoggedIn(false)
+        navigate('/')
+        progress.done()
+    })
+    
+}
+
+export const Dash = ({ setIsLoggedIn }: { setIsLoggedIn: any }): ReactElement => {
+    const apiToken = localStorage.getItem('apiToken') as string
+    const apiHost = localStorage.getItem('apiHost') as string
 
     const navigate = useNavigate()
     const [ loading, setLoading ] = useState(true)
     const [ codes, setCodes ] = useState({ codes: [], loading: true } as CodeResponse)
-
-    const pushBackToLogin = () => {
-        localStorage.removeItem('apiToken')
-        navigate('/')
-        progress.done()
-    }
 
     // check if the token is valid, while fetching
     // the codes of using the token
@@ -53,11 +71,12 @@ export const Dash = (): ReactElement => {
             if (status == 200) {
                 setCodes(data)
                 setLoading(false)
+                setIsLoggedIn(true)
             } else {
-                pushBackToLogin()
+                pushBackToLogin({apiHost, apiToken, navigate, setIsLoggedIn})
             }
         }).catch(err => {
-            pushBackToLogin()
+            pushBackToLogin({apiHost, apiToken, navigate, setIsLoggedIn})
         })
     }, [])
 

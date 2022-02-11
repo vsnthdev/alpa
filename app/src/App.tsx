@@ -3,22 +3,24 @@
  *  Created On 08 February 2022
  */
 
-import { ReactElement, StrictMode } from 'react';
+import { ReactElement, StrictMode, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Header } from './components/Header/Header';
 import { Login } from './pages/Login/Login';
 import { Dash } from './pages/Dash/DashContainer';
 
 export const App = (): ReactElement => {
+    const [ isLoggedIn, setIsLoggedIn ] = useState(false)
+
     return <StrictMode>
         <BrowserRouter>
             {/* the header */}
-            <Header/>
+            <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
 
             {/* the routes link to their pages */}
             <Routes>
                 <Route path='/' element={<Login/>}></Route>
-                <Route path='/dash' element={<Dash/>}></Route>
+                <Route path='/dash' element={<Dash setIsLoggedIn={setIsLoggedIn}/>}></Route>
             </Routes>
         </BrowserRouter>
     </StrictMode>
