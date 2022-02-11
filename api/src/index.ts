@@ -9,6 +9,6 @@ import getDatabase from './database.js';
 import startServer from './server/index.js';
 
 await getLog()
-const config = await getConfig()
-const db = await getDatabase(config)
-await startServer(config, db)
+await getConfig()
+const db = await getDatabase()
+await startServer(db)

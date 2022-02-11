@@ -5,7 +5,7 @@
 
 import Redis from 'ioredis'
 import { log } from './logger.js';
-import { AlpaAPIConfig } from './config/interface.js'
+import { config } from './config/index.js';
 import chalk from 'chalk';
 
 export interface ConnectionsList {
@@ -13,7 +13,8 @@ export interface ConnectionsList {
     tokens: Redis.Redis
 }
 
-export default async ({ database }: AlpaAPIConfig) => {
+export default async () => {
+    const { database } = config
     const base = {
         host: database.host,
         port: database.port,
