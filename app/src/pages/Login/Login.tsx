@@ -65,38 +65,46 @@ export const Login = (): ReactElement => {
     return <main className="h-full flex justify-center items-center px-10">
         <div className="-mt-20 w-full flex justify-center items-center">
             {/* login card */}
-            <div className="bg-white p-8 flex flex-col rounded-xl border-2 border-slate-200 max-w-md">
+            <div className="bg-white p-8 flex flex-col rounded-xl border-2 border-slate-200 max-w-lg md:p-12">
                 {/* card information */}
-                <h1 className="text-4xl font-bold mb-4">Log in</h1>
-                <p className="mb-8">Welcome to <a className="text-blue-500" href="https://github.com/vsnthdev/alpa" target="_blank" rel="noopener">alpa</a>, please input the configured login credentials to manage your short links.</p>
+                <h1 className="text-4xl font-bold mb-4 md:text-5xl">Log in</h1>
+                <p className="mb-8 text-base">Welcome to <a className="text-blue-500" href="https://github.com/vsnthdev/alpa" target="_blank" rel="noopener">alpa</a>, please input the configured login credentials to manage your short links.</p>
                 
                 {/* input fields */}
-                <div className="space-y-4">
+                <form className="space-y-4" onSubmit={e => {
+                    // prevent page refresh
+                    e.preventDefault()
+
+                    // trigger the login function
+                    loginUser()
+
+                    return false
+                }}>
                     {/* host */}
                     <div className="flex flex-col items-center space-y-2">
                         <label className="mr-auto">API Host</label>
-                        <input className="w-full font-semibold px-3 py-2 border-2 outline-none border-slate-200 focus:border-blue-500 rounded-md" type="text" id="host" placeholder="http://localhost:1727" value={apiHost as string} onChange={e => setApiHost(e.target.value)} autoFocus={!Boolean(apiHost)} />
+                        <input className="w-full font-medium px-3 py-2 border-2 outline-none border-slate-200 focus:border-blue-500 rounded-md" type="text" id="host" placeholder="http://localhost:1727" value={apiHost as string} onChange={e => setApiHost(e.target.value)} autoFocus={!Boolean(apiHost)} required />
                     </div>
 
                     {/* username */}
                     <div className="flex flex-col items-center space-y-2">
                         <label className="mr-auto">Username</label>
-                        <input className="w-full font-semibold px-3 py-2 border-2 outline-none border-slate-200 focus:border-blue-500 rounded-md" type="text" id="username" placeholder="alpa" autoFocus={Boolean(apiHost)} value={username as string} onChange={e => setUsername(e.target.value)} />
+                        <input className="w-full font-medium px-3 py-2 border-2 outline-none border-slate-200 focus:border-blue-500 rounded-md" type="text" id="username" placeholder="alpa" autoFocus={Boolean(apiHost)} value={username as string} onChange={e => setUsername(e.target.value)} required />
                     </div>
 
                     {/* password */}
                     <div className="flex flex-col items-center space-y-2">
                         <label className="mr-auto">Password</label>
-                        <input className="w-full font-semibold px-3 py-2 border-2 outline-none border-slate-200 focus:border-blue-500 rounded-md" type="password" id="password" placeholder="B^a8K7DD" autoFocus={Boolean(username)} value={password as string} onChange={e => setPassword(e.target.value)} onKeyUp={e => { if (e.key == 'Enter') loginUser() }} />
+                        <input className="w-full font-medium px-3 py-2 border-2 outline-none border-slate-200 focus:border-blue-500 rounded-md" type="password" id="password" placeholder="B^a8K7DD" autoFocus={Boolean(username)} value={password as string} onChange={e => setPassword(e.target.value)} onKeyUp={e => { if (e.key == 'Enter') document.querySelector('form')?.requestSubmit() }} required />
                     </div>
 
                     {/* login button */}
                     <div className="pt-3 flex justify-center">
-                        <button className="font-semibold py-2 px-4 border border-transparent shadow-sm text-sm rounded-md text-white bg-blue-600 hover:bg-blue-700 outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" onClick={loginUser}>
+                        <button className="font-semibold py-2 px-4 border border-transparent shadow-sm text-sm rounded-md text-white bg-blue-600 hover:bg-blue-700 outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" type='submit'>
                             Login
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </main>

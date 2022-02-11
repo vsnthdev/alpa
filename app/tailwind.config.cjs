@@ -16,10 +16,11 @@ module.exports = {
             white: '#FFFFFF',
             slate: colors.slate,
             blue: colors.blue,
+            red: colors.red,
         },
         fontFamily: {
             body: [
-                'Kumbh Sans',
+                'Sora',
                 'ui-sans-serif',
                 'system-ui',
                 '-apple-system',
