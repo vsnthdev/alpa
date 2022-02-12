@@ -11,22 +11,18 @@ import { Dash } from './pages/Dash/DashContainer';
 import { Provider } from 'react-redux';
 import {store} from './store/index.js';
 
-export const App = (): ReactElement => {
-    const [ isLoggedIn, setIsLoggedIn ] = useState(false)
+export const App = (): ReactElement => <StrictMode>
+    <Provider store={store}>
+        <BrowserRouter>
+            {/* the header */}
+            <Header/>
 
-    return <StrictMode>
-        <Provider store={store}>
-            <BrowserRouter>
-                {/* the header */}
-                <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
-
-                {/* the routes link to their pages */}
-                <Routes>
-                    <Route path='/' element={<Login/>}></Route>
-                    <Route path='/dash' element={<Dash setIsLoggedIn={setIsLoggedIn}/>}></Route>
-                </Routes>
-            </BrowserRouter>
-        </Provider>
-    </StrictMode>
-}
+            {/* the routes link to their pages */}
+            <Routes>
+                <Route path='/' element={<Login/>}></Route>
+                <Route path='/dash' element={<Dash/>}></Route>
+            </Routes>
+        </BrowserRouter>
+    </Provider>
+</StrictMode>
 

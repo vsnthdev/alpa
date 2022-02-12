@@ -4,16 +4,14 @@
  */
 
 import { ReactElement, useState } from "react";
-import { Code } from '../../pages/Dash/DashContainer';
+import { useSelector } from "react-redux";
+import { AppState } from "../../store";
+import { Code } from '../../store/codes';
 import { del } from './functions';
 
-interface CodeBlockOptions {
-    code: Code
-    apiHost: string
-    apiToken: string
-}
+export const CodeBlock = ({code}: { code: Code }): ReactElement | null => {
+    const { apiHost, apiToken } = useSelector((state: AppState) => state.auth)
 
-export const CodeBlock = ({apiHost, apiToken, code}: CodeBlockOptions): ReactElement | null => {
     const [ render, setRender ] = useState(true)
 
     return render

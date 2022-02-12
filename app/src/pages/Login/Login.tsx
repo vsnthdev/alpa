@@ -5,23 +5,10 @@
  */
 
 import { ReactElement, useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import progress from 'nprogress';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../store';
-
-export const parseJWTPayload = (token: string) => {
-    const base64Url: string = token.split('.')[1]
-    const base64: string = base64Url.replace(/-/g, '+').replace(/_/g, '/')
-    const jsonPayload: any = decodeURIComponent(
-        atob(base64).split('').map(c => {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
-        }).join('')
-    )
-
-    return JSON.parse(jsonPayload)
-}
+import login, { openDashboard } from './index';
 
 export const Login = (): ReactElement => {
     const navigate = useNavigate()
@@ -48,35 +35,26 @@ export const Login = (): ReactElement => {
         localStorage.setItem('apiHost', host)
     }
 
-    const openDashboard = () => navigate('/dash', {
-        replace: true
-    })
+    const submit = e => {
+        // prevent page refresh
+        e.preventDefault()
 
-    const loginUser = async () => {
-        progress.start()
-
-        try {
-            const { status, data } = await axios({
-                method: 'POST',
-                url: `${apiHost}/api/auth/login`,
-                data: {
-                    username,
-                    password,
-                }
-            })
-    
-            if (status == 200) {
-                localStorage.setItem('apiToken', data.token)
-                openDashboard()
+        // trigger the login function
+        login({
+            apiHost,
+            navigate,
+            credentials: {
+                username,
+                password,
             }
-        } catch {
-            console.log('failed login attempt')
-        }
+        })
+
+        return false
     }
 
     // check if an existing token exists
     useEffect(() => {
-        if (Boolean(localStorage.getItem('apiToken'))) openDashboard()
+        if (Boolean(localStorage.getItem('apiToken'))) openDashboard(navigate)
     }, [])
 
     return <main className="h-full flex justify-center items-center px-10">
@@ -88,15 +66,7 @@ export const Login = (): ReactElement => {
                 <p className="mb-8 text-base">Welcome to <a className="text-blue-500" href="https://github.com/vsnthdev/alpa" target="_blank" rel="noopener">alpa</a>, please input the configured login credentials to manage your short links.</p>
                 
                 {/* input fields */}
-                <form className="space-y-4" onSubmit={e => {
-                    // prevent page refresh
-                    e.preventDefault()
-
-                    // trigger the login function
-                    loginUser()
-
-                    return false
-                }}>
+                <form className="space-y-4" onSubmit={submit}>
                     {/* host */}
                     <div className="flex flex-col items-center space-y-2">
                         <label className="mr-auto">API Host</label>

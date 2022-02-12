@@ -6,65 +6,17 @@
 
 import { ReactElement, useState, useEffect, Dispatch } from 'react';
 import axios from 'axios';
-import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { DashContent } from './DashContent';
 import progress from 'nprogress';
-import { parseJWTPayload } from '../Login/Login';
-import { useDispatch } from 'react-redux';
-import { login, logout } from '../../store/auth';
+import { parseJWTPayload } from '../Login/index';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../store/auth';
+import { AppState } from '../../store';
+import { insert } from '../../store/codes';
+import logout from '.';
 
-interface CodeLink {
-    url: string
-}
-
-export interface Code {
-    code: string
-    links: CodeLink[]
-    tags: string[]
-}
-
-export interface CodeResponse {
-    codes: Code[]
-    loading: boolean
-}
-
-interface PushBackToLoginOptions {
-    apiHost: string
-    apiToken: string
-    navigate: NavigateFunction
-    dispatch: Dispatch<any>
-}
-
-export const pushBackToLogin = ({ apiHost, apiToken, navigate, dispatch }: PushBackToLoginOptions) => {
-    // the logout procedure
-    const procedure = () => {
-        // delete the token from the browser
-        localStorage.removeItem('apiToken')
-        
-        // reset our app store
-        dispatch(logout())
-
-        // go back to login page
-        navigate('/')
-        progress.done()
-    }
-
-    progress.start()
-    axios({
-        method: 'DELETE',
-        url: `${apiHost}/api/auth/logout`,
-        headers: {
-            Authorization: `Bearer ${apiToken}`
-        }
-    }).then(() => procedure()).catch(e => {
-        // if the token is no longer authorized, we simply
-        // clean up the token and redirect to login page
-        if (JSON.parse(JSON.stringify(e)).status == 401) procedure()
-    })
-    
-}
-
-export const Dash = ({ setIsLoggedIn }: { setIsLoggedIn: any }): ReactElement => {
+export const Dash = (): ReactElement => {
     const apiToken = localStorage.getItem('apiToken') as string
     const apiHost = localStorage.getItem('apiHost') as string
 
@@ -72,7 +24,7 @@ export const Dash = ({ setIsLoggedIn }: { setIsLoggedIn: any }): ReactElement =>
     const dispatch = useDispatch()
 
     const [ loading, setLoading ] = useState(true)
-    const [ codes, setCodes ] = useState({ codes: [], loading: true } as CodeResponse)
+    const codes = useSelector((state: AppState) => state.codes)
 
     // check if the token is valid, while fetching
     // the codes of using the token
@@ -97,19 +49,33 @@ export const Dash = ({ setIsLoggedIn }: { setIsLoggedIn: any }): ReactElement =>
                     isLoggedIn: true,
                 }))
 
-                setCodes(data)
+                dispatch(insert(data.codes))
                 setLoading(false)
             } else {
-                pushBackToLogin({apiHost, apiToken, navigate, dispatch})
+                logout({
+                    auth: {
+                        apiHost,
+                        apiToken
+                    },
+                    dispatch,
+                    navigate
+                })
             }
         }).catch(err => {
-            pushBackToLogin({apiHost, apiToken, navigate, dispatch})
+            logout({
+                auth: {
+                    apiHost,
+                    apiToken
+                },
+                dispatch,
+                navigate
+            })
         })
     }, [])
 
     return <main>
         { loading == false
-        ? <DashContent apiHost={apiHost} apiToken={apiToken} codes={codes}></DashContent>
+        ? <DashContent></DashContent>
         : "" }
     </main>
 }
