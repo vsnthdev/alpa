@@ -20,5 +20,5 @@ const codes = createSlice({
     }
 })
 
-export const { insert, clear } = codes.actions
+export const { insert, clear, del } = codes.actions
 export default codes.reducer

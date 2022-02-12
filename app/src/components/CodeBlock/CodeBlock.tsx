@@ -3,19 +3,17 @@
  *  Created On 11 February 2022
  */
 
-import { ReactElement, useState } from "react";
-import { useSelector } from "react-redux";
+import { ReactElement } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../../store";
 import { Code } from '../../store/codes';
 import { del } from './functions';
 
 export const CodeBlock = ({code}: { code: Code }): ReactElement | null => {
     const { apiHost, apiToken } = useSelector((state: AppState) => state.auth)
+    const dispatch = useDispatch()
 
-    const [ render, setRender ] = useState(true)
-
-    return render
-    ? <div className="bg-white border-2 border-slate-200 w-full p-8 rounded-lg flex flex-col">
+    return <div className="bg-white border-2 border-slate-200 w-full p-8 rounded-lg flex flex-col">
         {/* the code of the item */}
         <div className="mb-1">
             <code className="font-bold text-2xl mb-1">{ code.code }</code>
@@ -43,13 +41,11 @@ export const CodeBlock = ({code}: { code: Code }): ReactElement | null => {
             </button>
 
             {/* delete button */}
-            <button className="transition-colors hover:text-red-600" onClick={() => del({ apiHost, apiToken, code: code.code, setRender })}>
+            <button className="transition-colors hover:text-red-600" onClick={() => del({ apiHost, apiToken, dispatch, code: code.code })}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 aspect-square" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                 </svg>
             </button>
         </div>
     </div>
-
-    : null
 }
