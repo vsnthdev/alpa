@@ -8,9 +8,26 @@ import { ReactElement, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import progress from 'nprogress';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../store';
+
+export const parseJWTPayload = (token: string) => {
+    const base64Url: string = token.split('.')[1]
+    const base64: string = base64Url.replace(/-/g, '+').replace(/_/g, '/')
+    const jsonPayload: any = decodeURIComponent(
+        atob(base64).split('').map(c => {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+        }).join('')
+    )
+
+    return JSON.parse(jsonPayload)
+}
 
 export const Login = (): ReactElement => {
     const navigate = useNavigate()
+
+    const auth = useSelector((state: AppState) => state.auth)
+
     const [ password, setPassword ] = useState("")
     const [ username, updateUsername ] = useState(localStorage.getItem('username') || "")
     const [ apiHost, updateApiHost ] = useState(localStorage.getItem('apiHost') || "")
@@ -89,7 +106,7 @@ export const Login = (): ReactElement => {
                     {/* username */}
                     <div className="flex flex-col items-center space-y-2">
                         <label className="mr-auto">Username</label>
-                        <input className="w-full font-medium px-3 py-2 border-2 outline-none border-slate-200 focus:border-blue-500 rounded-md" type="text" id="username" placeholder="alpa" autoFocus={Boolean(apiHost)} value={username as string} onChange={e => setUsername(e.target.value)} required />
+                        <input className="w-full font-medium px-3 py-2 border-2 outline-none border-slate-200 focus:border-blue-500 rounded-md" type="text" id="username" placeholder="alpa" autoFocus={Boolean(apiHost)} value={username} onChange={e => setUsername(e.target.value)} required />
                     </div>
 
                     {/* password */}

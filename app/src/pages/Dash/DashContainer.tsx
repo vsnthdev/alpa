@@ -4,11 +4,14 @@
  *  Created On 08 February 2022
  */
 
-import { ReactElement, useState, useEffect } from 'react';
+import { ReactElement, useState, useEffect, Dispatch } from 'react';
 import axios from 'axios';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { DashContent } from './DashContent';
 import progress from 'nprogress';
+import { parseJWTPayload } from '../Login/Login';
+import { useDispatch } from 'react-redux';
+import { login, logout } from '../../store/auth';
 
 interface CodeLink {
     url: string
@@ -29,13 +32,19 @@ interface PushBackToLoginOptions {
     apiHost: string
     apiToken: string
     navigate: NavigateFunction
-    setIsLoggedIn: any
+    dispatch: Dispatch<any>
 }
 
-export const pushBackToLogin = ({ apiHost, apiToken, navigate, setIsLoggedIn }: PushBackToLoginOptions) => {
-    const sub = () => {
+export const pushBackToLogin = ({ apiHost, apiToken, navigate, dispatch }: PushBackToLoginOptions) => {
+    // the logout procedure
+    const procedure = () => {
+        // delete the token from the browser
         localStorage.removeItem('apiToken')
-        setIsLoggedIn(false)
+        
+        // reset our app store
+        dispatch(logout())
+
+        // go back to login page
         navigate('/')
         progress.done()
     }
@@ -47,10 +56,10 @@ export const pushBackToLogin = ({ apiHost, apiToken, navigate, setIsLoggedIn }: 
         headers: {
             Authorization: `Bearer ${apiToken}`
         }
-    }).then(() => sub()).catch(e => {
+    }).then(() => procedure()).catch(e => {
         // if the token is no longer authorized, we simply
         // clean up the token and redirect to login page
-        if (JSON.parse(JSON.stringify(e)).status == 401) sub()
+        if (JSON.parse(JSON.stringify(e)).status == 401) procedure()
     })
     
 }
@@ -60,6 +69,8 @@ export const Dash = ({ setIsLoggedIn }: { setIsLoggedIn: any }): ReactElement =>
     const apiHost = localStorage.getItem('apiHost') as string
 
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
     const [ loading, setLoading ] = useState(true)
     const [ codes, setCodes ] = useState({ codes: [], loading: true } as CodeResponse)
 
@@ -75,14 +86,24 @@ export const Dash = ({ setIsLoggedIn }: { setIsLoggedIn: any }): ReactElement =>
             }
         }).then(({status, data}) => {
             if (status == 200) {
+                // update our store with the latest
+                // user details
+                const { username, email } = parseJWTPayload(apiToken)
+                dispatch(login({
+                    apiHost,
+                    apiToken,
+                    username,
+                    email,
+                    isLoggedIn: true,
+                }))
+
                 setCodes(data)
                 setLoading(false)
-                setIsLoggedIn(true)
             } else {
-                pushBackToLogin({apiHost, apiToken, navigate, setIsLoggedIn})
+                pushBackToLogin({apiHost, apiToken, navigate, dispatch})
             }
         }).catch(err => {
-            pushBackToLogin({apiHost, apiToken, navigate, setIsLoggedIn})
+            pushBackToLogin({apiHost, apiToken, navigate, dispatch})
         })
     }, [])
 

@@ -7,11 +7,17 @@
 import { ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { pushBackToLogin } from '../../pages/Dash/DashContainer';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppState } from '../../store/index';
 
 export const Header = ({ isLoggedIn, setIsLoggedIn }: { isLoggedIn: boolean, setIsLoggedIn: any }): ReactElement => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
     const apiToken = localStorage.getItem('apiToken') as string
     const apiHost = localStorage.getItem('apiHost') as string
+    
+    const auth = useSelector((state: AppState) => state.auth)
     
     return <header className="bg-blue-600 text-white py-6">
         <div className="container mx-auto flex justify-between items-center px-8">
@@ -23,8 +29,8 @@ export const Header = ({ isLoggedIn, setIsLoggedIn }: { isLoggedIn: boolean, set
             </a>
 
             {/* logout button */}
-            {isLoggedIn
-            ? <button className='text-slate-700 bg-white font-semibold py-2 px-4 rounded-md text-sm transition-colors hover:bg-slate-200' onClick={() => pushBackToLogin({ apiHost, apiToken, navigate, setIsLoggedIn })}>Logout</button>
+            {auth.isLoggedIn
+            ? <button className='text-slate-700 bg-white font-semibold py-2 px-4 rounded-md text-sm transition-colors hover:bg-slate-200' onClick={() => pushBackToLogin({ apiHost, apiToken, navigate, dispatch })}>Logout</button>
             : ""}
         </div>
     </header>
