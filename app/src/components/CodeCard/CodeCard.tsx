@@ -9,7 +9,7 @@ import { AppState } from "../../store";
 import { Code } from '../../store/codes';
 import { del } from './functions';
 
-export const CodeCard = ({code}: { code: Code }): ReactElement | null => {
+export const CodeCard = ({code, openModal}: { code: Code, openModal: any }): ReactElement => {
     const { apiHost, apiToken } = useSelector((state: AppState) => state.auth)
     const dispatch = useDispatch()
 
@@ -20,21 +20,21 @@ export const CodeCard = ({code}: { code: Code }): ReactElement | null => {
         </div>
         
         {/* the link */}
-        <div className="mb-2">
+        <div className={code.tags ? "mb-2" : "mb-4"}>
             <a className="text-sm" href={code.links[0].url} target="_blank" rel="noopener">{code.links[0].url}</a>
         </div>
         
         {/* render tags if exist */}
-        { code.tags
-        ? <div className="mb-6 flex space-x-2 text-xs">
-            {code.tags.map(tag => <span key={tag} className="cursor-pointer text-white bg-blue-600 px-3 py-1 rounded-full">{tag}</span>)}
-        </div>
-        : <></> }
+        {
+            code.tags && <div className="mb-4 flex space-x-2 text-xs">
+                {code.tags.map(tag => <span key={tag} className="cursor-pointer text-white bg-blue-600 px-3 py-1 rounded-full">{tag}</span>)}
+            </div>
+        }
 
         {/* the card actions */}
         <div className="flex space-x-2">
             {/* edit button */}
-            <button className="transition-colors hover:text-blue-600">
+            <button className="transition-colors hover:text-blue-600" onClick={() => openModal()}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 aspect-square" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                 </svg>
