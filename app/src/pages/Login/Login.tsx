@@ -35,7 +35,7 @@ export const Login = (): ReactElement => {
         localStorage.setItem('apiHost', host)
     }
 
-    const submit = e => {
+    const submit = (e: any) => {
         // prevent page refresh
         e.preventDefault()
 

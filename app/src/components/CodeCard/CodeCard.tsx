@@ -9,7 +9,7 @@ import { AppState } from "../../store";
 import { Code } from '../../store/codes';
 import { del } from './functions';
 
-export const CodeBlock = ({code}: { code: Code }): ReactElement | null => {
+export const CodeCard = ({code}: { code: Code }): ReactElement | null => {
     const { apiHost, apiToken } = useSelector((state: AppState) => state.auth)
     const dispatch = useDispatch()
 

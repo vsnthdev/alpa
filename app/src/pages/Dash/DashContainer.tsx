@@ -74,8 +74,6 @@ export const Dash = (): ReactElement => {
     }, [])
 
     return <main>
-        { loading == false
-        ? <DashContent></DashContent>
-        : "" }
+        { loading || <DashContent></DashContent> }
     </main>
 }

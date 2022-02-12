@@ -5,7 +5,7 @@
 
 import { ReactElement, useEffect } from "react";
 import progress from 'nprogress';
-import { CodeBlock } from '../../components/CodeBlock/CodeBlock';
+import { CodeCard } from '../../components/CodeCard/CodeCard';
 import { useSelector } from "react-redux";
 import { AppState } from "../../store";
 
@@ -21,7 +21,7 @@ export const DashContent = (): ReactElement => {
     return <div className="py-24 container mx-auto flex flex-col items-center">
         <h1 className="text-3xl font-semibold mb-16 md:text-4xl">Recently created</h1>
         <div className="flex flex-col w-full max-w-3xl px-8 items-center space-y-8">
-            { codes.map(code => <CodeBlock key={code.code} code={code}></CodeBlock> ) }
+            { codes.map(code => <CodeCard key={code.code} code={code}></CodeCard> ) }
         </div>
     </div>
 }

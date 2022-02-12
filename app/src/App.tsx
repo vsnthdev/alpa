@@ -3,7 +3,7 @@
  *  Created On 08 February 2022
  */
 
-import { ReactElement, StrictMode, useState } from 'react';
+import { ReactElement, StrictMode } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Header } from './components/Header/Header';
 import { Login } from './pages/Login/Login';
