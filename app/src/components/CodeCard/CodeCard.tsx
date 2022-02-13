@@ -7,9 +7,16 @@ import { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../../store";
 import { Code } from '../../store/codes';
+import { CodeModalStateReturns } from "../CodeModal/functions";
 import { del } from './functions';
+import { openCodeModal } from '../CodeModal/functions';
 
-export const CodeCard = ({code, openModal}: { code: Code, openModal: any }): ReactElement => {
+interface CodeCardOptions {
+    code: Code
+    modalState: CodeModalStateReturns
+}
+
+export const CodeCard = ({code, modalState }: CodeCardOptions): ReactElement => {
     const { apiHost, apiToken } = useSelector((state: AppState) => state.auth)
     const dispatch = useDispatch()
 
@@ -34,7 +41,7 @@ export const CodeCard = ({code, openModal}: { code: Code, openModal: any }): Rea
         {/* the card actions */}
         <div className="flex space-x-2">
             {/* edit button */}
-            <button className="transition-colors hover:text-blue-600" onClick={() => openModal()}>
+            <button className="transition-colors hover:text-blue-600" onClick={() => openCodeModal(code.code, modalState)}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 aspect-square" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                 </svg>
