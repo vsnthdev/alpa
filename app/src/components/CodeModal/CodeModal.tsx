@@ -17,7 +17,7 @@ export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
         <div className="flex justify-center items-center min-h-screen pt-4 px-4 pb-20 text-center">
             <div className="fixed inset-0 bg-slate-800 bg-opacity-75 transition-opacity" onClick={() => cancelAction(modalState)} ></div>
 
-            <div className="inline-block align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
+            <div className="w-full inline-block align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg">
                 <div className="bg-slate-100 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                     <div className="sm:flex sm:items-start">
                         <div
@@ -27,29 +27,32 @@ export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                             </svg>
                         </div>
-                        <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                        <div className="w-full mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                             <h3
-                                className="text-lg leading-6 font-medium text-slate-900"
+                                className="text-2xl font-semibold text-slate-900"
                                 id="modal-title"
                             >
                                 Edit {code}
                             </h3>
-                            <div className="mt-2">
-                                <p className="text-sm text-slate-500">
-                                    Are you sure you want to deactivate your account? All of
-                                    your data will be permanently removed. This action
-                                    cannot be undone.
-                                </p>
+                            <div className="mt-6">
+                                <div className="w-full flex flex-col space-y-2">
+                                    <label className="mr-auto">Target</label>
+                                    <input className="w-full px-3 py-2 border-2 outline-none transition-colors border-slate-200 focus:border-blue-500 rounded-md" type="text" id="target" placeholder="URL you want to redirect to" required />
+                                </div>
+                                <div className="mt-4 w-full flex flex-col space-y-2">
+                                    <label className="mr-auto">Tags</label>
+                                    <textarea id="tags" rows={3} className="appearance-none w-full px-3 py-2 border-2 outline-none transition-colors border-slate-200 focus:border-blue-500 rounded-md resize-none" placeholder="Space separated words used to easily identify codes."></textarea>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div className="bg-slate-200 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button type="button" className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm" onClick={() => applyAction(modalState)}>
+                    <button type="button" className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 transition-colors bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm" onClick={() => applyAction(modalState)}>
                         Apply
                     </button>
-                    <button type="button" className="mt-3 w-full inline-flex justify-center rounded-md border border-slate-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-slate-700 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-400 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onClick={() => cancelAction(modalState)}>
+                    <button type="button" className="mt-3 w-full inline-flex justify-center rounded-md border border-slate-300 shadow-sm px-4 py-2 transition-colors bg-white text-base font-medium text-slate-700 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-400 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onClick={() => cancelAction(modalState)}>
                         Cancel
                     </button>
             </div>
