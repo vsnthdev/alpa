@@ -7,7 +7,7 @@ interface CodeLink {
 export interface Code {
     code: string
     links: CodeLink[]
-    tags: string[]
+    tags: string[] | string
 }
 
 const codes = createSlice({
@@ -16,9 +16,10 @@ const codes = createSlice({
     reducers: {
         insert: (state, action) => state.concat(action.payload),
         del: (state, action) => state.filter((code: Code) => code.code != action.payload.code),
+        patch: (state, action) => state.filter((code: Code) => code.code != action.payload.code).concat([ action.payload as never ]),
         clear: () => []
     }
 })
 
-export const { insert, clear, del } = codes.actions
+export const { insert, clear, del, patch } = codes.actions
 export default codes.reducer

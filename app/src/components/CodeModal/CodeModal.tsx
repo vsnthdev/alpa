@@ -4,6 +4,9 @@
  */
 
 import { ReactElement } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppState } from "../../store";
+import { Code } from "../../store/codes";
 import { CodeModalStateReturns, cancelAction, applyAction } from './functions';
 
 interface CodeModalOptions {
@@ -11,7 +14,12 @@ interface CodeModalOptions {
 }
 
 export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
-    const { code, isOpen, target, setTarget, tags, setTags } = modalState
+    const { code, isOpen, setCode } = modalState
+    const dispatch = useDispatch()
+    const auth = useSelector((state: AppState) => state.auth)
+
+    const setTarget = (targetURL: string) => setCode({ ...code, ...{ links: [{ url: targetURL }] } } as Code)
+    const setTags = (tagsString: string) => setCode({ ...code, ...{ tags: tagsString } } as Code)
 
     return <div className={`fixed z-10 inset-0 overflow-y-auto transition-opacity ${isOpen ? 'opacity-100' : 'opacity-0'} ${isOpen || 'pointer-events-none'}`} onKeyDown={e => e.code == 'Escape' && cancelAction(modalState) }>
         <div className="flex justify-center items-center min-h-screen pt-4 px-4 pb-20 text-center">
@@ -32,16 +40,16 @@ export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
                                 className="text-2xl font-semibold text-slate-900"
                                 id="modal-title"
                             >
-                                Edit {code}
+                                Edit {code.code}
                             </h3>
                             <div className="mt-6">
                                 <div className="w-full flex flex-col space-y-2">
                                     <label className="mr-auto">Target</label>
-                                    <input className="w-full px-3 py-2 border-2 outline-none transition-colors border-slate-200 focus:border-blue-500 rounded-md" type="text" id="target" placeholder="URL you want to redirect to" value={target} onChange={e => setTarget(e.target.value)} required />
+                                    <input className="w-full px-3 py-2 border-2 outline-none transition-colors border-slate-200 focus:border-blue-500 rounded-md" type="text" id="target" placeholder="URL you want to redirect to" value={code.links ? code.links[0].url : ''} onChange={e => setTarget(e.target.value)} required />
                                 </div>
                                 <div className="mt-4 w-full flex flex-col space-y-2">
                                     <label className="mr-auto">Tags</label>
-                                    <textarea id="tags" rows={3} className="appearance-none w-full px-3 py-2 border-2 outline-none transition-colors border-slate-200 focus:border-blue-500 rounded-md resize-none" placeholder="Space separated words used to easily identify codes." value={tags} onChange={e => setTags(e.target.value)}></textarea>
+                                    <textarea id="tags" rows={3} className="appearance-none w-full px-3 py-2 border-2 outline-none transition-colors border-slate-200 focus:border-blue-500 rounded-md resize-none" placeholder="Space separated words used to easily identify codes." value={code.tags ? code.tags : ''} onChange={e => setTags(e.target.value)}></textarea>
                                 </div>
                             </div>
                         </div>
@@ -49,7 +57,7 @@ export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
                 </div>
 
                 <div className="bg-slate-200 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button type="button" className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 transition-colors bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm" onClick={() => applyAction(modalState)}>
+                    <button type="button" className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 transition-colors bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm" onClick={() => applyAction(modalState, dispatch, auth)}>
                         Apply
                     </button>
                     <button type="button" className="mt-3 w-full inline-flex justify-center rounded-md border border-slate-300 shadow-sm px-4 py-2 transition-colors bg-white text-base font-medium text-slate-700 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-400 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onClick={() => cancelAction(modalState)}>
