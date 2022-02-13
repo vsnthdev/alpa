@@ -11,7 +11,7 @@ interface CodeModalOptions {
 }
 
 export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
-    const { code, isOpen } = modalState
+    const { code, isOpen, target, setTarget, tags, setTags } = modalState
 
     return <div className={`fixed z-10 inset-0 overflow-y-auto transition-opacity ${isOpen ? 'opacity-100' : 'opacity-0'} ${isOpen || 'pointer-events-none'}`} onKeyDown={e => e.code == 'Escape' && cancelAction(modalState) }>
         <div className="flex justify-center items-center min-h-screen pt-4 px-4 pb-20 text-center">
@@ -37,11 +37,11 @@ export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
                             <div className="mt-6">
                                 <div className="w-full flex flex-col space-y-2">
                                     <label className="mr-auto">Target</label>
-                                    <input className="w-full px-3 py-2 border-2 outline-none transition-colors border-slate-200 focus:border-blue-500 rounded-md" type="text" id="target" placeholder="URL you want to redirect to" required />
+                                    <input className="w-full px-3 py-2 border-2 outline-none transition-colors border-slate-200 focus:border-blue-500 rounded-md" type="text" id="target" placeholder="URL you want to redirect to" value={target} onChange={e => setTarget(e.target.value)} required />
                                 </div>
                                 <div className="mt-4 w-full flex flex-col space-y-2">
                                     <label className="mr-auto">Tags</label>
-                                    <textarea id="tags" rows={3} className="appearance-none w-full px-3 py-2 border-2 outline-none transition-colors border-slate-200 focus:border-blue-500 rounded-md resize-none" placeholder="Space separated words used to easily identify codes."></textarea>
+                                    <textarea id="tags" rows={3} className="appearance-none w-full px-3 py-2 border-2 outline-none transition-colors border-slate-200 focus:border-blue-500 rounded-md resize-none" placeholder="Space separated words used to easily identify codes." value={tags} onChange={e => setTags(e.target.value)}></textarea>
                                 </div>
                             </div>
                         </div>
