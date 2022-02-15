@@ -7,17 +7,18 @@ import { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../../store";
 import { Code } from "../../store/codes";
-import { CodeModalStateReturns, cancelAction, applyAction } from './functions';
+import { CodeModalStateReturns, cancelAction, applyAction, generateCodeString } from './functions';
 
 interface CodeModalOptions {
     modalState: CodeModalStateReturns
 }
 
 export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
-    const { code, isOpen, setCode } = modalState
+    const { code, isOpen, setCode, isCreatingNew } = modalState
     const dispatch = useDispatch()
     const auth = useSelector((state: AppState) => state.auth)
 
+    const setCodeValue = (codeString: string) => setCode({ ...code, ...{ code: codeString } } as Code)
     const setTarget = (targetURL: string) => setCode({ ...code, ...{ links: [{ url: targetURL }] } } as Code)
     const setTags = (tagsString: string) => setCode({ ...code, ...{ tags: tagsString } } as Code)
 
@@ -31,19 +32,34 @@ export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
                         <div
                             className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10"
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            { isCreatingNew
+                            ? <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
+                            : <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>}
                         </div>
                         <div className="w-full mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                             <h3
                                 className="text-2xl font-semibold text-slate-900"
                                 id="modal-title"
                             >
-                                Edit {code.code}
+                                { isCreatingNew ? `Creating ${code.code}` : `Edit ${ code.code }` }
                             </h3>
-                            <div className="mt-6">
-                                <div className="w-full flex flex-col space-y-2">
+                            <div className="mt-6 mb-4">
+                                { isCreatingNew && <div className="w-full flex flex-col space-y-2">
+                                    <label className="mr-auto">Code</label>
+                                    <div className="flex px-3 py-2 border-2 transition-colors rounded-md bg-white border-slate-200 focus-within:border-blue-500">
+                                        <input className="w-full outline-none transition-colors" type="text" id="code" placeholder="The short code" value={code.code} onChange={e => setCodeValue(e.target.value)} required />
+                                        <button className="pl-2 transition-colors outline-none text-slate-400 hover:text-slate-600 focus:text-slate-600 active:text-black" onClick={() => setCodeValue(generateCodeString())}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div> }
+                                <div className={`w-full flex flex-col space-y-2 ${isCreatingNew && 'mt-4'}`}>
                                     <label className="mr-auto">Target</label>
                                     <input className="w-full px-3 py-2 border-2 outline-none transition-colors border-slate-200 focus:border-blue-500 rounded-md" type="text" id="target" placeholder="URL you want to redirect to" value={code.links ? code.links[0].url : ''} onChange={e => setTarget(e.target.value)} required />
                                 </div>
@@ -58,7 +74,7 @@ export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
 
                 <div className="bg-slate-200 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                     <button type="button" className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 transition-colors bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm" onClick={() => applyAction(modalState, dispatch, auth)}>
-                        Apply
+                        { isCreatingNew ? 'Create' : 'Apply' }
                     </button>
                     <button type="button" className="mt-3 w-full inline-flex justify-center rounded-md border border-slate-300 shadow-sm px-4 py-2 transition-colors bg-white text-base font-medium text-slate-700 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-400 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onClick={() => cancelAction(modalState)}>
                         Cancel

@@ -9,16 +9,23 @@ import { Dispatch, useState } from 'react';
 import { Code, patch } from '../../store/codes';
 import axios from 'axios';
 import { AuthState } from '../../store/auth';
+import { customAlphabet } from 'nanoid';
+
+const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyz', 4)
 
 export interface CodeModalStateReturns {
     code: Code
     isOpen: boolean
+    isCreatingNew: boolean
     setCode: React.Dispatch<React.SetStateAction<Code>>
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+    setIsCreatingNew: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const prepareModalState = (): CodeModalStateReturns => {
     const [ isOpen, setIsOpen ] = useState(false)
+    const [ isCreatingNew, setIsCreatingNew ] = useState(false)
+
     const [code, setCode] = useState({
         code: '',
         links: [
@@ -29,15 +36,22 @@ export const prepareModalState = (): CodeModalStateReturns => {
         tags: ''
     } as Code)
 
-    return { code, setCode, isOpen, setIsOpen }
+    return { code, setCode, isOpen, setIsOpen, isCreatingNew, setIsCreatingNew }
 }
 
-export const openCodeModal = (code: Code, state: CodeModalStateReturns) => {
+export const openCodeModal = (code: Code | null, state: CodeModalStateReturns) => {
     // function to focus on our target input field
     const focus = () => (document.querySelector('#target') as HTMLInputElement).focus()
 
-    // set the code
-    state.setCode(code)
+    // set the code if we're editing
+    // an existing one, or else set as a new code dialog
+    if (code) {
+        state.setIsCreatingNew(false)
+        state.setCode(code)
+    } else {
+        state.setCode({ ...state.code, ...{ code: generateCodeString() } } as Code)
+        state.setIsCreatingNew(true)
+    }
 
     // show the modal & set focus on target
     state.setIsOpen(true)
@@ -81,3 +95,5 @@ export const applyAction = (state: CodeModalStateReturns, dispatch: Dispatch<any
 
     clearState(state)
 }
+
+export const generateCodeString = (): string => nanoid()
