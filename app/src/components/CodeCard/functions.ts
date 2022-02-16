@@ -5,7 +5,7 @@
 
 import { Dispatch } from "@reduxjs/toolkit"
 import axios from "axios"
-import { del as _del } from '../../store/codes';
+import { Code, del as _del } from '../../store/codes';
 
 interface DelOptions {
     apiHost: string
@@ -23,4 +23,9 @@ export const del = ({ apiHost, apiToken, code, dispatch }: DelOptions) => axios(
 }).then(() => {
     // update our application state
     dispatch(_del({ code }))
+})
+
+export const copyShortURL = ({ code, apiHost, setShowCopiedToolTip }: { code: Code, apiHost: string, setShowCopiedToolTip: React.Dispatch<React.SetStateAction<boolean>> }) => navigator.clipboard.writeText(`${apiHost}/${code.code}`).then(() => {
+    setShowCopiedToolTip(true)
+    setTimeout(() => setShowCopiedToolTip(false), 1000)
 })
