@@ -15,6 +15,7 @@ import { login } from '../../store/auth';
 import { AppState } from '../../store';
 import { insert } from '../../store/codes';
 import logout from '.';
+import { DashHero } from '../../components/DashHero/DashHero';
 
 export const Dash = (): ReactElement => {
     const apiToken = localStorage.getItem('apiToken') as string
@@ -74,6 +75,7 @@ export const Dash = (): ReactElement => {
     }, [])
 
     return <main>
-        { loading || <DashContent></DashContent> }
+        <DashHero loading={loading} ></DashHero>
+        <DashContent></DashContent>
     </main>
 }

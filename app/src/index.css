@@ -10,7 +10,7 @@
 /* Tippy.js styles */
 
 .tippy-box[data-theme~='primary']  {
-    @apply bg-blue-700 shadow-2xl shadow-blue-300 border-2 border-solid border-blue-500 font-medium;
+    @apply bg-blue-700 shadow-blue-300 border-2 border-solid border-blue-500 font-medium;
 }
 
 .tippy-box[data-theme~='primary'] .tippy-arrow {
