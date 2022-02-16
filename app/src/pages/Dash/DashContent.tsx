@@ -9,14 +9,11 @@ import { CodeCard } from '../../components/CodeCard/CodeCard';
 import { useSelector } from "react-redux";
 import { AppState } from "../../store";
 import { CodeModal } from '../../components/CodeModal/CodeModal';
-import { prepareModalState } from '../../components/CodeModal/functions';
+import { CodeModalStateReturns } from '../../components/CodeModal/functions';
 
-export const DashContent = (): ReactElement => {
+export const DashContent = ({ modalState }: { modalState: CodeModalStateReturns }): ReactElement => {
     // pull codes from the store
     const codes = useSelector((state: AppState) => state.codes)
-
-    // prepare modal's required state
-    const modalState = prepareModalState()
 
     // stop the progress bar
     useEffect(() => {

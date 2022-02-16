@@ -16,6 +16,7 @@ import { AppState } from '../../store';
 import { insert } from '../../store/codes';
 import logout from '.';
 import { DashHero } from '../../components/DashHero/DashHero';
+import { prepareModalState } from '../../components/CodeModal/functions';
 
 export const Dash = (): ReactElement => {
     const apiToken = localStorage.getItem('apiToken') as string
@@ -25,7 +26,9 @@ export const Dash = (): ReactElement => {
     const dispatch = useDispatch()
 
     const [ loading, setLoading ] = useState(true)
-    const codes = useSelector((state: AppState) => state.codes)
+
+    // prepare modal's required state
+    const modalState = prepareModalState()
 
     // check if the token is valid, while fetching
     // the codes of using the token
@@ -75,7 +78,7 @@ export const Dash = (): ReactElement => {
     }, [])
 
     return <main>
-        <DashHero loading={loading} ></DashHero>
-        <DashContent></DashContent>
+        <DashHero loading={loading} modalState={modalState}></DashHero>
+        <DashContent modalState={modalState}></DashContent>
     </main>
 }
