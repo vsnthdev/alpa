@@ -75,6 +75,8 @@ export const Dash = (): ReactElement => {
                 dispatch,
                 navigate
             })
+        }).finally(() => {
+            progress.done()
         })
     }, [])
 

@@ -47,6 +47,8 @@ export default ({ auth, navigate, dispatch }: LogoutOptions) => {
         // if the token is no longer authorized, we simply
         // clean up the token and redirect to login page
         if (JSON.parse(JSON.stringify(e)).status == 401) procedure()
+    }).finally(() => {
+        progress.done()
     })
     
 }

@@ -7,6 +7,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* hide scrollbar */
+
+::-webkit-scrollbar {
+    display: none;
+}
+
 /* Tippy.js styles */
 
 .tippy-box[data-theme~='primary']  {
