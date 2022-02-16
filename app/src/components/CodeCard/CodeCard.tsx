@@ -40,6 +40,13 @@ export const CodeCard = ({code, modalState }: CodeCardOptions): ReactElement => 
 
         {/* the card actions */}
         <div className="flex space-x-2">
+            {/* copy short URL button */}
+            {Boolean(navigator.clipboard) && <button className="transition-colors hover:text-blue-600" onClick={() => { navigator.clipboard.writeText(`${apiHost}/${code.code}`) }}>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 aspect-square" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+            </button>}
+
             {/* edit button */}
             <button className="transition-colors hover:text-blue-600" onClick={e => { openCodeModal(e.shiftKey ? null : code, modalState) }}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 aspect-square" fill="none" viewBox="0 0 24 24" stroke="currentColor">
