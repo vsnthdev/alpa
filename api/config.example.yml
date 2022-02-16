@@ -8,9 +8,7 @@ auth:
     email: alpa@example.com
     password: short_lived
 database:
-    host: localhost
-    port: 6379
-    password: null
+    connection: redis://localhost:6379
     channels:
         codes: 0
         tokens: 1

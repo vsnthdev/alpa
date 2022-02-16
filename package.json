@@ -3,7 +3,6 @@
     "description": "( अल्प ) — A fast ⚡ self-hosted link 🔗 shortener.",
     "license": "Zlib",
     "type": "module",
-    "homepage": "https://vas.cx/alpa",
     "bugs": "https://github.com/vsnthdev/alpa/issues",
     "author": {
         "name": "Vasanth Developer",

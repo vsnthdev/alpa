@@ -10,9 +10,7 @@ export interface AlpaAPIConfig {
         password: string
     }
     database: {
-        host: string
-        port: string
-        password?: string
+        connection: string
         channels: {
             codes: number
             tokens: number

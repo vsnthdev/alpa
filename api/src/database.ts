@@ -3,41 +3,38 @@
  *  Created On 30 January 2022
  */
 
-import Redis from 'ioredis'
 import { log } from './logger.js';
 import { config } from './config/index.js';
-import chalk from 'chalk';
+import { createClient, RedisClientType } from 'redis';
 
 export interface ConnectionsList {
-    codes: Redis.Redis
-    tokens: Redis.Redis
+    codes: RedisClientType<any>
+    tokens: RedisClientType<any>
 }
 
 export let db: ConnectionsList
 
 export default async () => {
+    const failedConnecting = () => log.error('Failed connecting to the database.', 2)
+
     const { database } = config
-    const base = {
-        host: database.host,
-        port: database.port,
-        password: database.password
-    }
 
     db = {
         codes: null,
         tokens: null
     }
 
-    const failedConnecting = () => log.error('Failed connecting to the database.', 2)
-
-    db.codes = new Redis({ ...base, ...{ db: database.channels.codes } } as any)
-    db.tokens = new Redis({ ...base, ...{ db: database.channels.tokens } } as any)
-    
     for (const key in db) {
-        const conn = db[key] as Redis.Redis
-        conn.on('error', failedConnecting)
-        await conn.info()
+        db[key] = createClient({
+            url: database.connection,
+            database: database.channels[key]
+        })
+
+        db[key].on('error', failedConnecting)
+    
+        await db[key].connect()
+        await db[key].info()
     }
 
-    log.success(`Connected to Redis database at ${chalk.gray.underline(`redis://${base.host}:${base.port}`)}`)
+    log.success(`Connected with the Redis database`)
 }

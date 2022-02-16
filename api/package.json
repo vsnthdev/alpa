@@ -9,6 +9,8 @@
         "start": "nodemon"
     },
     "dependencies": {
+        "@node-redis/json": "^1.0.2",
+        "@node-redis/search": "^1.0.2",
         "boom": "^7.3.0",
         "chalk": "^5.0.0",
         "fastify": "^3.27.0",
@@ -18,9 +20,9 @@
         "fastify-plugin": "^3.0.1",
         "glob": "^7.2.0",
         "gravatar": "^1.8.2",
-        "ioredis": "^4.28.3",
         "itivrutaha": "^2.0.12",
-        "js-yaml": "^4.1.0"
+        "js-yaml": "^4.1.0",
+        "redis": "^4.0.3"
     },
     "devDependencies": {
         "@types/boom": "^7.3.1",

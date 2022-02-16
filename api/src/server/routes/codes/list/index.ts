@@ -5,7 +5,9 @@ import { ConnectionsList } from '../../../../database.js';
 
 const getHandler = (config: AlpaAPIConfig, db: ConnectionsList) => async (req: FastifyRequest, rep: FastifyReply): Promise<any> => {
     const cursor = req.query['cursor'] || 0
-    const [now, keys] = await db.codes.scan(cursor)
+    const { cursor: now, keys } = await db.codes.scan(cursor, {
+        COUNT: 50
+    })
 
     const codes = []
 

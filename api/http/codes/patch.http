@@ -8,10 +8,10 @@ Content-Type: application/json
 Authorization: Bearer {{$dotenv TOKEN}}
 
 {
-    "code": "abcd",
+    "code": "twitter",
     "links": [
         {
-            "url": "https://vasanthdeveloper.com"
+            "url": "https://github.com/vsnthdev"
         }
     ]
 }
