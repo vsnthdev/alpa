@@ -26,6 +26,7 @@ export const Dash = (): ReactElement => {
     const dispatch = useDispatch()
 
     const [ loading, setLoading ] = useState(true)
+    const [ quickText, setQuickText ] = useState("")
 
     // prepare modal's required state
     const modalState = prepareModalState()
@@ -78,7 +79,7 @@ export const Dash = (): ReactElement => {
     }, [])
 
     return <main>
-        <DashHero loading={loading} modalState={modalState}></DashHero>
+        <DashHero loading={loading} modalState={modalState} quickText={quickText} setQuickText={setQuickText}></DashHero>
         <DashContent modalState={modalState}></DashContent>
     </main>
 }

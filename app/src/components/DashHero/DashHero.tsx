@@ -4,15 +4,50 @@
  *  Created On 17 February 2022
  */
 
-import { ReactElement, useState } from 'react';
-import { CodeModalStateReturns, openCodeModal } from '../CodeModal/functions';
+import axios from 'axios';
+import { Dispatch, ReactElement, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppState } from '../../store';
+import { Code, patch } from '../../store/codes';
+import { CodeModalStateReturns, openCodeModal, generateCodeString } from '../CodeModal/functions';
+import progress from 'nprogress';
 
-export const DashHero = ({ loading, modalState }: { loading: boolean, modalState: CodeModalStateReturns }): ReactElement => {
-    const [ quickText, setQuickText ] = useState("")
+interface DashHeroOptions {
+    loading: boolean
+    quickText: string
+    modalState: CodeModalStateReturns
+    setQuickText: Dispatch<React.SetStateAction<string>>
+}
+
+export const DashHero = ({ loading, modalState, quickText, setQuickText }: DashHeroOptions): ReactElement => {
+    const dispatch = useDispatch()
+    const auth = useSelector((app: AppState) => app.auth)
 
     const onClick = () => {
         if (quickText.length == 0) {
             openCodeModal(null, modalState)
+        } else {
+            progress.start()
+
+            const data = { code: generateCodeString(), links: [ { url: quickText } ], tags: '' } as Code
+
+            axios({
+                data,
+                method: 'POST',
+                url: `${auth.apiHost}/api/codes?force=true`,
+                headers: {
+                    Authorization: `Bearer ${auth.apiToken}`
+                },
+            }).then(() => {
+                // dispatch a app store change
+                dispatch(patch(data))
+
+                // clear input text
+                setQuickText("")
+
+                // stop progressbar
+                progress.done()
+            })
         }
     }
 
