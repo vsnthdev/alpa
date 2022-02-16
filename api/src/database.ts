@@ -8,7 +8,7 @@ import { config } from './config/index.js';
 import { createClient, RedisClientType } from 'redis';
 
 export interface ConnectionsList {
-    codes: RedisClientType<any>
+    codes: any
     tokens: RedisClientType<any>
 }
 

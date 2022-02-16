@@ -12,8 +12,8 @@ const getHandler = (config: AlpaAPIConfig, db: ConnectionsList) => async (req: F
     const codes = []
 
     for (const key of keys) {
-        const str = await db.codes.get(key)
-        codes.push({ ...{ code: key }, ...JSON.parse(str) })
+        const code = await db.codes.json.get(key)
+        codes.push({ ...{ code: key }, ...code })
     }
 
     return rep.status(200).send({ cursor: now, codes })

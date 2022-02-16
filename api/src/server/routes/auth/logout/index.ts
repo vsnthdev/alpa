@@ -8,7 +8,9 @@ const getHandler = (config: AlpaAPIConfig, db: ConnectionsList, fastify: Fastify
     const decoded = fastify.jwt.decode(token)
     const secondsRemaining = decoded['exp'] - Math.round((new Date()).getTime() / 1000)
 
-    await db.tokens.set(token, '1', 'EX', secondsRemaining)
+    await db.tokens.set(token, 1, {
+        EX: secondsRemaining
+    })
 
     return rep.status(204).send('')
 }

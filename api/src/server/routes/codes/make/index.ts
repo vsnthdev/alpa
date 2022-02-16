@@ -13,7 +13,7 @@ export interface CodeLink {
 
 export interface Code {
     code: string
-    tags: string[]
+    tags: string
     links: CodeLink[]
 }
 
@@ -25,7 +25,7 @@ const getHandler = (config: AlpaAPIConfig, db: ConnectionsList) => async (req: F
     const exists = await db.codes.exists(code)
     if (exists && Boolean(req.query['force']) == false) throw boom.conflict('That code already exists')
 
-    await db.codes.set(code, JSON.stringify(body))
+    await db.codes.json.set(code, '$', body)
 
     if (exists) {
         return rep.status(200).send({
