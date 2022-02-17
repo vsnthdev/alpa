@@ -47,7 +47,7 @@ export const openCodeModal = (code: Code | null, state: CodeModalStateReturns) =
     // an existing one, or else set as a new code dialog
     if (code) {
         state.setIsCreatingNew(false)
-        state.setCode(code)
+        state.setCode({...code, ...{ tags: code.tags.split(';').map(tag => tag.trim()).filter(tag => Boolean(tag)).join('; ') }} as Code)
     } else {
         state.setCode({ ...state.code, ...{ code: generateCodeString() } } as Code)
         state.setIsCreatingNew(true)
@@ -77,7 +77,7 @@ export const applyAction = (state: CodeModalStateReturns, dispatch: Dispatch<any
     closeModal(state)
 
     // prepare a final new Code object
-    const getTags = (tags: string | string[]) => typeof tags == 'string' ? tags.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0) : tags
+    const getTags = (tags: string) => tags.split(';').map(tag => tag.trim()).filter(tag => tag.length > 0).join(';')
     const final = { ...state.code, ...{ tags: getTags(state.code.tags) } }
 
     // send HTTP request

@@ -35,7 +35,7 @@ export const CodeCard = ({code, modalState }: CodeCardOptions): ReactElement => 
         {/* render tags if exist */}
         {
             code.tags && <div className="mb-4 flex space-x-2 text-xs">
-                {(code.tags as string[]).map(tag => <span key={tag} className="cursor-pointer text-white bg-blue-600 px-3 py-1 rounded-full">{tag}</span>)}
+                {code.tags.split(';').map(tag => <span key={tag} className="cursor-pointer text-white bg-blue-600 px-3 py-1 rounded-full">{tag}</span>)}
             </div>
         }
 

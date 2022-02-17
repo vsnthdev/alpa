@@ -14,7 +14,7 @@
 ```js
 {
     code: "abcd",  // identifier
-    tags: ["official", "interval"], // to make it easy to search
+    tags: "official;interval", // to make it easy to search
     links: [
         {
             title: "Vasanth Developer", // (optional) shown on when multiple links exist
