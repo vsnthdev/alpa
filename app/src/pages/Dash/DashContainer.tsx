@@ -10,9 +10,8 @@ import { useNavigate } from 'react-router-dom';
 import { DashContent } from './DashContent';
 import progress from 'nprogress';
 import { parseJWTPayload } from '../Login/index';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, } from 'react-redux';
 import { login } from '../../store/auth';
-import { AppState } from '../../store';
 import { insert } from '../../store/codes';
 import logout from '.';
 import { DashHero } from '../../components/DashHero/DashHero';
@@ -82,6 +81,6 @@ export const Dash = (): ReactElement => {
 
     return <main>
         <DashHero loading={loading} modalState={modalState} quickText={quickText} setQuickText={setQuickText}></DashHero>
-        <DashContent modalState={modalState}></DashContent>
+        <DashContent modalState={modalState} quickText={quickText}></DashContent>
     </main>
 }
