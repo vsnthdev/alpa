@@ -18,7 +18,7 @@ import { config } from '../config/index.js';
 import { db } from '../database.js';
 
 export interface RouteImpl {
-    path: string
+    path: string | string[]
     method: string
     opts: any
     getHandler: (config: AlpaAPIConfig, db: ConnectionsList, fastify: FastifyInstance) => (req: FastifyRequest, rep: FastifyReply) => Promise<FastifyReply>
@@ -38,7 +38,14 @@ const loadRoutes = async (fastify: FastifyInstance, config: AlpaAPIConfig, db: C
 
         route.method = route.method.toLowerCase()
         if (!route.opts) route.opts = {}
-        fastify[route.method](route.path, route.opts, route.getHandler(config, db, fastify))
+
+        if (typeof route.path == 'string') {
+            fastify[route.method](route.path, route.opts, route.getHandler(config, db, fastify))
+        } else {
+            for (const another of route.path) {
+                fastify[route.method](another, route.opts, route.getHandler(config, db, fastify))
+            }
+        }
     }
 }
 

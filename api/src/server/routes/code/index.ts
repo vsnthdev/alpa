@@ -5,7 +5,7 @@ import boom from 'boom';
 import { CodeLink } from "../codes/make";
 
 const getHandler =  (config: AlpaAPIConfig, db: ConnectionsList) => async (req: FastifyRequest, rep: FastifyReply): Promise<any> => {
-    const links = await db.codes.json.get(req.params['code'], {
+    const links = await db.codes.json.get(req.params['code'] || "_root", {
         path: [
             'links'
         ]
@@ -21,7 +21,7 @@ const getHandler =  (config: AlpaAPIConfig, db: ConnectionsList) => async (req: 
 }
 
 export default {
-    path: '/:code',
+    path: ['/:code', '/'],
     method: 'GET',
     getHandler,
 }
