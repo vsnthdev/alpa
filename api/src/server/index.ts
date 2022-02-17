@@ -42,6 +42,15 @@ const loadRoutes = async (fastify: FastifyInstance, config: AlpaAPIConfig, db: C
     }
 }
 
+const getCors = (): string[] => {
+    const devURL = 'http://localhost:3000'
+
+    const prod = process.env.NODE_ENV == 'production'
+    if (prod == false && config.server.cors.includes(devURL) == false) config.server.cors.push(devURL)
+
+    return config.server.cors
+}
+
 export default async (): Promise<void> => new Promise((resolve, reject) => {
     fastify = Fastify({
         // TODO: implement a custom logger, and attach it here
@@ -53,9 +62,9 @@ export default async (): Promise<void> => new Promise((resolve, reject) => {
     })
 
     fastify.register(cors, {
-        methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+        methods: ['GET', 'POST', 'DELETE'],
         credentials: true,
-        origin: '*',
+        origin: getCors(),
         allowedHeaders: ['Authorization', 'Content-Type']
     })
 
