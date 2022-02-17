@@ -22,6 +22,8 @@ const getHandler = (config: AlpaAPIConfig, db: ConnectionsList) => async (req: F
     const code = body.code
     delete body.code
 
+    if (code == 'api') throw boom.notAcceptable('A code named api cannot be created.')
+
     const exists = await db.codes.exists(code)
     if (exists && Boolean(req.query['force']) == false) throw boom.conflict('That code already exists')
 
