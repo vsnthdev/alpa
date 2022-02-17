@@ -5,7 +5,8 @@
 
 import { log } from './logger.js';
 import { config } from './config/index.js';
-import { createClient, RedisClientType } from 'redis';
+import { createClient, RedisClientType, SchemaFieldTypes } from 'redis';
+import { app } from './app.js';
 
 export interface ConnectionsList {
     codes: any
@@ -13,6 +14,34 @@ export interface ConnectionsList {
 }
 
 export let db: ConnectionsList
+
+export const getIndexName = () => 'codes'.concat(app.version.replace(/\./g, ''))
+
+const createSearchIndex = async ({codes }: ConnectionsList) => {
+    const indexName = getIndexName()
+
+    const existing = await codes.ft._list()
+    if (existing.includes(indexName) == false) {
+        // clear all existing indexes
+        for (const key of existing) await codes.ft.dropIndex(key, { DD: true })
+
+        await codes.ft.create(
+            indexName,
+            {
+                '$.tags': {
+                    type: SchemaFieldTypes.TAG,
+                    AS: 'tags',
+                    SEPARATOR: ';'
+                }
+            },
+            {
+                ON: 'JSON'
+            }
+        )
+
+        log.info('Created search index for codes')
+    }
+}
 
 export default async () => {
     const failedConnecting = () => log.error('Failed connecting to the database.', 2)
@@ -37,4 +66,6 @@ export default async () => {
     }
 
     log.success(`Connected with the Redis database`)
+
+    await createSearchIndex(db)
 }

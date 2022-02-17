@@ -2,7 +2,6 @@
 
 | Status | Method | Endpoint | Description |
 |-|-|-|-|
-| ❌ | `GET` | `/` | Redirects to a pre-configured URL. |
 | ✅ | `GET` | `/:code` | Performs a redirect if found or redirects to a 404 page. |
 | ❌ | `GET` | `/api` | Responds with API version details. |
 | ✅ | `POST` | `/api/auth/login` | Responds with a token. |
