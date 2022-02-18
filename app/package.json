@@ -5,7 +5,8 @@
     "scripts": {
         "clean": "rimraf dist tsconfig.tsbuildinfo",
         "start": "vite",
-        "build": "vite build --emptyOutDir"
+        "build": "vite build --emptyOutDir",
+        "build:docker": "cd .. && docker build . --tag vsnthdev/alpa-app:latest -f app/Dockerfile"
     },
     "devDependencies": {
         "@reduxjs/toolkit": "^1.7.2",

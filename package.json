@@ -20,18 +20,19 @@
         "postinstall": "lerna bootstrap",
         "clean": "lerna run clean",
         "build": "lerna run build",
+        "build:docker": "lerna run --stream build:docker",
         "watch": "lerna run watch",
         "start": "lerna run start"
     },
     "dependencies": {
         "@vsnthdev/utilities-node": "^2.0.1",
         "axios": "^0.25.0",
-        "es-dirname": "^0.1.0"
+        "es-dirname": "^0.1.0",
+        "lerna": "^4.0.0"
     },
     "devDependencies": {
         "@types/node": "^17.0.13",
         "concurrently": "^7.0.0",
-        "lerna": "^4.0.0",
         "rimraf": "^3.0.2",
         "typescript": "^4.5.5"
     }

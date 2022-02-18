@@ -5,6 +5,7 @@
     "scripts": {
         "clean": "rimraf dist tsconfig.tsbuildinfo",
         "build": "tsc --incremental false",
+        "build:docker": "cd .. && docker build . --tag vsnthdev/alpa-api:latest -f api/Dockerfile",
         "watch": "tsc --watch",
         "start": "nodemon"
     },
