@@ -22,6 +22,7 @@
         "react-redux": "^7.2.6",
         "react-router-dom": "^6.2.1",
         "tailwindcss": "^3.0.19",
+        "use-debounce": "^7.0.1",
         "vite": "^2.7.13",
         "vite-plugin-html": "^3.0.3"
     },

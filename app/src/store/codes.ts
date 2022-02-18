@@ -17,9 +17,10 @@ const codes = createSlice({
         insert: (state, action) => state.concat(action.payload),
         del: (state, action) => state.filter((code: Code) => code.code != action.payload.code),
         patch: (state, action) => [ action.payload as never ].concat(state.filter((code: Code) => code.code != action.payload.code)),
+        update: (state, { payload }) => state.concat(payload.filter((code: Code) => Boolean(state.find((c: Code) => c.code == code.code)) == false)),
         clear: () => []
     }
 })
 
-export const { insert, clear, del, patch } = codes.actions
+export const { insert, clear, del, patch, update } = codes.actions
 export default codes.reducer
