@@ -1,0 +1,8 @@
+api
+**/Dockerfile*
+**/node_modules
+**/tsconfig*
+**/.git*
+app/vite*
+app/tailwind*
+app/src

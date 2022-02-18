@@ -24,4 +24,4 @@ RUN npm install --prod && \
     rm -rf /var/cache/apk/*
 
 # run @alpa/api on contianer boot
-CMD ["node", "api/dist/index.js", "--verbose"]
+CMD node api/dist/index.js --verbose

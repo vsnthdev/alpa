@@ -1,0 +1,10 @@
+app
+**/Dockerfile*
+**/node_modules
+**/tsconfig*
+**/.git*
+api/config.yml
+api/http
+api/nodemon*
+api/notes
+api/src
