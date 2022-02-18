@@ -28,7 +28,7 @@ export const CodeCard = ({code, modalState }: CodeCardOptions): ReactElement => 
         </div>
         
         {/* the link */}
-        <div className={code.tags ? "mb-2" : "mb-4"}>
+        <div className="mb-4">
             <a className="text-sm" href={code.links[0].url} target="_blank" rel="noopener">{code.links[0].url}</a>
         </div>
         
