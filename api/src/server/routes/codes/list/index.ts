@@ -37,7 +37,7 @@ const getRecentList = async (query: RequestQuery, db: ConnectionsList) => {
         COUNT: 50
     })
 
-    const codes = keysToCodes(keys, db)
+    const codes = await keysToCodes(keys, db)
 
     return { cursor: now, codes }
 }
