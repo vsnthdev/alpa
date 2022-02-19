@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+    # the redis Docker image with RedisJSON and RediSearch
+    # modules enabled along with persistance
+    redis:
+        image: redislabs/redisearch:2.4.0
+        container_name: redis
+        command: redis-server --loadmodule /usr/lib/redis/modules/redisearch.so --loadmodule /usr/lib/redis/modules/rejson.so --appendonly yes
+        volumes:
+            - .redis:/data
+
+    # the API backend which is the actual
+    # redirection service
+    alpa-api:
+        image: vsnthdev/alpa-api
+        container_name: alpa-api
+        ports:
+            - 1727:1727
+        volumes:
+            - ./api/config.yml:/opt/alpa/api/config.yml
+
+    # the frontend app to interface with the API
+    alpa-app:
+        image: vsnthdev/alpa-app
+        container_name: alpa-app
+        ports:
+            - 3000:3000

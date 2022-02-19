@@ -167,3 +167,4 @@ dist
 .vercel
 www/
 api/config.yml
+.redis
