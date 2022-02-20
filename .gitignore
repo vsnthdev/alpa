@@ -164,7 +164,6 @@ dist
 
 # End of https://www.toptal.com/developers/gitignore/api/node,visualstudiocode
 
-.vercel
 www/
 api/config.yml
 .redis
