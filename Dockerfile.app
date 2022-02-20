@@ -23,4 +23,4 @@ RUN npm install --global sirv-cli && \
     rm -rf /var/cache/apk/*
 
 # run @alpa/app using sirv on contianer boot
-CMD cd app/dist && sirv . --port 3000 --host "0.0.0.0" --single
+CMD cd app/dist && sirv . --port 3000 --host "0.0.0.0" --single --no-clear

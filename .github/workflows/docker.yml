@@ -1,0 +1,116 @@
+#
+#  Keeps the images on DockerHub updated, by automatically building
+#  a new Docker image, and pushing it to DockerHub.
+#  Created On 19 February 2022
+#
+
+name: Docker Images
+on:
+    workflow_dispatch: {}
+    push:
+        branches:
+            - main
+jobs:
+    api:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Cloning project
+              uses: actions/checkout@master
+
+            - name: Setting up Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: "17.4.0"
+
+            - name: Installing dependencies
+              run: npm install --dev
+
+            - name: Building API
+              run: npm run build
+
+            - name: Reading API version
+              id: package-version
+              uses: martinbeentjes/npm-get-version-action@master
+              with:
+                  path: api
+
+            - name: Creating Docker image metadata
+              id: meta
+              uses: docker/metadata-action@v3
+              with:
+                  # list of Docker images to use as base name for tags
+                  images: |
+                      vsnthdev/alpa-api
+
+            - name: Setting up QEMU
+              uses: docker/setup-qemu-action@v1
+
+            - name: Setting up Docker Buildx
+              uses: docker/setup-buildx-action@v1
+
+            - name: Logging in to DockerHub
+              uses: docker/login-action@v1
+              with:
+                  username: ${{ secrets.DOCKER_USERNAME }}
+                  password: ${{ secrets.DOCKER_TOKEN }}
+
+            - name: Building & pushing to DockerHub
+              uses: docker/build-push-action@v2
+              with:
+                  push: true
+                  context: .
+                  file: Dockerfile.api
+                  tags: "vsnthdev/alpa-api:latest,vsnthdev/alpa-api:v${{ steps.package-version.outputs.current-version}}"
+                  labels: ${{ steps.meta.outputs.labels }}
+
+    app:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Cloning project
+              uses: actions/checkout@master
+
+            - name: Setting up Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: "17.4.0"
+
+            - name: Installing dependencies
+              run: npm install --dev
+
+            - name: Building the app
+              run: npm run build
+
+            - name: Reading the app version
+              id: package-version
+              uses: martinbeentjes/npm-get-version-action@master
+              with:
+                  path: app
+
+            - name: Creating Docker image metadata
+              id: meta
+              uses: docker/metadata-action@v3
+              with:
+                  # list of Docker images to use as base name for tags
+                  images: |
+                      vsnthdev/alpa-app
+
+            - name: Setting up QEMU
+              uses: docker/setup-qemu-action@v1
+
+            - name: Setting up Docker Buildx
+              uses: docker/setup-buildx-action@v1
+
+            - name: Logging in to DockerHub
+              uses: docker/login-action@v1
+              with:
+                  username: ${{ secrets.DOCKER_USERNAME }}
+                  password: ${{ secrets.DOCKER_TOKEN }}
+
+            - name: Building & pushing
+              uses: docker/build-push-action@v2
+              with:
+                  push: true
+                  context: .
+                  file: Dockerfile.app
+                  tags: "vsnthdev/alpa-app:latest,vsnthdev/alpa-app:v${{ steps.package-version.outputs.current-version}}"
+                  labels: ${{ steps.meta.outputs.labels }}

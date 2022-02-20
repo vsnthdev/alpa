@@ -6,3 +6,6 @@ api
 app/vite*
 app/tailwind*
 app/src
+api/README.md
+api/.env.example
+docker-compose.yml

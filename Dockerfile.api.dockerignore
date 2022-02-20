@@ -8,3 +8,4 @@ api/http
 api/nodemon*
 api/notes
 api/src
+docker-compose.yml
