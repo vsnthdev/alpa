@@ -28,8 +28,8 @@ export const CodeCard = ({code, modalState }: CodeCardOptions): ReactElement => 
         </div>
         
         {/* the link */}
-        <div className="mb-4">
-            <a className="text-sm" href={code.links[0].url} target="_blank" rel="noopener">{code.links[0].url}</a>
+        <div className="mb-4 max-w-full flex">
+            <a className="text-sm truncate" href={code.links[0].url} target="_blank" rel="noopener">{code.links[0].url}</a>
         </div>
         
         {/* render tags if exist */}
