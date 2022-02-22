@@ -40,7 +40,7 @@ export const CodeCard = ({code, modalState }: CodeCardOptions): ReactElement => 
         }
 
         {/* the card actions */}
-        <div className="flex space-x-2">
+        <div className="flex space-x-5 md:space-x-2">
             {/* copy short URL button */}
             {Boolean(navigator.clipboard) && <Tippy content="Copy short URL" delay={700} theme="light"><Tippy visible={showCopiedTooltip} onClickOutside={() => setShowCopiedToolTip(false)} content="Copied short URL 🎉" theme="primary" animation="shift-away" inertia={true}><button className="outline-none transition-colors hover:text-blue-600" onClick={() => copyShortURL({ apiHost, code, setShowCopiedToolTip })}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 aspect-square" fill="none" viewBox="0 0 24 24" stroke="currentColor">

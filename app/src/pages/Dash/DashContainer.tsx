@@ -34,39 +34,28 @@ export const Dash = (): ReactElement => {
     // the codes of using the token
     useEffect(() => {
         progress.start()
-        setTimeout(() => {
-            axios({
-                method: 'GET',
-                url: `${apiHost}/api/codes`,
-                headers: {
-                    Authorization: `Bearer ${apiToken}`
-                }
-            }).then(({status, data}) => {
-                if (status == 200) {
-                    // update our store with the latest
-                    // user details
-                    const { username, email } = parseJWTPayload(apiToken)
-                    dispatch(login({
-                        apiHost,
-                        apiToken,
-                        username,
-                        email,
-                        isLoggedIn: true,
-                    }))
-    
-                    dispatch(insert(data.codes))
-                    setLoading(false)
-                } else {
-                    logout({
-                        auth: {
-                            apiHost,
-                            apiToken
-                        },
-                        dispatch,
-                        navigate
-                    })
-                }
-            }).catch(err => {
+        axios({
+            method: 'GET',
+            url: `${apiHost}/api/codes`,
+            headers: {
+                Authorization: `Bearer ${apiToken}`
+            }
+        }).then(({status, data}) => {
+            if (status == 200) {
+                // update our store with the latest
+                // user details
+                const { username, email } = parseJWTPayload(apiToken)
+                dispatch(login({
+                    apiHost,
+                    apiToken,
+                    username,
+                    email,
+                    isLoggedIn: true,
+                }))
+
+                dispatch(insert(data.codes))
+                setLoading(false)
+            } else {
                 logout({
                     auth: {
                         apiHost,
@@ -75,10 +64,19 @@ export const Dash = (): ReactElement => {
                     dispatch,
                     navigate
                 })
-            }).finally(() => {
-                progress.done()
+            }
+        }).catch(err => {
+            logout({
+                auth: {
+                    apiHost,
+                    apiToken
+                },
+                dispatch,
+                navigate
             })
-        }, 3000)
+        }).finally(() => {
+            progress.done()
+        })
     }, [])
 
     return <main>
