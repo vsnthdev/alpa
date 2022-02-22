@@ -10,6 +10,7 @@ import { Code, patch } from '../../store/codes';
 import axios from 'axios';
 import { AuthState } from '../../store/auth';
 import { customAlphabet } from 'nanoid';
+import isMobile from 'is-mobile';
 
 const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyz', 4)
 
@@ -55,7 +56,7 @@ export const openCodeModal = (code: Code | null, state: CodeModalStateReturns) =
 
     // show the modal & set focus on target
     state.setIsOpen(true)
-    focus()
+    isMobile() ? (document.activeElement as HTMLElement).blur() : focus()
 }
 
 const closeModal = (state: CodeModalStateReturns) => state.setIsOpen(false)
