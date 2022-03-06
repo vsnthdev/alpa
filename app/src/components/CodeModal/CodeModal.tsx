@@ -73,10 +73,10 @@ export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
                 </div>
 
                 <div className="bg-slate-200 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button type="button" className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 transition-colors bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm" onClick={() => applyAction(modalState, dispatch, auth)}>
+                    <button type="button" className="w-full inline-flex justify-center rounded-md border border-transparent px-4 py-2 transition-colors bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm" onClick={() => applyAction(modalState, dispatch, auth)}>
                         { isCreatingNew ? 'Create' : 'Apply' }
                     </button>
-                    <button type="button" className="mt-3 w-full inline-flex justify-center rounded-md border border-slate-300 shadow-sm px-4 py-2 transition-colors bg-white text-base font-medium text-slate-700 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-400 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onClick={() => cancelAction(modalState)}>
+                    <button type="button" className="mt-3 w-full inline-flex justify-center rounded-md border border-slate-300  px-4 py-2 transition-colors bg-white text-base font-medium text-slate-700 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-400 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onClick={() => cancelAction(modalState)}>
                         Cancel
                     </button>
             </div>

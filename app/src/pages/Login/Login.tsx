@@ -69,25 +69,25 @@ export const Login = (): ReactElement => {
                 <form className="space-y-4" onSubmit={submit}>
                     {/* host */}
                     <div className="flex flex-col items-center space-y-2">
-                        <label className="mr-auto">API Host</label>
+                        <label className="mr-auto text-slate-600">API Host</label>
                         <input className="w-full px-3 py-2 border-2 outline-none border-slate-200 focus:border-blue-500 rounded-md transition-colors" type="text" id="host" placeholder="http://localhost:1727" value={apiHost as string} onChange={e => setApiHost(e.target.value)} autoFocus={!Boolean(apiHost)} required />
                     </div>
 
                     {/* username */}
                     <div className="flex flex-col items-center space-y-2">
-                        <label className="mr-auto">Username</label>
+                        <label className="mr-auto text-slate-600">Username</label>
                         <input className="w-full px-3 py-2 border-2 outline-none border-slate-200 focus:border-blue-500 rounded-md transition-colors" type="text" id="username" placeholder="alpa" autoFocus={Boolean(apiHost)} value={username} onChange={e => setUsername(e.target.value)} required />
                     </div>
 
                     {/* password */}
                     <div className="flex flex-col items-center space-y-2">
-                        <label className="mr-auto">Password</label>
+                        <label className="mr-auto text-slate-600">Password</label>
                         <input className="w-full px-3 py-2 border-2 outline-none border-slate-200 focus:border-blue-500 rounded-md transition-colors" type="password" id="password" placeholder="B^a8K7DD" autoFocus={Boolean(username)} value={password as string} onChange={e => setPassword(e.target.value)} onKeyUp={e => { if (e.key == 'Enter') document.querySelector('form')?.requestSubmit() }} required />
                     </div>
 
                     {/* login button */}
                     <div className="pt-3 flex justify-center">
-                        <button className="font-semibold py-2 px-4 border border-transparent shadow-sm text-sm rounded-md transition-colors text-white bg-blue-600 hover:bg-blue-700 outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" type='submit'>
+                        <button className="font-semibold py-2 px-4 border border-transparent text-sm rounded-md transition-colors text-white bg-blue-600 hover:bg-blue-700 outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" type='submit'>
                             Login
                         </button>
                     </div>
