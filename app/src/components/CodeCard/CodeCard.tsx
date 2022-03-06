@@ -16,6 +16,15 @@ interface CodeCardOptions {
     modalState: CodeModalStateReturns
 }
 
+// copied from 👇
+// https://stackoverflow.com/questions/3426404/create-a-hexadecimal-colour-based-on-a-string-with-javascript
+const getColorFromTag = (tag: string) => {
+    let stringUniqueHash = [...tag].reduce((acc, char) => {
+        return char.charCodeAt(0) + ((acc << 5) - acc);
+    }, 0);
+    return `hsl(${stringUniqueHash % 360}, 95%, 35%)`;
+}
+
 export const CodeCard = ({code, modalState }: CodeCardOptions): ReactElement => {
     const [ showCopiedTooltip, setShowCopiedToolTip ] = useState(false)
     const { apiHost, apiToken } = useSelector((state: AppState) => state.auth)
@@ -35,7 +44,7 @@ export const CodeCard = ({code, modalState }: CodeCardOptions): ReactElement => 
         {/* render tags if exist */}
         {
             code.tags && <div className="mb-4 text-xs flex flex-wrap">
-                {code.tags.split(';').map(tag => <span key={tag} className="cursor-pointer text-white bg-blue-600 px-3 py-1 mt-2 mr-2 rounded-full">{tag}</span>)}
+                {code.tags.split(';').map(tag => <span key={tag} className="cursor-pointer text-white px-3 py-1 mt-2 mr-2 rounded-full" style={{ backgroundColor: getColorFromTag(tag) }} >{tag}</span>)}
             </div>
         }
 
