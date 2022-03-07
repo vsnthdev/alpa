@@ -67,7 +67,7 @@ export const DashHero = ({ loading, modalState, quickText, setQuickText }: DashH
         }).finally(() => progress.done())
     }, 200)
 
-    return <div className="pt-28 pb-10 px-12">
+    return <div className="mb-16 mt-16 md:mt-24 px-12">
         <div className="flex flex-col justify-center items-center">
             <input autoFocus={true} type="text" id="searchOrCreate" placeholder="Search or quickly create" value={quickText} onChange={e => { setQuickText(e.target.value); searchAPI() }} className={`w-full max-w-xl px-3 py-2 border-2 outline-none border-slate-200 focus:border-blue-500 rounded-md transition-colors ${loading ? "opacity-0" : "opacity-100"}`} />
             <div className="mt-16">
