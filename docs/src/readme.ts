@@ -3,9 +3,11 @@
  *  Created On 08 March 2022
  */
 
-import { generics, read, write } from './util.js';
+import chalk from 'chalk'
+import { generics, read, write } from './util.js'
 
 const config = {
+    name: chalk.bgWhiteBright.black.dim.bold(' README.md '),
     in: '../templates/README.md',
     out: '../../README.md'
 }

@@ -13,7 +13,6 @@
         "@node-redis/json": "^1.0.2",
         "@node-redis/search": "^1.0.2",
         "boom": "^7.3.0",
-        "chalk": "^5.0.0",
         "fastify": "^3.27.0",
         "fastify-boom": "^1.0.0",
         "fastify-cors": "^6.0.2",
