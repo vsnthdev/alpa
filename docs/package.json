@@ -1,0 +1,10 @@
+{
+    "name": "@alpa/docs",
+    "description": "Programmatically ⚡ builds docs 📚 of all projects 📂 under alpa.",
+    "version": "0.0.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "clean": "rimraf"
+    }
+}
