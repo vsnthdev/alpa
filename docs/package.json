@@ -5,6 +5,10 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "clean": "rimraf"
+        "clean": "rimraf ../README.md",
+        "build": "node --no-warnings --loader ts-node/esm src/index.ts"
+    },
+    "dependencies": {
+        "ts-node": "^10.7.0"
     }
 }
