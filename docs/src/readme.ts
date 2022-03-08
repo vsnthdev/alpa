@@ -14,4 +14,4 @@ const config = {
 
 const template = await read(config)
 
-await write(config, generics(template))
+await write(config, await generics(template))

@@ -36,9 +36,12 @@ export const write = async (config: ReadStruct, data: string): Promise<void> => 
     logger.success(`Finished processing ${config.name}`)
 }
 
-export const generics = (template: string): string => {
+export const generics = async (template: string): Promise<string> => {
+    const app = JSON.parse(await fs.readFile(path.join(dirname(), '..', '..', 'package.json'), 'utf-8'))
     const date = new Date()
 
     return template
+        .replace(/<!-- desc -->/g, app.description)
+        .replace(/<!-- license -->/g, app.license)
         .replace(/<!-- year -->/g, date.getFullYear().toString())
 }

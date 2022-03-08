@@ -2,7 +2,7 @@
     <code>alpa</code>
 </h1>
 
-<p align="center"><strong><!-- desc --></strong></p>
+<p align="center"><strong>( अल्प ) — A fast ⚡ self-hosted link 🔗 shortener.</strong></p>
 
 <p align="center">
     <a href="https://github.com/vsnthdev/alpa/issues">
@@ -22,7 +22,7 @@
 <!-- block:footer -->
 
 ## 📰 License
-> The **alpa** project is released under the [<!-- license -->](https://github.com/vsnthdev/alpa/blob/main/LICENSE.md). <br> Developed &amp; maintained By Vasanth Srivatsa. Copyright <!-- year --> © Vasanth Developer.
+> The **alpa** project is released under the [Zlib](https://github.com/vsnthdev/alpa/blob/main/LICENSE.md). <br> Developed &amp; maintained By Vasanth Srivatsa. Copyright 2022 © Vasanth Developer.
 <hr>
 
 > <a href="https://vsnth.dev" target="_blank" rel="noopener">vsnth.dev</a> &nbsp;&middot;&nbsp;
