@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="754"
+     height="754"
+     viewBox="0 0 754 754">
+    <style>
+        #short, #tall {
+            fill: #1c1917;
+        }
+
+        @media (prefers-color-scheme: light) {
+            #short, #tall {
+                fill: #1c1917;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            #short, #tall {
+                fill: #ffffff;
+            }
+        }
+    </style>
+    <g transform="translate(147 134.965)">
+        <rect id="frame"
+              width="754"
+              height="754"
+              transform="translate(-147 -134.965)"
+              fill="none" />
+        <rect id="short"
+              width="195"
+              height="340"
+              rx="97.5"
+              transform="translate(267 150.035)" />
+        <rect id="tall"
+              width="196"
+              height="490"
+              rx="98"
+              transform="translate(0 0.035)" />
+    </g>
+</svg>
