@@ -28,6 +28,7 @@
         "@vsnthdev/utilities-node": "^2.0.1",
         "axios": "^0.25.0",
         "es-dirname": "^0.1.0",
+        "itivrutaha": "^2.0.13",
         "lerna": "^4.0.0"
     },
     "devDependencies": {
