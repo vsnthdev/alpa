@@ -5,10 +5,15 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "clean": "rimraf ../README.md",
+        "clean": "rimraf ./README.md ../README.md ../app/README.md ../api/README.md",
         "build": "node --no-warnings --loader ts-node/esm src/index.ts"
     },
     "dependencies": {
+        "gray-matter": "^4.0.3",
+        "handlebars": "^4.7.7",
         "ts-node": "^10.7.0"
+    },
+    "devDependencies": {
+        "@types/handlebars": "^4.1.0"
     }
 }
