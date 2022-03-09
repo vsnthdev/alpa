@@ -1,3 +1,4 @@
+<br>
 <h1 align="center">
     <a href="https://alpa.vercel.app#gh-light-mode-only" target="_blank" rel="noopener">
         <img src="https://raw.githubusercontent.com/vsnthdev/alpa/dev/docs/media/logo_light.svg" alt="alpa" height="60">
