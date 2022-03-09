@@ -1,5 +1,10 @@
 <h1 align="center">
-    <code>alpa</code>
+    <a href="https://alpa.vercel.app#gh-light-mode-only" target="_blank" rel="noopener">
+        <img src="https://raw.githubusercontent.com/vsnthdev/alpa/dev/docs/media/logo_light.svg" alt="alpa" height="60">
+    </a>
+    <a href="https://alpa.vercel.app#gh-dark-mode-only" target="_blank" rel="noopener">
+        <img src="https://raw.githubusercontent.com/vsnthdev/alpa/dev/docs/media/logo_dark.svg" alt="alpa" height="60">
+    </a>
 </h1>
 
 <p align="center"><strong>( अल्प ) — A fast ⚡ self-hosted link 🔗 shortener.</strong></p>
