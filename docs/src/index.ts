@@ -11,6 +11,7 @@ import getData from './helpers/index.js'
 import { log } from './logger.js'
 
 const getMD = async () => {
+    log.info('Estimating markdown files')
     let files = glob.sync(path.join(dirname(), '..', 'md', '*', '**.md'))
     files = files.concat(glob.sync(path.join(dirname(), '..', 'md', '**.md')))
 

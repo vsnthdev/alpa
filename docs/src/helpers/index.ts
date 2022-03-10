@@ -11,15 +11,19 @@
 import glob from 'glob'
 import path from 'path'
 import dirname from 'es-dirname'
+import { log } from '../logger.js'
+import chalk from 'chalk'
 
 export default async () => {
     // get all the files in this directory
-    const files = glob.sync(path.join(dirname(), '*.ts'))
-    files.splice(files.indexOf(path.join(dirname(), 'index.ts')), 1)
+    log.info('Starting to fetch data')
+    let files = glob.sync(path.join(dirname(), '*.ts'))
+    files = files.filter(file => file != files.find(file => path.parse(file).base == 'index.ts'))
 
     let data = {}
 
     for (const file of files) {
+        log.info(`Fetching for ${chalk.gray(path.parse(file).base)}`)
         const { default: ts } = await import(`file://${file}`)
         data = { ...data, ...await ts() }
     }

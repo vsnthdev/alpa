@@ -31,7 +31,7 @@
 
 **alpa** is a self-hosted _(you run it on your servers)_ URL shortener. It is fast and provides full control of the short links you create.
 
-> Tweet me <a target="_blank" rel="noopener" href="https://vas.cx/twitter">@{{twitter_username}}</a>, I would love to know your opinion/experience on this project 😍
+> Tweet me <a target="_blank" rel="noopener" href="https://vas.cx/twitter">@{{twitterUsername}}</a>, I would love to know your opinion/experience on this project 😍
 
 ## ✨ Features
 
