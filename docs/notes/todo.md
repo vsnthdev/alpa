@@ -16,7 +16,7 @@ app
         ❌ npm scripts overview
 
 README.md
-    ❌ header
+    ✅ header
     ❌ short overview
     ❌ features
     ❌ why I built it
@@ -24,5 +24,5 @@ README.md
     ❌ support & funding
     ❌ code & contribution
     ❌ building
-    ❌ license
-    ❌ footer
+    ✅ license
+    ✅ footer

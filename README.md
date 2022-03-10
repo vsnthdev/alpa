@@ -18,12 +18,32 @@
         <img src="https://img.shields.io/github/last-commit/vsnthdev/alpa.svg?style=flat-square"
             alt="commits">
     </a>
+    <a href="https://hub.docker.com/r/vsnthdev/alpa-api" target="_blank" rel="noopener">
+        <img src="https://img.shields.io/docker/pulls/vsnthdev/alpa-api?color=1E90FF&style=flat-square" alt="docker">
+    </a>
+    <a href="https://alpa.vercel.app" target="_blank" rel="noopener">
+        <img src="https://img.shields.io/website?label=dashboard&logo=vercel&style=flat-square&url=https%3A%2F%2Falpa.vercel.app" alt="dashboard status">
+    </a>
 </p>
 <br>
 
 <!-- block:header -->
 
-<!-- content -->
+**alpa** is a self-hosted _(you run it on your servers)_ URL shortener. It is fast and provides full control of the short links you create.
+
+> Tweet me <a target="_blank" rel="noopener" href="https://vas.cx/twitter">@</a>, I would love to know your opinion/experience on this project 😍
+
+## ✨ Features
+
+## 💡 Why I built it?
+
+## 🚀 Quick start
+
+## ⚡ Support & funding
+
+## 💻 Code & contribution
+
+## 🛠️ Building
 
 <!-- block:footer -->
 

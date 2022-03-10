@@ -18,6 +18,12 @@
         <img src="https://img.shields.io/github/last-commit/vsnthdev/alpa.svg?style=flat-square"
             alt="commits">
     </a>
+    <a href="https://hub.docker.com/r/vsnthdev/alpa-api" target="_blank" rel="noopener">
+        <img src="https://img.shields.io/docker/pulls/vsnthdev/alpa-api?color=1E90FF&style=flat-square" alt="docker">
+    </a>
+    <a href="https://alpa.vercel.app" target="_blank" rel="noopener">
+        <img src="https://img.shields.io/website?label=dashboard&logo=vercel&style=flat-square&url=https%3A%2F%2Falpa.vercel.app" alt="dashboard status">
+    </a>
 </p>
 <br>
 
