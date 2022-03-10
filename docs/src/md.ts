@@ -29,7 +29,7 @@ export default async (md: string, data: any) => {
     const render = template(data)
 
     // write to the destination
-    const dest = path.join(dirname(), '..', '..', md.split('docs/md')[1])
+    const dest = path.join(dirname(), '..', '..', path.normalize(md).split(path.join('docs', 'md'))[1])
     await fs.writeFile(dest, render, 'utf-8')
 
     // tell the user, we're finished with this file
