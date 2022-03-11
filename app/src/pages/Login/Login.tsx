@@ -87,7 +87,7 @@ export const Login = (): ReactElement => {
 
                     {/* login button */}
                     <div className="pt-3 flex justify-center">
-                        <button className="font-semibold py-2 px-4 border border-transparent text-sm rounded-md transition-colors text-white bg-primary hover:bg-primary outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" type='submit'>
+                        <button className="font-semibold py-2 px-4 border border-transparent text-sm rounded-md transition-colors text-white bg-primary hover:bg-primary-hover outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" type='submit'>
                             Login
                         </button>
                     </div>
