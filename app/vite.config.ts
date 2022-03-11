@@ -59,7 +59,8 @@ export default defineConfig({
                         type: 'image/png'
                     },
                 ],
-            }
+            },
+            includeAssets: ['/cover.png']
         })
     ]
 })
