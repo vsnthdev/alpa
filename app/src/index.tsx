@@ -13,3 +13,8 @@ import 'tippy.js/animations/shift-away.css';
 import 'tippy.js/dist/border.css';
 
 ReactDOM.render(<App/>, document.querySelector('#app'))
+
+const { registerSW } = await import('virtual:pwa-register')
+registerSW({
+    immediate: true,
+})
