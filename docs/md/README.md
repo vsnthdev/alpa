@@ -105,6 +105,16 @@ But it will be better if you can get in touch with me before contributing or [ra
 
 ## 🛠️ Building
 
+This is a [monorepo](https://monorepo.tools/#what-is-a-monorepo) containing multiple projects.
+
+Below is a list of all the projects in this repository, what they do, and docs to building them:
+
+| Name | Description |
+| --- | --- |
+{{#each projects}}
+| [{{this.name}}](./{{this.projectName}}) | {{this.description}} |
+{{/each}}
+
 <!-- block:footer -->
 
 ## 📰 License

@@ -17,12 +17,12 @@ app
 
 README.md
     ✅ header
-    ❌ short overview
-    ❌ features
-    ❌ why I built it
-    ❌ quick start
-    ❌ support & funding
-    ❌ code & contribution
-    ❌ building
+    ✅ short overview
+    ✅ features
+    ✅ why I built it
+    ✅ quick start
+    ✅ support & funding
+    ✅ code & contribution
+    ✅ building
     ✅ license
     ✅ footer

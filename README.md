@@ -105,6 +105,16 @@ But it will be better if you can get in touch with me before contributing or [ra
 
 ## 🛠️ Building
 
+This is a [monorepo](https://monorepo.tools/#what-is-a-monorepo) containing multiple projects.
+
+Below is a list of all the projects in this repository, what they do, and docs to building them:
+
+| Name | Description |
+| --- | --- |
+| [@alpa/api](./api) |  |
+| [@alpa/app](./app) |  |
+| [@alpa/docs](./docs) | Programmatically ⚡ builds docs 📚 of all projects 📂 under alpa. |
+
 <!-- block:footer -->
 
 ## 📰 License
