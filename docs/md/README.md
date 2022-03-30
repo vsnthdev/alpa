@@ -91,7 +91,17 @@ docker-compose up -d
 
 ## ⚡ Support & funding
 
+Financial funding would really help this project go forward as I will be able to spend more hours working on the project to maintain & add more features into it.
+
+Please get in touch with me on [Discord](https://discord.com/users/492205153198407682) or [Twitter](https://vas.cx/twitter) to get fund the project even if it is a small amount 🙏
+
 ## 💻 Code & contribution
+
+**Pull requests are always welcome** 👍
+
+But it will be better if you can get in touch with me before contributing or [raise an issue](https://github.com/vsnthdev/alpa/issues/new/choose) to see if the contribution aligns with the vision of the project.
+
+> **ℹ️ Note:** This project follows [Vasanth's Commit Style](https://vas.cx/commits) for commit messages. We highly encourage you to use this commit style for contributions to this project.
 
 ## 🛠️ Building
 
