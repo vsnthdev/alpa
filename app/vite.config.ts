@@ -60,7 +60,7 @@ export default defineConfig({
                     },
                 ],
             },
-            includeAssets: ['/cover.png']
+            includeAssets: ['/cover.png', '/.well-known/assetlinks.json']
         })
     ]
 })

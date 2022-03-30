@@ -27,7 +27,11 @@
 </p>
 <br>
 
+## 🔭 API Routes
 
+## 🔮 Tech stack
+
+## 🧭 `npm` scripts
 
 ## 📰 License
 > The **alpa** project is released under the [Zlib](https://github.com/vsnthdev/alpa/blob/main/LICENSE.md). <br> Developed &amp; maintained By Vasanth Srivatsa. Copyright 2022 © Vasanth Developer.

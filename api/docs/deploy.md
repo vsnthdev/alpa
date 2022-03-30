@@ -27,9 +27,10 @@
 </p>
 <br>
 
-## 🔮 Tech stack
-
-## 🧭 `npm` scripts
+## 🚀 Deploying `@alpa/api`
+### 🧰 Manually deploying
+### 🐳 Deploying with Docker
+### 🏅 Deploying with Kubernetes
 
 ## 📰 License
 > The **alpa** project is released under the [Zlib](https://github.com/vsnthdev/alpa/blob/main/LICENSE.md). <br> Developed &amp; maintained By Vasanth Srivatsa. Copyright 2022 © Vasanth Developer.

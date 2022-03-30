@@ -11,6 +11,7 @@ import dirname from 'es-dirname'
 import handlebars from 'handlebars'
 import getLayout from './layout.js'
 import { log } from './logger.js'
+import mkdir from 'mkdirp'
 
 export default async (md: string, data: any) => {
     // read the file
@@ -30,6 +31,7 @@ export default async (md: string, data: any) => {
 
     // write to the destination
     const dest = path.join(dirname(), '..', '..', path.normalize(md).split(path.join('docs', 'md'))[1])
+    await mkdir(path.dirname(dest))
     await fs.writeFile(dest, render, 'utf-8')
 
     // tell the user, we're finished with this file

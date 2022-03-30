@@ -13,8 +13,6 @@ import login, { openDashboard } from './index';
 export const Login = (): ReactElement => {
     const navigate = useNavigate()
 
-    const auth = useSelector((state: AppState) => state.auth)
-
     const [ password, setPassword ] = useState("")
     const [ username, updateUsername ] = useState(localStorage.getItem('username') || "")
     const [ apiHost, updateApiHost ] = useState(localStorage.getItem('apiHost') || "")
