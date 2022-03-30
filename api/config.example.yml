@@ -8,13 +8,14 @@ auth:
     email: alpa@example.com
     password: short_lived
 database:
-    connection: redis://localhost:6379
+    connection: redis://redis:6379
     channels:
         codes: 0
         tokens: 1
 server:
-    host: localhost
+    host: 0.0.0.0
     port: 1727
-    secret: [CREATE A 64 CHARACTER RANDOM STRING HERE]
+    secret: 3PWSzUzBRA722PdnyFwzVrXbangmFsQkLe98jjaEnDw9o8cW7fcWNkURc92GB5SF
     cors:
         - https://alpa.vercel.app
+        - http://localhost:3000
