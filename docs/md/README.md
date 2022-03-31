@@ -8,6 +8,8 @@
     </a>
 </h1>
 
+{{#if isIndex}}<img src="docs/media/cover.png" alt="cover">{{/if}}
+
 <p align="center"><strong>{{desc}}</strong></p>
 
 <p align="center">
@@ -25,6 +27,7 @@
         <img src="https://img.shields.io/website?label=dashboard&logo=vercel&style=flat-square&url=https%3A%2F%2Falpa.vercel.app" alt="dashboard status">
     </a>
 </p>
+
 <br>
 
 <!-- block:header -->

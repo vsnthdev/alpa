@@ -13,6 +13,11 @@ import getLayout from './layout.js'
 import { log } from './logger.js'
 import mkdir from 'mkdirp'
 
+const getIsIndex = (md: string) => {
+    const relative = path.relative(path.join(dirname(), '..'), md)
+    return (path.dirname(relative) == 'md' && path.basename(relative) == 'README.md') ? true : false
+}
+
 export default async (md: string, data: any) => {
     // read the file
     const src = await fs.readFile(md, 'utf-8')
@@ -27,7 +32,7 @@ export default async (md: string, data: any) => {
     const template = handlebars.compile(content)
 
     // render it
-    const render = template(data)
+    const render = template({ ...data, ...{ isIndex: getIsIndex(md) } })
 
     // write to the destination
     const dest = path.join(dirname(), '..', '..', path.normalize(md).split(path.join('docs', 'md'))[1])

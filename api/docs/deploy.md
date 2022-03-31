@@ -8,6 +8,8 @@
     </a>
 </h1>
 
+
+
 <p align="center"><strong>( अल्प ) — A fast ⚡ self-hosted link 🔗 shortener.</strong></p>
 
 <p align="center">
@@ -25,6 +27,7 @@
         <img src="https://img.shields.io/website?label=dashboard&logo=vercel&style=flat-square&url=https%3A%2F%2Falpa.vercel.app" alt="dashboard status">
     </a>
 </p>
+
 <br>
 
 ## 🚀 Deploying `@alpa/api`
