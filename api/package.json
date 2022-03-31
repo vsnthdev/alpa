@@ -1,5 +1,6 @@
 {
     "name": "@alpa/api",
+    "description": "The core RESTful API 🛠️ that handles redirection in alpa.",
     "version": "0.0.0",
     "type": "module",
     "scripts": {

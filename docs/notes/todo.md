@@ -3,17 +3,16 @@ api
         ❌ manual deploy
         ❌ docker deploy
         ❌ kubernetes deploy
-    docs/config.md
-        ❌ configuration file definitions
     README.md
+        ❌ configuration
         ❌ api routes
         ❌ tech stack
-        ❌ npm scripts overview
+        ❌ building
 
 app
     README.md
         ❌ tech stack
-        ❌ npm scripts overview
+        ❌ building
 
 README.md
     ✅ header

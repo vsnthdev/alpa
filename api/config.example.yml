@@ -3,19 +3,47 @@
 #  Created On 30 January 2022
 #
 
+# authentication of alpa's API
 auth:
+    # username and password used to login to
+    # alpa's API
     username: alpa
-    email: alpa@example.com
     password: short_lived
+
+    # (not used currently) will be used to fetch
+    # an avatar from Gravatar later
+    email: alpa@example.com
+
+# database configuration
 database:
+    # the database connection URL in the redis:// or rediss:// protocol
     connection: redis://redis:6379
+
+    # different redis databases used for different purposes
     channels:
+        # storing short codes
         codes: 0
+
+        # storing authentication token blacklist
         tokens: 1
+
+# HTTP server configuration
 server:
+    # the host to listen to
     host: 0.0.0.0
+
+    # at the port to listen on
     port: 1727
+
+    # the secret key used to encrypt JWT tokens
+    # while using for production, change this key to a random 64 character
+    # string for stronger security
     secret: 3PWSzUzBRA722PdnyFwzVrXbangmFsQkLe98jjaEnDw9o8cW7fcWNkURc92GB5SF
+
+    # allowed URLs for the API to be access from
+    # while using for production, remove the localhost ones
+    # tip: remove https://alpa.vercel.app if you don't want to use the public
+    # dashboard hosted my me
     cors:
         - https://alpa.vercel.app
         - http://localhost:3000

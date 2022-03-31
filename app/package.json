@@ -1,5 +1,6 @@
 {
     "name": "@alpa/app",
+    "description": "Dashboard ✨ to interact with alpa's API.",
     "version": "0.0.0",
     "type": "module",
     "scripts": {

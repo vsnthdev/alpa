@@ -111,8 +111,8 @@ Below is a list of all the projects in this repository, what they do, and docs t
 
 | Name | Description |
 | --- | --- |
-| [@alpa/api](./api) |  |
-| [@alpa/app](./app) |  |
+| [@alpa/api](./api) | The core RESTful API 🛠️ that handles redirection in alpa. |
+| [@alpa/app](./app) | Dashboard ✨ to interact with alpa&#x27;s API. |
 | [@alpa/docs](./docs) | Programmatically ⚡ builds docs 📚 of all projects 📂 under alpa. |
 
 <!-- block:footer -->
