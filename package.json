@@ -19,7 +19,7 @@
     "scripts": {
         "postinstall": "lerna bootstrap",
         "clean": "lerna run clean",
-        "build": "lerna run build",
+        "build": "lerna run --parallel build",
         "build:docker": "lerna run --stream build:docker",
         "build:docs": "lerna run --stream --scope @alpa/docs build",
         "prepare": "husky install"

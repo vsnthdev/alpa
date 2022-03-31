@@ -26,7 +26,6 @@
     "devDependencies": {
         "@types/boom": "^7.3.1",
         "@types/gravatar": "^1.8.3",
-        "@types/ioredis": "^4.28.7",
         "@types/js-yaml": "^4.0.5",
         "nodemon": "^2.0.15"
     }

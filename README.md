@@ -106,7 +106,7 @@ But it will be better if you can get in touch with me before contributing or [ra
 
 > **ℹ️ Note:** This project follows [Vasanth's Commit Style](https://vas.cx/commits) for commit messages. We highly encourage you to use this commit style for contributions to this project.
 
-## 🛠️ Building
+## 🛠️ Project structure
 
 This is a [monorepo](https://monorepo.tools/#what-is-a-monorepo) containing multiple projects.
 

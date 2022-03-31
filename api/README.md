@@ -30,6 +30,8 @@
 
 <br>
 
+This is the core of the project, it the RESTful API that performs redirection, communicates with the database and provides **alpa** it's functionality.
+
 ## ⚙️ Configuration
 
 Refer to the [config example file](https://github.com/vsnthdev/alpa/blob/main/api/config.example.yml) for all possible configuration keys, and their detailed explanation. If you still have any doubts, feel free to shoot a tweet at me [@vsnthdev](https://vas.cx/@me).
@@ -47,7 +49,9 @@ Refer to the [config example file](https://github.com/vsnthdev/alpa/blob/main/ap
 
 ## 🔮 Tech stack
 
-## 🧭 `npm` scripts
+- **Fastify** _(API server focussed on speed)_
+- **Redis** _(key-value pair database known for it's speed)_
+- **JSON Web Tokens** _(for authentication)_
 
 ## 📰 License
 > The **alpa** project is released under the [Zlib](https://github.com/vsnthdev/alpa/blob/main/LICENSE.md). <br> Developed &amp; maintained By Vasanth Srivatsa. Copyright 2022 © Vasanth Developer.

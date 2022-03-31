@@ -4,15 +4,13 @@ api
         ❌ docker deploy
         ❌ kubernetes deploy
     README.md
-        ❌ configuration
-        ❌ api routes
-        ❌ tech stack
-        ❌ building
+        ✅ configuration
+        ✅ api routes
+        ✅ tech stack
 
 app
     README.md
-        ❌ tech stack
-        ❌ building
+        ✅ tech stack
 
 README.md
     ✅ header
