@@ -1,3 +1,8 @@
+/*
+ *  Redirects if short code is found or returns 404.
+ *  Created On 03 February 2022
+ */
+
 import { FastifyReply, FastifyRequest } from "fastify"
 import { AlpaAPIConfig } from "../../../config/interface"
 import { ConnectionsList } from "../../../database"

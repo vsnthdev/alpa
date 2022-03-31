@@ -1,3 +1,8 @@
+/*
+ *  List out all short codes with pagination.
+ *  Created On 03 February 2022
+ */
+
 import auth from '../../../plugins/auth.js';
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { AlpaAPIConfig } from '../../../../config/interface.js';

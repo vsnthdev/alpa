@@ -1,3 +1,8 @@
+/*
+ *  Deletes a short code from the database.
+ *  Created On 03 February 2022
+ */
+
 import { FastifyReply, FastifyRequest } from "fastify"
 import { AlpaAPIConfig } from "../../../../config/interface"
 import { ConnectionsList } from "../../../../database"

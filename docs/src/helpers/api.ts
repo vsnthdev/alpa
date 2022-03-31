@@ -38,6 +38,14 @@ const getRouteMethod = (code: string) => {
     return typeof value == 'string' ? value : value[0]
 }
 
+const getRouteDescription = (code: string) => {
+    let lines = code.split(' */')[0].split('\n')
+    lines.shift()
+    lines = lines.filter(line => Boolean(line))
+    
+    return lines[0].slice(2).trim()
+}
+
 const isAuthRequired = (code: string) => {
     const lines = code.split('export default {')[1].split('\n')
         .map(line => line.trim())
@@ -64,6 +72,7 @@ export default async () => {
         routes.push({
             path: getRoutePath(code),
             method: getRouteMethod(code),
+            description: getRouteDescription(code),
             authRequired: isAuthRequired(code)
         })
 
