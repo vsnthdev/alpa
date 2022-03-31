@@ -14,7 +14,7 @@
         "url": "https://github.com/vsnthdev/alpa.git"
     },
     "engines": {
-        "node": "<=17.4.0"
+        "node": ">=17.4.0"
     },
     "scripts": {
         "postinstall": "lerna bootstrap",
