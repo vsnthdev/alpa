@@ -33,6 +33,15 @@ Refer to the [config example file](https://github.com/vsnthdev/alpa/blob/main/ap
 
 ## 🔭 API Routes
 
+| Method | Path | Protected |
+|---|---|---|
+| `POST` | `/api/auth/login` | ❌ |
+| `DELETE` | `/api/auth/logout` | ✅ |
+| `GET` | `/:code` | ❌ |
+| `DELETE` | `/api/codes/:code` | ✅ |
+| `GET` | `/api/codes` | ✅ |
+| `POST` | `/api/codes` | ✅ |
+
 ## 🔮 Tech stack
 
 ## 🧭 `npm` scripts

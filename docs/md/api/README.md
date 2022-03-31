@@ -8,6 +8,12 @@ Refer to the [config example file](https://github.com/vsnthdev/alpa/blob/main/ap
 
 ## 🔭 API Routes
 
+| Method | Path | Protected |
+|---|---|---|
+{{#each api.routes}}
+| `{{this.method}}` | `{{this.path}}` | {{#if this.authRequired}}✅{{else}}❌{{/if}} |
+{{/each}}
+
 ## 🔮 Tech stack
 
 ## 🧭 `npm` scripts
