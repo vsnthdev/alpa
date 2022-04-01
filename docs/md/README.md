@@ -50,10 +50,10 @@ Which is easier to remember and share across the internet.
 
 ## ✨ Features
 
-🚀 **Super fast**  
-👌 **Your branding**  
-✅ **Full control**  
-🎮 **Simple & intuitive dashboard**  
+1. **It is 🚀 super fast**
+2. **Your domain, your branding** 👌
+3. **Privacy friendly 🤗 & configurable**
+4. **Simple & 🎮 intuitive dashboard**
 
 ## 💡 Why I built it?
 

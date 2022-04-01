@@ -9,10 +9,11 @@ import dirname from 'es-dirname'
 
 export default async () => {
     const packageJSON = await fs.readFile(path.join(dirname(),  '..', '..', '..', 'package.json'), 'utf-8')
-    const { description, license } = JSON.parse(packageJSON)
+    const { description, license, engines } = JSON.parse(packageJSON)
 
     return {
         license,
-        desc: description
+        desc: description,
+        nodeVersion: engines.node.slice(2)
     }
 }
