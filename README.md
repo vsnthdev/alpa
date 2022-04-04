@@ -8,9 +8,9 @@
     </a>
 </h1>
 
-{{#if isIndex}}<img src="docs/media/cover.png" alt="cover">{{/if}}
+<img src="docs/media/cover.png" alt="cover">
 
-<p align="center"><strong>{{desc}}</strong></p>
+<p align="center"><strong>( अल्प ) — A fast ⚡ self-hosted link 🔗 shortener.</strong></p>
 
 <p align="center">
     <a href="https://github.com/vsnthdev/alpa/issues">
@@ -112,13 +112,13 @@ This is a [monorepo](https://monorepo.tools/#what-is-a-monorepo) containing mult
 
 | Name | Description |
 | --- | --- |
-{{#each projects}}
-| [{{this.name}}](./{{this.projectName}}) | {{this.description}} |
-{{/each}}
+| [@alpa/api](./api) | The core RESTful API 🛠️ that handles redirection in alpa. |
+| [@alpa/app](./app) | Dashboard ✨ to interact with alpa&#x27;s API. |
+| [@alpa/docs](./docs) | Programmatically ⚡ builds docs 📚 of all projects 📂 under alpa. |
 
 ### 🛠️ Building all projects
 
-You need to be at least on **Node.js v{{nodeVersion}} or above** and follow the below instructions to build all the projects 👇
+You need to be at least on **Node.js v17.4.0 or above** and follow the below instructions to build all the projects 👇
 
 - **STEP 1️⃣**  Clone this project
 - **STEP 2️⃣**  Run **`npm install`** to get all dependencies & link projects together
@@ -145,7 +145,7 @@ npm run clean
 <!-- block:footer -->
 
 ## 📰 License
-> The **alpa** project is released under the [{{license}}](https://github.com/vsnthdev/alpa/blob/main/LICENSE.md). <br> Developed &amp; maintained By Vasanth Srivatsa. Copyright {{year}} © Vasanth Developer.
+> The **alpa** project is released under the [Zlib](https://github.com/vsnthdev/alpa/blob/main/LICENSE.md). <br> Developed &amp; maintained By Vasanth Srivatsa. Copyright 2022 © Vasanth Developer.
 <hr>
 
 > <a href="https://vsnth.dev" target="_blank" rel="noopener">vsnth.dev</a> &nbsp;&middot;&nbsp;
