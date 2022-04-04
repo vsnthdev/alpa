@@ -18,6 +18,10 @@ Refer to the [config example file](https://github.com/vsnthdev/alpa/blob/main/ap
 
 ## 🔮 Tech stack
 
-- **Fastify** _(API server focussed on speed)_
-- **Redis** _(key-value pair database known for it's speed)_
-- **JSON Web Tokens** _(for authentication)_
+| Name | Description |
+| --- | --- |
+| <img height="15" src="https://www.svgrepo.com/show/306030/fastify.svg"> **Fastify** | HTTP server focussed on speed designed to build RESTful APIs. |
+| <img height="15" src="https://www.svgrepo.com/show/353943/json.svg"> **JSON Web Tokens** | For user authentication. |
+| <img height="15" src="https://www.svgrepo.com/show/303460/redis-logo.svg"> **Redis** | Key-value pair database known for it's speed. |
+| <img height="15" src="https://www.svgrepo.com/show/361050/bracket-dot.svg"> **RedisJSON** | Redis database plugin to store JSON documents. |
+| <img height="15" src="https://redis.com/wp-content/uploads/2020/06/redisearch.png"> **RediSearch** | Redis database plugin that facilitates full text search. |
