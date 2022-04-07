@@ -1,5 +1,5 @@
 /*
- *  Reads API routes and prepares an array to be iterated in README.md.
+ *  Returns an object, by reading parts of the @alpa/api project.
  *  Created On 31 March 2022
  */
 
@@ -7,6 +7,7 @@ import glob from 'glob'
 import path from 'path'
 import fs from 'fs/promises'
 import dirname from 'es-dirname'
+import yaml from 'js-yaml'
 
 const getRoutePath = (code: string) => {
     const lines = code.split('export default {')[1].split('\n')
@@ -61,6 +62,11 @@ const isAuthRequired = (code: string) => {
     }
 }
 
+const readDefaultConfig = async (api: string): Promise<any> => {
+    const str = await fs.readFile(path.join(api, 'config.example.yml'), 'utf-8')
+    return yaml.load(str)
+}
+
 export default async () => {
     const api = path.join(dirname(), '..', '..', '..', 'api')
     const routeFiles = glob.sync(path.join(api, 'src', 'server', 'routes', '**', '**', 'index.ts'))
@@ -81,6 +87,7 @@ export default async () => {
     return {
         api: {
             routes,
+            config: await readDefaultConfig(api)
         }
     }
 }
