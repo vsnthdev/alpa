@@ -120,7 +120,7 @@ This is a [monorepo](https://monorepo.tools/#what-is-a-monorepo) containing mult
 
 You need to be at least on **Node.js v{{nodeVersion}} or above** and follow the below instructions to build all the projects 👇
 
-- **STEP 1️⃣**  Clone this project
+- **STEP 1️⃣**  Clone this repository & enter into it (`cd ./alpa`)
 - **STEP 2️⃣**  Run **`npm install`** to get all dependencies & link projects together
 - **STEP 3️⃣**  To build all the projects & docs run **`npm run build`**
 

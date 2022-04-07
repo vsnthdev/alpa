@@ -43,6 +43,17 @@ This project contains a friendly dashboard deployed at https://alpa.vercel.app w
 | <img height="15" src="https://www.svgrepo.com/show/327408/logo-vercel.svg"> **Vercel** | For deploying frontend. |
 | <img height="15" src="https://camo.githubusercontent.com/c306d97014be1caa9a2a511a0ff4722d54a77b0b6c81a18c81113d6051408325/68747470733a2f2f61692e6769746875622e696f2f6e616e6f69642f6c6f676f2e737667"> **nanoid** | For creating short codes. |
 
+## 💻 Building & Dev Setup
+
+You need to be at least on **Node.js v17.4.0 or above** and follow the below instructions to build this project 👇
+
+- **STEP 1️⃣**  Clone this repository & enter into it (`cd ./alpa`)
+- **STEP 2️⃣**  Run **`npm install`** to get all dependencies & link projects together
+- **STEP 3️⃣**  Enter in the project directory (`cd app`)
+- **STEP 4️⃣**  To build this project run **`npm run build`**
+
+Upon building `@alpa/app` a production optimized bundle of React.js app is generated in the `dist` folder within the project.
+
 ## 📰 License
 > The **alpa** project is released under the [Zlib](https://github.com/vsnthdev/alpa/blob/main/LICENSE.md). <br> Developed &amp; maintained By Vasanth Srivatsa. Copyright 2022 © Vasanth Developer.
 <hr>

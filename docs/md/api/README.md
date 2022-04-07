@@ -25,3 +25,14 @@ Refer to the [config example file](https://github.com/vsnthdev/alpa/blob/main/ap
 | <img height="15" src="https://www.svgrepo.com/show/303460/redis-logo.svg"> **Redis** | Key-value pair database known for it's speed. |
 | <img height="15" src="https://www.svgrepo.com/show/361050/bracket-dot.svg"> **RedisJSON** | Redis database plugin to store JSON documents. |
 | <img height="15" src="https://redis.com/wp-content/uploads/2020/06/redisearch.png"> **RediSearch** | Redis database plugin that facilitates full text search. |
+
+## 💻 Building & Dev Setup
+
+You need to be at least on **Node.js v{{nodeVersion}} or above** and follow the below instructions to build this project 👇
+
+- **STEP 1️⃣**  Clone this repository & enter into it (`cd ./alpa`)
+- **STEP 2️⃣**  Run **`npm install`** to get all dependencies & link projects together
+- **STEP 3️⃣**  Enter in the project directory (`cd api`)
+- **STEP 4️⃣**  To build this project run **`npm run build`**
+
+Upon building `@alpa/api` a `dist` folder is created with the transpiled JavaScript files.
