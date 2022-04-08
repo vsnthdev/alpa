@@ -4,7 +4,7 @@ layout: ../../README.md
 
 # 🧰 Manually deploying
 
-There are mainly 3 ways to deploy `@alpa/api` onto production. For personal usage deploying through [🐳 Docker](./docker.md) is the most easiest & recommended way.
+There are mainly 3 ways to deploy `@alpa/api` onto production. For personal usage deploying through [🐳 Docker Compose](./docker.md) is the most easiest & recommended way.
 
 Deploying **alpa**'s API is easy and straightforward by following the below steps:
 
@@ -77,7 +77,7 @@ cp api/config.example.yml api/config.yml
 
 ### ⚡ Production configuration
 
-Provided example config file is best suitable for development & testing purposes. We need to make some changes to the config file to make `@alpa/api` suitable for production environments.
+Provided example config file is best suitable for development & testing purposes only. We need to make some changes to the config file to make `@alpa/api` suitable for production environments.
 
 1. 🔒 **Changing username & password**  
     
@@ -132,6 +132,8 @@ npx cross-env NODE_ENV=production node api/dist/index.js
 > ℹ️ **Info:** During this process npm may ask you whether to install `cross-env` depending on if you already have it.
 
 After following the above steps you should be able to login from the configured client and start enjoying **alpa**.
+
+**If you're still facing issues, refer the [troubleshooting & help section]() for further information.**
 
 <!-- ### 🔐 Securing behind NGINX reverse proxy -->
 

@@ -56,6 +56,8 @@ Refer to the [config example file](https://github.com/vsnthdev/alpa/blob/main/ap
 | <img height="15" src="https://www.svgrepo.com/show/303460/redis-logo.svg"> **Redis** | Key-value pair database known for it's speed. |
 | <img height="15" src="https://www.svgrepo.com/show/361050/bracket-dot.svg"> **RedisJSON** | Redis database plugin to store JSON documents. |
 | <img height="15" src="https://redis.com/wp-content/uploads/2020/06/redisearch.png"> **RediSearch** | Redis database plugin that facilitates full text search. |
+| <img height="15" src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png"> **Docker** | For easy installation & seamless updates. |
+| <img height="15" src="https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg"> **Kubernetes** | For scalable deployments to production. |
 
 ## 💻 Building & Dev Setup
 

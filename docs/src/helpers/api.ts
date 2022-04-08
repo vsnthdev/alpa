@@ -67,6 +67,11 @@ const readDefaultConfig = async (api: string): Promise<any> => {
     return yaml.load(str)
 }
 
+const getApp = async (api: string): Promise<any> => {
+    const str = await fs.readFile(path.join(api, 'package.json'), 'utf-8')
+    return JSON.parse(str)
+}
+
 export default async () => {
     const api = path.join(dirname(), '..', '..', '..', 'api')
     const routeFiles = glob.sync(path.join(api, 'src', 'server', 'routes', '**', '**', 'index.ts'))
@@ -87,6 +92,7 @@ export default async () => {
     return {
         api: {
             routes,
+            app: await getApp(api),
             config: await readDefaultConfig(api)
         }
     }
