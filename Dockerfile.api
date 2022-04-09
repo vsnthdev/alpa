@@ -7,7 +7,7 @@
 # frontend can be found at vsnthdev/alpa-app.
 
 # small & updated base image
-FROM node:17-alpine3.13
+FROM node:17.8.0-alpine3.15
 
 # run Node.js in production so the API
 # can take the necessary security measures

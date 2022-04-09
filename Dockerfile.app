@@ -7,7 +7,7 @@
 # API can be found at vsnthdev/alpa-api.
 
 # small & updated base image
-FROM node:17-alpine3.13
+FROM node:17.8.0-alpine3.15
 
 # run Node.js in production
 ENV NODE_ENV=production
