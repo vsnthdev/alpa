@@ -98,6 +98,12 @@ Financial funding would really help this project go forward as I will be able to
 
 Please get in touch with me on [Discord](https://discord.com/users/492205153198407682) or [Twitter](https://vas.cx/twitter) to get fund the project even if it is a small amount 🙏
 
+## 🤝 Troubleshooting & help
+
+If you face trouble setting up **alpa**, or have any questions, or even a bug report, feel free to contact me through Discord. I provide support for **alpa** on [my Discord server](https://vas.cx/discord).
+
+I will be happy to consult & personally assist you 😊
+
 ## 💖 Code & contribution
 
 **Pull requests are always welcome** 👏
