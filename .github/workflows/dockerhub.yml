@@ -1,0 +1,28 @@
+name: DockerHub README
+on:
+    workflow_dispatch: {}
+    push:
+        branches:
+            - main
+jobs:
+    sync:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Cloning project
+              uses: actions/checkout@master
+
+            - name: "@alpa/api"
+              uses: ms-jpq/sync-dockerhub-readme@v1
+              with:
+                  username: ${{ secrets.DOCKER_USERNAME }}
+                  password: ${{ secrets.DOCKER_TOKEN }}
+                  repository: vsnthdev/alpa-api
+                  readme: ./api/README.md
+
+            - name: "@alpa/app"
+              uses: ms-jpq/sync-dockerhub-readme@v1
+              with:
+                  username: ${{ secrets.DOCKER_USERNAME }}
+                  password: ${{ secrets.DOCKER_TOKEN }}
+                  repository: vsnthdev/alpa-app
+                  readme: ./app/README.md
