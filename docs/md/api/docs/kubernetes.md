@@ -277,4 +277,4 @@ To start all the services defined in our `kustomization.yml` run 👇 the below 
 kubectl apply -k .
 ```
 
-**If you're still facing issues, refer the [troubleshooting & help section]() for further information.**
+**If you're still facing issues, refer the [troubleshooting & help section](https://github.com/vsnthdev/alpa#-troubleshooting--help) for further information.**

@@ -118,7 +118,7 @@ docker-compose up
 
 After following the above steps you should be able to login from the configured client and start enjoying **alpa**.
 
-**If you're still facing issues, refer the [troubleshooting & help section]() for further information.**
+**If you're still facing issues, refer the [troubleshooting & help section](https://github.com/vsnthdev/alpa#-troubleshooting--help) for further information.**
 
 <!-- ### Applying updates -->
 
