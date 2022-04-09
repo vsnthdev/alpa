@@ -1,3 +1,8 @@
+/*
+ *  Creates a new short code.
+ *  Created On 03 February 2022
+ */
+
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { AlpaAPIConfig } from '../../../../config/interface.js';
 import { ConnectionsList } from '../../../../database.js';

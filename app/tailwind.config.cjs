@@ -12,11 +12,12 @@ module.exports = {
     ],
     theme: {
         colors: {
-            black: '#000000',
             white: '#FFFFFF',
             slate: colors.slate,
-            blue: colors.blue,
-            red: colors.red,
+            primary: '#EF233C',
+            'primary-hover': '#D11026',
+            secondary: '#1C1917',
+            'secondary-hover': '#5A5049'
         },
         fontFamily: {
             body: [

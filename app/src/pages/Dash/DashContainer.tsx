@@ -81,6 +81,6 @@ export const Dash = (): ReactElement => {
 
     return <main>
         <DashHero loading={loading} modalState={modalState} quickText={quickText} setQuickText={setQuickText}></DashHero>
-        <DashContent modalState={modalState} quickText={quickText}></DashContent>
+        <DashContent modalState={modalState} quickText={quickText} loading={loading}></DashContent>
     </main>
 }

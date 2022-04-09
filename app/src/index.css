@@ -13,18 +13,29 @@
     display: none;
 }
 
+/* text selection color */
+*::selection {
+    @apply bg-primary/10;
+}
+
+/* prevent blue color highlight on clicking in mobile devices */
+
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
 /* Tippy.js styles */
 
 .tippy-box[data-theme~='primary']  {
-    @apply bg-blue-700 shadow-blue-300 border-2 border-solid border-blue-500 font-medium;
+    @apply bg-primary border-2 border-solid border-primary font-medium;
 }
 
 .tippy-box[data-theme~='primary'] .tippy-arrow {
-    @apply text-blue-700;
+    @apply text-primary;
 }
 
 .tippy-box[data-theme~='light']  {
-    @apply bg-white text-slate-900 shadow-2xl border-2 border-solid border-slate-300 font-medium;
+    @apply bg-white text-slate-900 border-2 border-solid border-slate-300 font-medium;
 }
 
 .tippy-box[data-theme~='light'] .tippy-arrow {

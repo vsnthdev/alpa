@@ -1,3 +1,8 @@
+/*
+ *  Takes username, password and responds with a JWT token.
+ *  Created On 02 February 2022
+ */
+
 import { FastifyReply, FastifyRequest } from "fastify"
 import { AlpaAPIConfig } from "../../../../config/interface.js";
 import boom from 'boom';

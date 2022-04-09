@@ -53,5 +53,6 @@ export default async ({ apiHost, credentials, navigate }: LoginOptions) => {
         }
     } catch {
         console.log('failed login attempt')
+        progress.done()
     }
 }

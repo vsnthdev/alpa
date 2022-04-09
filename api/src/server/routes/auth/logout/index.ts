@@ -1,3 +1,8 @@
+/*
+ *  Blacklists the token until expired to prevent usage.
+ *  Created On 02 February 2022
+ */
+
 import { FastifyReply, FastifyRequest, FastifyInstance } from "fastify"
 import { AlpaAPIConfig } from "../../../../config/interface"
 import { ConnectionsList } from "../../../../database";
