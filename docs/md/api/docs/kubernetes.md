@@ -188,7 +188,7 @@ spec:
                       name: alpa-api-config
             containers:
                 - name: alpa
-                  image: vsnthdev/alpa-api:{{api.app.version}}
+                  image: vsnthdev/alpa-api:v{{api.app.version}}
                   imagePullPolicy: Always
                   volumeMounts:
                       - mountPath: /opt/alpa/api/config.yml
@@ -257,7 +257,7 @@ Once all the required files are created, the completed directory structure shoul
 alpa
     /alpa
         1-configs.yml
-        2-volumes.yml
+        2-deploys.yml
         3-services.yml
     /redis
         1-volumes.yml
