@@ -22,7 +22,7 @@ Once you've satisfied the prerequisites, follow the below steps to configure `@a
 Create a new folder named `alpa` with two sub-folders named `alpa`, `redis`, this is where we'll store the Kubernetes files.
 
 ```
-mkdir ./alpa && mkdir ./alpa/redis && mkdir ./alpa/alpa
+mkdir alpa && mkdir alpa/redis && mkdir alpa/alpa && cd alpa
 ```
 
 ### 🏝️ Creating a namespace
@@ -129,13 +129,13 @@ spec:
     selector:
         app: redis
     ports:
-        - port: 15601
+        - port: 6379
           targetPort: 6379
 ```
 
-Redis service exposes the Redis database on port 15601 to be accessed by `@alpa/api` and other deployments in this namespace.
+Redis service exposes the Redis database on port 6379 to be accessed by `@alpa/api` and other deployments in this namespace.
 
-> ℹ️ **Note:** For security purposes, it is recommended that you change this port number `15601` to a random 5 digit number below 60,000.
+> ℹ️ **Note:** For security purposes, it is recommended that you change this port number `6379` to a random 5 digit number below 60,000.
 
 ### ⚙️ Creating configuration file
 
@@ -247,7 +247,7 @@ resources:
 
     # @alpa/api service
     - alpa/1-configs.yml
-    - alpa/2-volumes.yml
+    - alpa/2-deploys.yml
     - alpa/3-services.yml
 ```
 
