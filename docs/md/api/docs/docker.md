@@ -4,9 +4,7 @@ layout: ../../README.md
 
 # 🐳 Deploying with Docker Compose
 
-There are mainly 3 ways to deploy `@alpa/api` onto production. For personal usage deploying through 🐳 **Docker Compose** is the easiest & recommended way.
-
-> ℹ️ **Info:** For advanced use cases or high intensity workload read about [manual deployment](./manual.md) & [Kubernetes deployment](./kubernetes.md).
+There are mainly 3 ways to deploy `@alpa/api` onto production. For personal usage deploying through 🐳 **Docker Compose** is the easiest & recommended way. For advanced use cases or high intensity workload read about [manual deployment](./manual.md) & [Kubernetes deployment](./kubernetes.md).
 
 Deploying **alpa**'s API using Docker is easy and straightforward by following the below steps:
 
@@ -68,7 +66,7 @@ docker-compose.yml
 config.yml
 ```
 
-### ⚡ Production configuration
+### ⚡ Configuring for production
 
 Provided example config file is best suitable for development & testing purposes only. We need to make some changes to the config file to make `@alpa/api` suitable for production environments.
 

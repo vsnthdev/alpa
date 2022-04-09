@@ -32,7 +32,7 @@
 
 # 🧰 Manually deploying
 
-There are mainly 3 ways to deploy `@alpa/api` onto production. For personal usage deploying through [🐳 Docker Compose](./docker.md) is the most easiest & recommended way.
+There are mainly 3 ways to deploy `@alpa/api` onto production. For personal usage deploying through [🐳 Docker Compose](./docker.md) is the most easiest & recommended way. For high intensity workloads read about [Kubernetes deployment](./kubernetes.md).
 
 Deploying **alpa**'s API is easy and straightforward by following the below steps:
 
@@ -103,7 +103,7 @@ An [example config file](../../api/config.example.yml) is already present with a
 cp api/config.example.yml api/config.yml
 ```
 
-### ⚡ Production configuration
+### ⚡ Configuring for production
 
 Provided example config file is best suitable for development & testing purposes only. We need to make some changes to the config file to make `@alpa/api` suitable for production environments.
 

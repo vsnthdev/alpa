@@ -21,7 +21,7 @@
         "clean": "lerna run clean",
         "build": "lerna run --parallel build",
         "build:docker": "lerna run --stream build:docker",
-        "build:docs": "lerna run --stream --scope @alpa/docs build",
+        "build:docs": "lerna run --stream --scope @alpa/docs clean && lerna run --stream --scope @alpa/docs build",
         "prepare": "husky install"
     },
     "dependencies": {
