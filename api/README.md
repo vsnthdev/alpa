@@ -1,10 +1,11 @@
 <br>
 <h1 align="center">
     <a href="https://alpa.vercel.app#gh-light-mode-only" target="_blank" rel="noopener">
-        <img src="https://raw.githubusercontent.com/vsnthdev/alpa/dev/docs/media/logo_light.svg" alt="alpa" height="60">
+        <img src="https://raw.githubusercontent.com/vsnthdev/alpa/main/docs/media/logo_light.svg" alt="alpa" height="60">
     </a>
     <a href="https://alpa.vercel.app#gh-dark-mode-only" target="_blank" rel="noopener">
-        <img src="https://raw.githubusercontent.com/vsnthdev/alpa/dev/docs/media/logo_dark.svg" alt="alpa" height="60">
+        <img src="https://raw.githubusercontent.com/vsnthdev/alpa/main/docs/media/logo_dark.svg" alt="alpa" heig
+        ht="60">
     </a>
 </h1>
 
