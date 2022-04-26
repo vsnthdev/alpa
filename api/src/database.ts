@@ -5,7 +5,6 @@
 
 import { createClient, RedisClientType, SchemaFieldTypes } from 'redis'
 
-import { app } from './app.js'
 import { config } from './config/index.js'
 import { log } from './logger.js'
 
@@ -16,18 +15,14 @@ export interface ConnectionsList {
 
 export let db: ConnectionsList
 
-export const getIndexName = () => 'codes'.concat(app.version.replace(/\./g, ''))
-
 const createSearchIndex = async ({ codes }: ConnectionsList) => {
-    const indexName = getIndexName()
-
     const existing = await codes.ft._list()
-    if (existing.includes(indexName) == false) {
+    if (existing.includes('codes') == false) {
         // clear all existing indexes
-        for (const key of existing) await codes.ft.dropIndex(key, { DD: true })
+        for (const key of existing) await codes.ft.dropIndex(key)
 
         await codes.ft.create(
-            indexName,
+            'codes',
             {
                 '$.tags': {
                     type: SchemaFieldTypes.TAG,
@@ -40,7 +35,7 @@ const createSearchIndex = async ({ codes }: ConnectionsList) => {
             },
         )
 
-        log.info('Created search index for codes')
+        log.info('Updating search index for codes')
     }
 }
 

@@ -6,7 +6,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 
 import { AlpaAPIConfig } from '../../../../config/interface.js'
-import { ConnectionsList, getIndexName } from '../../../../database.js'
+import { ConnectionsList } from '../../../../database.js'
 import auth from '../../../plugins/auth.js'
 import { Code } from '../make/index.js'
 
@@ -63,9 +63,8 @@ const executeQuery = async ({ search }: RequestQuery, db: ConnectionsList) => {
     results.codes = results.codes.concat(await keysToCodes(keys, db))
 
     // search for tags
-    const indexName = getIndexName()
     const { documents } = await db.codes.ft.search(
-        indexName,
+        'codes',
         `@tags:{ ${search
             .split(' ')
             .map(tag => `${tag}*`)
