@@ -325,7 +325,7 @@ kubectl apply -k .
 **If you're still facing issues, refer the [troubleshooting & help section](https://github.com/vsnthdev/alpa#-troubleshooting--help) for further information.**
 
 ## 📰 License
-> The **alpa** project is released under the [Zlib](https://github.com/vsnthdev/alpa/blob/main/LICENSE.md). <br> Developed &amp; maintained By Vasanth Srivatsa. Copyright 2022 © Vasanth Developer.
+> The **alpa** project is released under the [AGPL-3.0-only](https://github.com/vsnthdev/alpa/blob/main/LICENSE.md). <br> Developed &amp; maintained By Vasanth Srivatsa. Copyright 2022 © Vasanth Developer.
 <hr>
 
 > <a href="https://vsnth.dev" target="_blank" rel="noopener">vsnth.dev</a> &nbsp;&middot;&nbsp;

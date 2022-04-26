@@ -1,7 +1,7 @@
 {
     "name": "alpa",
     "description": "( अल्प ) — A fast ⚡ self-hosted link 🔗 shortener.",
-    "license": "Zlib",
+    "license": "AGPL-3.0-only",
     "type": "module",
     "bugs": "https://github.com/vsnthdev/alpa/issues",
     "author": {

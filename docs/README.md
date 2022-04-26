@@ -54,7 +54,7 @@ Upon building `@alpa/docs` will rerender all markdown files within all the proje
 > **ℹ️ Info:** You can also run `npm run clean` to delete existing documentation from the project to avoid overwriting & purge dangling documents. While running the `build` script, old docs are first deleted before getting overwritten.
 
 ## 📰 License
-> The **alpa** project is released under the [Zlib](https://github.com/vsnthdev/alpa/blob/main/LICENSE.md). <br> Developed &amp; maintained By Vasanth Srivatsa. Copyright 2022 © Vasanth Developer.
+> The **alpa** project is released under the [AGPL-3.0-only](https://github.com/vsnthdev/alpa/blob/main/LICENSE.md). <br> Developed &amp; maintained By Vasanth Srivatsa. Copyright 2022 © Vasanth Developer.
 <hr>
 
 > <a href="https://vsnth.dev" target="_blank" rel="noopener">vsnth.dev</a> &nbsp;&middot;&nbsp;
