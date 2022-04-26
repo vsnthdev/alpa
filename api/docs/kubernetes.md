@@ -183,7 +183,7 @@ data:
           password: short_lived
           email: alpa@example.com
         database:
-          connection: 'redis://redis:6379'
+          connection: redis://redis:6379
           channels:
             codes: 0
             tokens: 1
@@ -192,8 +192,8 @@ data:
           port: 1727
           secret: 3PWSzUzBRA722PdnyFwzVrXbangmFsQkLe98jjaEnDw9o8cW7fcWNkURc92GB5SF
           cors:
-            - 'https://alpa.vercel.app'
-            - 'http://localhost:3000'
+            - https://alpa.vercel.app
+            - http://localhost:3000
         
 ```
 

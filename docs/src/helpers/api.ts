@@ -7,7 +7,7 @@ import glob from 'glob'
 import path from 'path'
 import fs from 'fs/promises'
 import dirname from 'es-dirname'
-import yaml from 'js-yaml'
+import { parse } from 'yaml'
 
 const getRoutePath = (code: string) => {
     const lines = code.split('export default {')[1].split('\n')
@@ -64,7 +64,7 @@ const isAuthRequired = (code: string) => {
 
 const readDefaultConfig = async (api: string): Promise<any> => {
     const str = await fs.readFile(path.join(api, 'config.example.yml'), 'utf-8')
-    return yaml.load(str)
+    return parse(str)
 }
 
 const getApp = async (api: string): Promise<any> => {

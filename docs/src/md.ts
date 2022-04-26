@@ -12,7 +12,7 @@ import handlebars from 'handlebars'
 import getLayout from './layout.js'
 import { log } from './logger.js'
 import mkdir from 'mkdirp'
-import yaml from 'js-yaml'
+import { stringify } from 'yaml'
 
 const getIsIndex = (md: string) => {
     const relative = path.relative(path.join(dirname(), '..'), md)
@@ -30,7 +30,7 @@ export default async (md: string, data: any) => {
     content = await getLayout(md, context, content)
 
     // create a YAML template
-    handlebars.registerHelper('yaml', (data, indent) => yaml.dump(data).split('\n').map(line => ' '.repeat(indent) + line).join('\n').substring(indent))
+    handlebars.registerHelper('yaml', (data, indent) => stringify(data).split('\n').map(line => ' '.repeat(indent) + line).join('\n').substring(indent))
 
     // create a handlebars template
     const template = handlebars.compile(content)

@@ -8,7 +8,7 @@ import fs from 'fs/promises'
 import path from 'path'
 import dirname from 'es-dirname'
 import { promise } from '@vsnthdev/utilities-node';
-import yaml from 'js-yaml';
+import { parse } from 'yaml'
 
 import type { AlpaAPIConfig } from './interface.js'
 import { log } from '../logger.js';
@@ -25,7 +25,7 @@ export default async (): Promise<void> => {
     err && log.error(`Could not read config file at :point_down:\n${chalk.gray.underline(loc)}\n`, 2)
 
     try {
-        config = yaml.load(str) as AlpaAPIConfig
+        config = parse(str) as AlpaAPIConfig
     } catch {
         log.error('Failed to parse config file. Read from :point_down:\n${chalk.gray.underline(loc)}\n', 2)
     }
