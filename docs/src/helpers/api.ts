@@ -3,14 +3,16 @@
  *  Created On 31 March 2022
  */
 
+import dirname from 'es-dirname'
+import fs from 'fs/promises'
 import glob from 'glob'
 import path from 'path'
-import fs from 'fs/promises'
-import dirname from 'es-dirname'
 import { parse } from 'yaml'
 
 const getRoutePath = (code: string) => {
-    const lines = code.split('export default {')[1].split('\n')
+    const lines = code
+        .split('export default {')[1]
+        .split('\n')
         .map(line => line.trim())
         .filter(line => Boolean(line))
 
@@ -18,14 +20,16 @@ const getRoutePath = (code: string) => {
 
     let line = lines.find(line => line.match(/path: /g))
     line = line.slice(5, -1).trim()
-    
+
     const value = eval(line)
 
     return typeof value == 'string' ? value : value[0]
 }
 
 const getRouteMethod = (code: string) => {
-    const lines = code.split('export default {')[1].split('\n')
+    const lines = code
+        .split('export default {')[1]
+        .split('\n')
         .map(line => line.trim())
         .filter(line => Boolean(line))
 
@@ -33,7 +37,7 @@ const getRouteMethod = (code: string) => {
 
     let line = lines.find(line => line.match(/method:/g))
     line = line.slice(5, -1).trim()
-    
+
     const value = eval(line)
 
     return typeof value == 'string' ? value : value[0]
@@ -43,12 +47,14 @@ const getRouteDescription = (code: string) => {
     let lines = code.split(' */')[0].split('\n')
     lines.shift()
     lines = lines.filter(line => Boolean(line))
-    
+
     return lines[0].slice(2).trim()
 }
 
 const isAuthRequired = (code: string) => {
-    const lines = code.split('export default {')[1].split('\n')
+    const lines = code
+        .split('export default {')[1]
+        .split('\n')
         .map(line => line.trim())
         .filter(line => Boolean(line))
 
@@ -74,26 +80,27 @@ const getApp = async (api: string): Promise<any> => {
 
 export default async () => {
     const api = path.join(dirname(), '..', '..', '..', 'api')
-    const routeFiles = glob.sync(path.join(api, 'src', 'server', 'routes', '**', '**', 'index.ts'))
+    const routeFiles = glob.sync(
+        path.join(api, 'src', 'server', 'routes', '**', '**', 'index.ts'),
+    )
     const routes = []
 
     for (const file of routeFiles) {
         const code = await fs.readFile(file, 'utf-8')
-        
+
         routes.push({
             path: getRoutePath(code),
             method: getRouteMethod(code),
             description: getRouteDescription(code),
-            authRequired: isAuthRequired(code)
+            authRequired: isAuthRequired(code),
         })
-
     }
 
     return {
         api: {
             routes,
             app: await getApp(api),
-            config: await readDefaultConfig(api)
-        }
+            config: await readDefaultConfig(api),
+        },
     }
 }

@@ -9,6 +9,6 @@ export const log = await itivrutaha.createNewLogger({
     bootLog: false,
     shutdownLog: false,
     theme: {
-        string: ':emoji :type :message'
-    }
+        string: ':emoji :type :message',
+    },
 })

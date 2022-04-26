@@ -3,13 +3,13 @@
  *  Created On 02 February 2022
  */
 
-import { FastifyReply, FastifyRequest } from 'fastify'
+import boom from 'boom'
+import { FastifyRequest } from 'fastify'
 import fp from 'fastify-plugin'
-import boom from 'boom';
 
-import { db } from '../../database.js';
+import { db } from '../../database.js'
 
-const func: any = async (req: FastifyRequest, rep: FastifyReply) => {
+const func: any = async (req: FastifyRequest) => {
     try {
         // check if that token exists in our black list
         // if yes, then we simply throw an error, so it gets

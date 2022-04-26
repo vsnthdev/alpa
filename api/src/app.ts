@@ -4,9 +4,9 @@
  *  Created On 17 February 2022
  */
 
-import { readFile } from 'fs/promises';
-import { join } from 'path';
-import dirname from 'es-dirname';
+import dirname from 'es-dirname'
+import { readFile } from 'fs/promises'
+import { join } from 'path'
 
 interface PackageJSON {
     name: string
@@ -17,5 +17,7 @@ interface PackageJSON {
 export let app: PackageJSON
 
 export default async () => {
-    app = JSON.parse(await readFile(join(dirname(), '..', 'package.json'), 'utf-8'))
+    app = JSON.parse(
+        await readFile(join(dirname(), '..', 'package.json'), 'utf-8'),
+    )
 }

@@ -7,6 +7,6 @@ export default async () => {
     const date = new Date()
 
     return {
-        year: date.getFullYear()
+        year: date.getFullYear(),
     }
 }

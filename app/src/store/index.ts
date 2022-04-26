@@ -1,12 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
-import auth, { AuthState } from './auth.js';
-import codes, { Code } from './codes.js';
+
+import auth, { AuthState } from './auth.js'
+import codes, { Code } from './codes.js'
 
 export interface AppState {
-    auth: AuthState,
+    auth: AuthState
     codes: Code[]
 }
 
-export const store= configureStore({
-    reducer: { auth, codes }
+export const store = configureStore({
+    reducer: { auth, codes },
 })

@@ -1,5 +1,6 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+npm run --silent lint
 npm run --silent build:docs
 git add --all

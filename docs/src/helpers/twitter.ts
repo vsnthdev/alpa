@@ -3,8 +3,8 @@
  *  Created On 10 March 2022
  */
 
-import path from 'path'
 import axios from 'axios'
+import path from 'path'
 
 export default async () => {
     try {
@@ -14,8 +14,9 @@ export default async () => {
             maxRedirects: 0,
         })
     } catch ({ response: { status, headers } }) {
-        if (status == 307) return {
-            twitterUsername: path.parse(headers.location).base
-        }
+        if (status == 307)
+            return {
+                twitterUsername: path.parse(headers.location).base,
+            }
     }
 }

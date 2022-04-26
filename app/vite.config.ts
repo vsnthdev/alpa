@@ -3,11 +3,11 @@
  *  Created On 04 February 2022
  */
 
+import react from '@vitejs/plugin-react'
+import autoprefixer from 'autoprefixer'
+import tailwindcss from 'tailwindcss'
 import { defineConfig } from 'vite'
-import { createHtmlPlugin } from 'vite-plugin-html';
-import autoprefixer from 'autoprefixer';
-import tailwindcss from 'tailwindcss';
-import react from '@vitejs/plugin-react';
+import { createHtmlPlugin } from 'vite-plugin-html'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
@@ -17,25 +17,22 @@ export default defineConfig({
         outDir: '../dist',
         minify: 'esbuild',
         target: 'esnext',
-        polyfillModulePreload: false
+        polyfillModulePreload: false,
     },
     server: {
         fs: {
-            strict: false
-        }
+            strict: false,
+        },
     },
     css: {
         postcss: {
-            plugins: [
-                autoprefixer(),
-                tailwindcss()
-            ]
-        }
+            plugins: [autoprefixer(), tailwindcss()],
+        },
     },
     plugins: [
         react(),
         createHtmlPlugin({
-            minify: true
+            minify: true,
         }),
         VitePWA({
             manifest: {
@@ -51,16 +48,16 @@ export default defineConfig({
                         src: '/icon.svg',
                         sizes: '791x791',
                         type: 'image/svg',
-                        purpose: 'maskable'
+                        purpose: 'maskable',
                     },
                     {
                         src: '/icon.png',
                         sizes: '791x791',
-                        type: 'image/png'
+                        type: 'image/png',
                     },
                 ],
             },
-            includeAssets: ['/cover.png', '/.well-known/assetlinks.json']
-        })
-    ]
+            includeAssets: ['/cover.png', '/.well-known/assetlinks.json'],
+        }),
+    ],
 })

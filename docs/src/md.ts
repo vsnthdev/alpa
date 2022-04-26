@@ -4,19 +4,23 @@
  */
 
 import chalk from 'chalk'
-import path from 'path'
+import dirname from 'es-dirname'
 import fs from 'fs/promises'
 import gm from 'gray-matter'
-import dirname from 'es-dirname'
 import handlebars from 'handlebars'
+import mkdir from 'mkdirp'
+import path from 'path'
+import { stringify } from 'yaml'
+
 import getLayout from './layout.js'
 import { log } from './logger.js'
-import mkdir from 'mkdirp'
-import { stringify } from 'yaml'
 
 const getIsIndex = (md: string) => {
     const relative = path.relative(path.join(dirname(), '..'), md)
-    return (path.dirname(relative) == 'md' && path.basename(relative) == 'README.md') ? true : false
+    return path.dirname(relative) == 'md' &&
+        path.basename(relative) == 'README.md'
+        ? true
+        : false
 }
 
 export default async (md: string, data: any) => {
@@ -24,22 +28,33 @@ export default async (md: string, data: any) => {
     const src = await fs.readFile(md, 'utf-8')
 
     // read the front matter
-    let { data: context, content } = gm(src)
+    const doc = gm(src)
 
     // fetch the layout if specified
-    content = await getLayout(md, context, content)
+    doc.content = await getLayout(md, doc.data, doc.content)
 
     // create a YAML template
-    handlebars.registerHelper('yaml', (data, indent) => stringify(data).split('\n').map(line => ' '.repeat(indent) + line).join('\n').substring(indent))
+    handlebars.registerHelper('yaml', (data, indent) =>
+        stringify(data)
+            .split('\n')
+            .map(line => ' '.repeat(indent) + line)
+            .join('\n')
+            .substring(indent),
+    )
 
     // create a handlebars template
-    const template = handlebars.compile(content)
+    const template = handlebars.compile(doc.content)
 
     // render it
     const render = template({ ...data, ...{ isIndex: getIsIndex(md) } })
 
     // write to the destination
-    const dest = path.join(dirname(), '..', '..', path.normalize(md).split(path.join('docs', 'md'))[1])
+    const dest = path.join(
+        dirname(),
+        '..',
+        '..',
+        path.normalize(md).split(path.join('docs', 'md'))[1],
+    )
     await mkdir(path.dirname(dest))
     await fs.writeFile(dest, render, 'utf-8')
 

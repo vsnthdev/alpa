@@ -3,12 +3,13 @@
  *  Created On 08 March 2022
  */
 
-import path from 'path'
-import glob from 'glob'
 import dirname from 'es-dirname'
-import handleMarkdownFile from './md.js'
+import glob from 'glob'
+import path from 'path'
+
 import getData from './helpers/index.js'
 import { log } from './logger.js'
+import handleMarkdownFile from './md.js'
 
 const getMD = async () => {
     log.info('Estimating markdown files')

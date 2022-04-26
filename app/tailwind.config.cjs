@@ -7,9 +7,7 @@ const colors = require('tailwindcss/colors')
 
 module.exports = {
     darkMode: 'class',
-    content: [
-        './src/**/*.{js,jsx,ts,tsx,html}'
-    ],
+    content: ['./src/**/*.{js,jsx,ts,tsx,html}'],
     theme: {
         colors: {
             white: '#FFFFFF',
@@ -17,7 +15,7 @@ module.exports = {
             primary: '#EF233C',
             'primary-hover': '#D11026',
             secondary: '#1C1917',
-            'secondary-hover': '#5A5049'
+            'secondary-hover': '#5A5049',
         },
         fontFamily: {
             body: [
@@ -33,6 +31,6 @@ module.exports = {
                 '"Noto Sans"',
                 'sans-serif',
             ],
-        }
-    }
+        },
+    },
 }

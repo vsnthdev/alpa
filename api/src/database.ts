@@ -3,10 +3,11 @@
  *  Created On 30 January 2022
  */
 
-import { log } from './logger.js';
-import { config } from './config/index.js';
-import { createClient, RedisClientType, SchemaFieldTypes } from 'redis';
-import { app } from './app.js';
+import { createClient, RedisClientType, SchemaFieldTypes } from 'redis'
+
+import { app } from './app.js'
+import { config } from './config/index.js'
+import { log } from './logger.js'
 
 export interface ConnectionsList {
     codes: any
@@ -17,7 +18,7 @@ export let db: ConnectionsList
 
 export const getIndexName = () => 'codes'.concat(app.version.replace(/\./g, ''))
 
-const createSearchIndex = async ({codes }: ConnectionsList) => {
+const createSearchIndex = async ({ codes }: ConnectionsList) => {
     const indexName = getIndexName()
 
     const existing = await codes.ft._list()
@@ -31,12 +32,12 @@ const createSearchIndex = async ({codes }: ConnectionsList) => {
                 '$.tags': {
                     type: SchemaFieldTypes.TAG,
                     AS: 'tags',
-                    SEPARATOR: ';'
-                }
+                    SEPARATOR: ';',
+                },
             },
             {
-                ON: 'JSON'
-            }
+                ON: 'JSON',
+            },
         )
 
         log.info('Created search index for codes')
@@ -44,23 +45,24 @@ const createSearchIndex = async ({codes }: ConnectionsList) => {
 }
 
 export default async () => {
-    const failedConnecting = () => log.error('Failed connecting to the database.', 2)
+    const failedConnecting = () =>
+        log.error('Failed connecting to the database.', 2)
 
     const { database } = config
 
     db = {
         codes: null,
-        tokens: null
+        tokens: null,
     }
 
     for (const key in db) {
         db[key] = createClient({
             url: database.connection,
-            database: database.channels[key]
+            database: database.channels[key],
         })
 
         db[key].on('error', failedConnecting)
-    
+
         await db[key].connect()
         await db[key].info()
     }

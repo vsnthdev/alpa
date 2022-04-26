@@ -3,27 +3,28 @@
  *  Created On 03 February 2022
  */
 
-import { FastifyReply, FastifyRequest } from "fastify"
-import { AlpaAPIConfig } from "../../../config/interface"
-import { ConnectionsList } from "../../../database"
-import boom from 'boom';
-import { CodeLink } from "../codes/make";
+import boom from 'boom'
+import { FastifyReply, FastifyRequest } from 'fastify'
 
-const getHandler =  (config: AlpaAPIConfig, db: ConnectionsList) => async (req: FastifyRequest, rep: FastifyReply): Promise<any> => {
-    const links = await db.codes.json.get(req.params['code'] || "_root", {
-        path: [
-            'links'
-        ]
-    }) as CodeLink[]
+import { AlpaAPIConfig } from '../../../config/interface'
+import { ConnectionsList } from '../../../database'
+import { CodeLink } from '../codes/make'
 
-    if (!links) throw boom.notFound()
+const getHandler =
+    (config: AlpaAPIConfig, db: ConnectionsList) =>
+    async (req: FastifyRequest, rep: FastifyReply): Promise<any> => {
+        const links = (await db.codes.json.get(req.params['code'] || '_root', {
+            path: ['links'],
+        })) as CodeLink[]
 
-    if (links.length == 1) {
-        return rep.redirect(307, links[0].url)
-    } else {
-        throw boom.notImplemented()
+        if (!links) throw boom.notFound()
+
+        if (links.length == 1) {
+            return rep.redirect(307, links[0].url)
+        } else {
+            throw boom.notImplemented()
+        }
     }
-}
 
 export default {
     path: ['/:code', '/'],

@@ -5,12 +5,13 @@
  *  Created On 13 February 2022
  */
 
-import { Dispatch, useState } from 'react';
-import { Code, patch } from '../../store/codes';
-import axios from 'axios';
-import { AuthState } from '../../store/auth';
-import { customAlphabet } from 'nanoid';
-import isMobile from 'is-mobile';
+import axios from 'axios'
+import isMobile from 'is-mobile'
+import { customAlphabet } from 'nanoid'
+import { Dispatch, useState } from 'react'
+
+import { AuthState } from '../../store/auth'
+import { Code, patch } from '../../store/codes'
 
 const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyz', 4)
 
@@ -24,33 +25,49 @@ export interface CodeModalStateReturns {
 }
 
 export const prepareModalState = (): CodeModalStateReturns => {
-    const [ isOpen, setIsOpen ] = useState(false)
-    const [ isCreatingNew, setIsCreatingNew ] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
+    const [isCreatingNew, setIsCreatingNew] = useState(false)
 
     const [code, setCode] = useState({
         code: '',
         links: [
             {
-                url: ''
-            }
+                url: '',
+            },
         ],
-        tags: ''
+        tags: '',
     } as Code)
 
     return { code, setCode, isOpen, setIsOpen, isCreatingNew, setIsCreatingNew }
 }
 
-export const openCodeModal = (code: Code | null, state: CodeModalStateReturns) => {
+export const openCodeModal = (
+    code: Code | null,
+    state: CodeModalStateReturns,
+) => {
     // function to focus on our target input field
-    const focus = () => (document.querySelector('#target') as HTMLInputElement).focus()
+    const focus = () =>
+        (document.querySelector('#target') as HTMLInputElement).focus()
 
     // set the code if we're editing
     // an existing one, or else set as a new code dialog
     if (code) {
         state.setIsCreatingNew(false)
-        state.setCode({...code, ...{ tags: code.tags.split(';').map(tag => tag.trim()).filter(tag => Boolean(tag)).join('; ') }} as Code)
+        state.setCode({
+            ...code,
+            ...{
+                tags: code.tags
+                    .split(';')
+                    .map(tag => tag.trim())
+                    .filter(tag => Boolean(tag))
+                    .join('; '),
+            },
+        } as Code)
     } else {
-        state.setCode({ ...state.code, ...{ code: generateCodeString() } } as Code)
+        state.setCode({
+            ...state.code,
+            ...{ code: generateCodeString() },
+        } as Code)
         state.setIsCreatingNew(true)
     }
 
@@ -61,24 +78,34 @@ export const openCodeModal = (code: Code | null, state: CodeModalStateReturns) =
 
 const closeModal = (state: CodeModalStateReturns) => state.setIsOpen(false)
 
-const clearState = (state: CodeModalStateReturns) => setTimeout(() => {
-    state.setCode({
-        code: '',
-        links: [{ url: '' }],
-        tags: ''
-    })
-}, 500)
+const clearState = (state: CodeModalStateReturns) =>
+    setTimeout(() => {
+        state.setCode({
+            code: '',
+            links: [{ url: '' }],
+            tags: '',
+        })
+    }, 500)
 
 export const cancelAction = (state: CodeModalStateReturns) => {
     closeModal(state)
     clearState(state)
 }
 
-export const applyAction = (state: CodeModalStateReturns, dispatch: Dispatch<any>, auth: AuthState) => {
+export const applyAction = (
+    state: CodeModalStateReturns,
+    dispatch: Dispatch<any>,
+    auth: AuthState,
+) => {
     closeModal(state)
 
     // prepare a final new Code object
-    const getTags = (tags: string) => tags.split(';').map(tag => tag.trim()).filter(tag => tag.length > 0).join(';')
+    const getTags = (tags: string) =>
+        tags
+            .split(';')
+            .map(tag => tag.trim())
+            .filter(tag => tag.length > 0)
+            .join(';')
     const final = { ...state.code, ...{ tags: getTags(state.code.tags) } }
 
     // send HTTP request
@@ -86,9 +113,9 @@ export const applyAction = (state: CodeModalStateReturns, dispatch: Dispatch<any
         method: 'POST',
         url: `${auth.apiHost}/api/codes?force=true`,
         headers: {
-            Authorization: `Bearer ${auth.apiToken}`
+            Authorization: `Bearer ${auth.apiToken}`,
         },
-        data: final
+        data: final,
     }).then(() => {
         // dispatch a app store change
         dispatch(patch(final))

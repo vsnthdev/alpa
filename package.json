@@ -18,10 +18,11 @@
     },
     "scripts": {
         "postinstall": "lerna bootstrap",
+        "lint": "eslint --fix --ext cjs,mjs,js,ts,tsx -c ./.eslintrc.cjs .",
         "clean": "lerna run clean",
         "build": "lerna run --parallel build",
         "build:docker": "lerna run --stream build:docker",
-        "build:docs": "lerna run --stream --scope @alpa/docs clean && lerna run --stream --scope @alpa/docs build",
+        "build:docs": "lerna run --loglevel silent --stream --scope @alpa/docs clean && lerna run --loglevel silent --stream --scope @alpa/docs build",
         "prepare": "husky install"
     },
     "dependencies": {
@@ -38,7 +39,15 @@
     "devDependencies": {
         "@types/glob": "^7.2.0",
         "@types/node": "^17.0.13",
+        "@typescript-eslint/eslint-plugin": "^5.21.0",
         "concurrently": "^7.0.0",
+        "eslint": "^8.14.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "eslint-plugin-react": "^7.29.4",
+        "eslint-plugin-simple-import-sort": "^7.0.0",
+        "prettier": "^2.6.2",
         "rimraf": "^3.0.2",
         "typescript": "^4.5.5"
     }

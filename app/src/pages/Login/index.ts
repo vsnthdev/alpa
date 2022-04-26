@@ -3,30 +3,34 @@
  *  Created On 12 February 2022
  */
 
-import progress from 'nprogress';
-import axios from 'axios';
-import { NavigateFunction } from 'react-router-dom';
+import axios from 'axios'
+import progress from 'nprogress'
+import { NavigateFunction } from 'react-router-dom'
 
 interface LoginOptions {
     navigate: NavigateFunction
     apiHost: string
     credentials: {
-        username: string,
+        username: string
         password: string
     }
 }
 
-export const openDashboard = (navigate: NavigateFunction) => navigate('/dash', {
-    replace: true
-})
+export const openDashboard = (navigate: NavigateFunction) =>
+    navigate('/dash', {
+        replace: true,
+    })
 
 export const parseJWTPayload = (token: string) => {
     const base64Url: string = token.split('.')[1]
     const base64: string = base64Url.replace(/-/g, '+').replace(/_/g, '/')
     const jsonPayload: any = decodeURIComponent(
-        atob(base64).split('').map(c => {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
-        }).join('')
+        atob(base64)
+            .split('')
+            .map(c => {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+            })
+            .join(''),
     )
 
     return JSON.parse(jsonPayload)
@@ -42,9 +46,9 @@ export default async ({ apiHost, credentials, navigate }: LoginOptions) => {
             method: 'POST',
             url: `${apiHost}/api/auth/login`,
             data: {
-                username, 
+                username,
                 password,
-            }
+            },
         })
 
         if (status == 200) {

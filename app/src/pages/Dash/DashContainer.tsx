@@ -4,18 +4,19 @@
  *  Created On 08 February 2022
  */
 
-import { ReactElement, useState, useEffect, Dispatch } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { DashContent } from './DashContent';
-import progress from 'nprogress';
-import { parseJWTPayload } from '../Login/index';
-import { useDispatch, } from 'react-redux';
-import { login } from '../../store/auth';
-import { insert } from '../../store/codes';
-import logout from '.';
-import { DashHero } from '../../components/DashHero/DashHero';
-import { prepareModalState } from '../../components/CodeModal/functions';
+import axios from 'axios'
+import progress from 'nprogress'
+import { ReactElement, useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+import { prepareModalState } from '../../components/CodeModal/functions'
+import { DashHero } from '../../components/DashHero/DashHero'
+import { login } from '../../store/auth'
+import { insert } from '../../store/codes'
+import { parseJWTPayload } from '../Login/index'
+import logout from '.'
+import { DashContent } from './DashContent'
 
 export const Dash = (): ReactElement => {
     const apiToken = localStorage.getItem('apiToken') as string
@@ -24,8 +25,8 @@ export const Dash = (): ReactElement => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const [ loading, setLoading ] = useState(true)
-    const [ quickText, setQuickText ] = useState("")
+    const [loading, setLoading] = useState(true)
+    const [quickText, setQuickText] = useState('')
 
     // prepare modal's required state
     const modalState = prepareModalState()
@@ -38,49 +39,65 @@ export const Dash = (): ReactElement => {
             method: 'GET',
             url: `${apiHost}/api/codes`,
             headers: {
-                Authorization: `Bearer ${apiToken}`
-            }
-        }).then(({status, data}) => {
-            if (status == 200) {
-                // update our store with the latest
-                // user details
-                const { username, email } = parseJWTPayload(apiToken)
-                dispatch(login({
-                    apiHost,
-                    apiToken,
-                    username,
-                    email,
-                    isLoggedIn: true,
-                }))
+                Authorization: `Bearer ${apiToken}`,
+            },
+        })
+            .then(({ status, data }) => {
+                if (status == 200) {
+                    // update our store with the latest
+                    // user details
+                    const { username, email } = parseJWTPayload(apiToken)
+                    dispatch(
+                        login({
+                            apiHost,
+                            apiToken,
+                            username,
+                            email,
+                            isLoggedIn: true,
+                        }),
+                    )
 
-                dispatch(insert(data.codes))
-                setLoading(false)
-            } else {
+                    dispatch(insert(data.codes))
+                    setLoading(false)
+                } else {
+                    logout({
+                        auth: {
+                            apiHost,
+                            apiToken,
+                        },
+                        dispatch,
+                        navigate,
+                    })
+                }
+            })
+            .catch(() => {
                 logout({
                     auth: {
                         apiHost,
-                        apiToken
+                        apiToken,
                     },
                     dispatch,
-                    navigate
+                    navigate,
                 })
-            }
-        }).catch(err => {
-            logout({
-                auth: {
-                    apiHost,
-                    apiToken
-                },
-                dispatch,
-                navigate
             })
-        }).finally(() => {
-            progress.done()
-        })
+            .finally(() => {
+                progress.done()
+            })
     }, [])
 
-    return <main>
-        <DashHero loading={loading} modalState={modalState} quickText={quickText} setQuickText={setQuickText}></DashHero>
-        <DashContent modalState={modalState} quickText={quickText} loading={loading}></DashContent>
-    </main>
+    return (
+        <main>
+            <DashHero
+                loading={loading}
+                modalState={modalState}
+                quickText={quickText}
+                setQuickText={setQuickText}
+            ></DashHero>
+            <DashContent
+                modalState={modalState}
+                quickText={quickText}
+                loading={loading}
+            ></DashContent>
+        </main>
+    )
 }

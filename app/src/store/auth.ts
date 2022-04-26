@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit'
 
 export interface AuthState {
     username: string
@@ -17,8 +17,8 @@ const user = createSlice({
     name: 'user',
     reducers: {
         login: (state, action) => ({ ...state, ...action.payload }),
-        logout: () => initialState
-    }
+        logout: () => initialState,
+    },
 })
 
 export const { login, logout } = user.actions
