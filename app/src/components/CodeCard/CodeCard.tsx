@@ -35,7 +35,7 @@ export const CodeCard = ({
     const dispatch = useDispatch()
 
     return (
-        <div className="bg-white border-2 border-slate-200 w-full p-8 rounded-lg flex flex-col">
+        <div className="bg-white border-2 border-neutral-200 w-full p-8 rounded-lg flex flex-col">
             {/* the code of the item */}
             <div className="mb-1">
                 <code className="font-bold text-2xl mb-1">{code.code}</code>

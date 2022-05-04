@@ -96,7 +96,7 @@ export const DashHero = ({
                         setQuickText(e.target.value)
                         searchAPI()
                     }}
-                    className={`w-full max-w-xl px-3 py-2 border-2 outline-none border-slate-200 focus:border-primary rounded-md transition-colors ${
+                    className={`w-full max-w-xl px-3 py-2 border-2 outline-none border-neutral-200 focus:border-primary rounded-md transition-colors ${
                         loading ? 'opacity-0' : 'opacity-100'
                     }`}
                 />

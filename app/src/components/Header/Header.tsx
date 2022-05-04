@@ -18,7 +18,7 @@ export const Header = (): ReactElement => {
     const auth = useSelector((state: AppState) => state.auth)
 
     return (
-        <header className="bg-white border-b-2 border-slate-200 py-4">
+        <header className="bg-white border-b-2 border-neutral-200 py-4">
             <div className="container mx-auto flex justify-between items-center px-8">
                 {/* brand */}
                 <a href="/">
@@ -60,7 +60,7 @@ export const Header = (): ReactElement => {
                 {/* logout button */}
                 {auth.isLoggedIn ? (
                     <button
-                        className="font-semibold py-2 px-4 border border-transparent text-sm rounded-md transition-colors text-white bg-secondary hover:bg-secondary-hover outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-800"
+                        className="font-semibold py-2 px-4 border border-transparent text-sm rounded-md transition-colors text-white bg-secondary hover:bg-secondary-hover outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-800"
                         onClick={() => logout({ auth, navigate, dispatch })}
                     >
                         Logout

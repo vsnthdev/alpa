@@ -40,12 +40,12 @@ export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
         >
             <div className="flex justify-center items-center min-h-screen pt-4 px-4 pb-20 text-center">
                 <div
-                    className="fixed inset-0 bg-slate-800 bg-opacity-75 transition-opacity"
+                    className="fixed inset-0 bg-neutral-800 bg-opacity-75 transition-opacity"
                     onClick={() => cancelAction(modalState)}
                 ></div>
 
                 <div className="w-full inline-block align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg">
-                    <div className="bg-slate-100 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div className="bg-neutral-100 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                         <div className="sm:flex sm:items-start">
                             <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-primary/[0.1] sm:mx-0 sm:h-10 sm:w-10">
                                 {isCreatingNew ? (
@@ -82,7 +82,7 @@ export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
                             </div>
                             <div className="w-full mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                                 <h3
-                                    className="text-2xl font-semibold text-slate-900"
+                                    className="text-2xl font-semibold text-neutral-900"
                                     id="modal-title"
                                 >
                                     {isCreatingNew
@@ -95,7 +95,7 @@ export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
                                             <label className="mr-auto">
                                                 Code
                                             </label>
-                                            <div className="flex px-3 py-2 border-2 transition-colors rounded-md bg-white border-slate-200 focus-within:border-primary">
+                                            <div className="flex px-3 py-2 border-2 transition-colors rounded-md bg-white border-neutral-200 focus-within:border-primary">
                                                 <input
                                                     className="w-full outline-none transition-colors"
                                                     type="text"
@@ -110,7 +110,7 @@ export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
                                                     required
                                                 />
                                                 <button
-                                                    className="pl-2 transition-colors outline-none text-slate-400 hover:text-slate-600 focus:text-slate-600 active:text-black"
+                                                    className="pl-2 transition-colors outline-none text-neutral-400 hover:text-neutral-600 focus:text-neutral-600 active:text-black"
                                                     onClick={() =>
                                                         setCodeValue(
                                                             generateCodeString(),
@@ -144,7 +144,7 @@ export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
                                             Target
                                         </label>
                                         <input
-                                            className="w-full px-3 py-2 border-2 outline-none transition-colors border-slate-200 focus:border-primary rounded-md"
+                                            className="w-full px-3 py-2 border-2 outline-none transition-colors border-neutral-200 focus:border-primary rounded-md"
                                             type="text"
                                             id="target"
                                             placeholder="URL you want to redirect to"
@@ -164,7 +164,7 @@ export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
                                         <textarea
                                             id="tags"
                                             rows={3}
-                                            className="appearance-none w-full px-3 py-2 border-2 outline-none transition-colors border-slate-200 focus:border-primary rounded-md resize-none"
+                                            className="appearance-none w-full px-3 py-2 border-2 outline-none transition-colors border-neutral-200 focus:border-primary rounded-md resize-none"
                                             placeholder="Space separated words used to easily identify codes."
                                             value={code.tags ? code.tags : ''}
                                             onChange={e =>
@@ -177,10 +177,10 @@ export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
                         </div>
                     </div>
 
-                    <div className="bg-slate-200 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <div className="bg-neutral-200 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                         <button
                             type="button"
-                            className="w-full inline-flex justify-center rounded-md border border-transparent px-4 py-2 transition-colors bg-primary text-base font-medium text-slate-100 hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:ml-3 sm:w-auto sm:text-sm"
+                            className="w-full inline-flex justify-center rounded-md border border-transparent px-4 py-2 transition-colors bg-primary text-base font-medium text-neutral-100 hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:ml-3 sm:w-auto sm:text-sm"
                             onClick={() =>
                                 applyAction(modalState, dispatch, auth)
                             }
@@ -189,7 +189,7 @@ export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
                         </button>
                         <button
                             type="button"
-                            className="mt-3 w-full inline-flex justify-center rounded-md border border-slate-300  px-4 py-2 transition-colors bg-white text-base font-medium text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-400 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                            className="mt-3 w-full inline-flex justify-center rounded-md border border-neutral-300  px-4 py-2 transition-colors bg-white text-base font-medium text-neutral-700 hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                             onClick={() => cancelAction(modalState)}
                         >
                             Cancel

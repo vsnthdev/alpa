@@ -35,7 +35,7 @@
 }
 
 .tippy-box[data-theme~='light']  {
-    @apply bg-white text-slate-900 border-2 border-solid border-slate-300 font-medium;
+    @apply bg-white text-neutral-900 border-2 border-solid border-neutral-300 font-medium;
 }
 
 .tippy-box[data-theme~='light'] .tippy-arrow {

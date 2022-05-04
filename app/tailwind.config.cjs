@@ -3,20 +3,10 @@
  *  Created On 08 February 2022
  */
 
-const colors = require('tailwindcss/colors')
-
 module.exports = {
     darkMode: 'class',
     content: ['./src/**/*.{js,jsx,ts,tsx,html}'],
     theme: {
-        colors: {
-            white: '#FFFFFF',
-            slate: colors.slate,
-            primary: '#EF233C',
-            'primary-hover': '#D11026',
-            secondary: '#1C1917',
-            'secondary-hover': '#5A5049',
-        },
         fontFamily: {
             body: [
                 'Sora',
@@ -31,6 +21,14 @@ module.exports = {
                 '"Noto Sans"',
                 'sans-serif',
             ],
+        },
+        extend: {
+            colors: {
+                primary: '#EF233C',
+                'primary-hover': '#D11026',
+                secondary: '#1C1917',
+                'secondary-hover': '#5A5049',
+            },
         },
     },
 }

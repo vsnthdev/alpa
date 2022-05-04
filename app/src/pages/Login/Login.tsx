@@ -62,7 +62,7 @@ export const Login = (): ReactElement => {
         <main className="h-full flex justify-center items-center px-10">
             <div className="-mt-20 w-full flex justify-center items-center">
                 {/* login card */}
-                <div className="bg-white p-8 flex flex-col rounded-xl border-2 border-slate-200 max-w-lg md:p-12">
+                <div className="bg-white p-8 flex flex-col rounded-xl border-2 border-neutral-200 max-w-lg md:p-12">
                     {/* card information */}
                     <h1 className="text-4xl font-bold mb-4 md:text-5xl">
                         Log in
@@ -85,11 +85,11 @@ export const Login = (): ReactElement => {
                     <form className="space-y-4" onSubmit={submit}>
                         {/* host */}
                         <div className="flex flex-col items-center space-y-2">
-                            <label className="mr-auto text-slate-600">
+                            <label className="mr-auto text-neutral-600">
                                 API Host
                             </label>
                             <input
-                                className="w-full px-3 py-2 border-2 outline-none border-slate-200 focus:border-primary rounded-md transition-colors"
+                                className="w-full px-3 py-2 border-2 outline-none border-neutral-200 focus:border-primary rounded-md transition-colors"
                                 type="text"
                                 id="host"
                                 placeholder="http://localhost:1727"
@@ -102,11 +102,11 @@ export const Login = (): ReactElement => {
 
                         {/* username */}
                         <div className="flex flex-col items-center space-y-2">
-                            <label className="mr-auto text-slate-600">
+                            <label className="mr-auto text-neutral-600">
                                 Username
                             </label>
                             <input
-                                className="w-full px-3 py-2 border-2 outline-none border-slate-200 focus:border-primary rounded-md transition-colors"
+                                className="w-full px-3 py-2 border-2 outline-none border-neutral-200 focus:border-primary rounded-md transition-colors"
                                 type="text"
                                 id="username"
                                 placeholder="alpa"
@@ -119,11 +119,11 @@ export const Login = (): ReactElement => {
 
                         {/* password */}
                         <div className="flex flex-col items-center space-y-2">
-                            <label className="mr-auto text-slate-600">
+                            <label className="mr-auto text-neutral-600">
                                 Password
                             </label>
                             <input
-                                className="w-full px-3 py-2 border-2 outline-none border-slate-200 focus:border-primary rounded-md transition-colors"
+                                className="w-full px-3 py-2 border-2 outline-none border-neutral-200 focus:border-primary rounded-md transition-colors"
                                 type="password"
                                 id="password"
                                 placeholder="B^a8K7DD"
