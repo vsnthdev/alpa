@@ -15,14 +15,14 @@ import { store } from './store/index.js'
 export const App = (): ReactElement => (
     <StrictMode>
         <Provider store={store}>
-            <BrowserRouter>
+            <BrowserRouter basename="app">
                 {/* the header */}
                 <Header />
 
                 {/* the routes link to their pages */}
                 <Routes>
-                    <Route path="/" element={<Login />}></Route>
-                    <Route path="/dash" element={<Dash />}></Route>
+                    <Route path="/login" element={<Login />}></Route>
+                    <Route path="/" element={<Dash />}></Route>
                 </Routes>
             </BrowserRouter>
         </Provider>

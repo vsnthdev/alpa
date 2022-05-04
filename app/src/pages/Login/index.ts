@@ -17,7 +17,7 @@ interface LoginOptions {
 }
 
 export const openDashboard = (navigate: NavigateFunction) =>
-    navigate('/dash', {
+    navigate('/', {
         replace: true,
     })
 

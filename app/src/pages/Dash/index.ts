@@ -33,7 +33,7 @@ export default ({ auth, navigate, dispatch }: LogoutOptions) => {
         dispatch(clear())
 
         // go back to login page
-        navigate('/')
+        navigate('/login')
         progress.done()
     }
 
