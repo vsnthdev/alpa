@@ -35,6 +35,14 @@ export const Dash = (): ReactElement => {
     // the codes of using the token
     useEffect(() => {
         progress.start()
+
+        // handle when there's isn't an apiHost
+        if (Boolean(apiHost) == false) {
+            navigate('/login')
+            progress.done()
+            return
+        }
+
         axios({
             method: 'GET',
             url: `${apiHost}/api/codes`,
