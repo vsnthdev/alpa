@@ -4,6 +4,7 @@
  */
 
 import boom from 'boom'
+import dot from 'dot-object'
 import { FastifyReply, FastifyRequest } from 'fastify'
 
 import config from '../../../database/config.js'
@@ -36,9 +37,9 @@ const allowed: AllowedConfigs = {
 const getHandler = () => async (req: FastifyRequest, rep: FastifyReply) => {
     let restart = false
 
-    for (const key in req.body as any) {
+    for (const key in dot.dot(req.body)) {
         // check if there are any restricted keys being set
-        if (Object.keys(allowed).includes(key) == false)
+        if (Object.keys(dot.dot(req.body)).includes(key) == false)
             throw boom.forbidden(
                 `The key "${key}" is not allowed to be configured.`,
                 req.body,

@@ -8,8 +8,10 @@ Content-Type: application/json
 Authorization: Bearer {{$dotenv TOKEN}}
 
 {
-    "server.host": "0.0.0.0",
-    "server.port": 1727
+    "server": {
+        "host": "0.0.0.0",
+        "port": 1727
+    }
 }
 
 ###
@@ -22,5 +24,7 @@ Content-Type: application/json
 Authorization: Bearer {{$dotenv TOKEN}}
 
 {
-    "server.port": null
+    "server": {
+        "port": null
+    }
 }

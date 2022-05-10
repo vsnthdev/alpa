@@ -3,6 +3,7 @@
  *  Created On 10 May 2022
  */
 
+import merge from 'deepmerge'
 import dot from 'dot-object'
 
 import { db } from './index.js'
@@ -26,6 +27,16 @@ const get = async (key: string): Promise<any> => {
     }
 }
 
+const deleteKeys = (change: any, current: any) => {
+    const dotted = dot.dot(change)
+    const toDelete = Object.keys(dotted).filter(key => dotted[key] == null)
+
+    for (const key of toDelete) {
+        dot.delete(key, current)
+        dot.delete(key, change)
+    }
+}
+
 const set = async (change: any): Promise<void> => {
     // fetch existing config
     let current = await db.config.json.get('config')
@@ -33,18 +44,12 @@ const set = async (change: any): Promise<void> => {
     // handle when there's no existing config
     if (current == null) current = {}
 
-    // process each config key separately
-    for (const key in change) {
-        const value = change[key]
+    // remove any nulls, and undefined values
+    deleteKeys(change, current)
 
-        if (value === null) {
-            // delete the key in our database
-            dot.del(key, current)
-        } else {
-            // create or update the key in our database
-            current = dot.str(key, value, current)
-        }
-    }
+    // merge both the updated one with full config
+    // to get the final config object
+    current = merge(change, current)
 
     // write back the updated config
     await db.config.json.set('config', '$', current)
