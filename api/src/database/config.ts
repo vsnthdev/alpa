@@ -49,7 +49,10 @@ const set = async (change: any): Promise<void> => {
 
     // merge both the updated one with full config
     // to get the final config object
-    current = merge(change, current)
+    const overwriteMerge = (destinationArray, sourceArray) => sourceArray
+    current = merge(change, current, {
+        arrayMerge: overwriteMerge,
+    })
 
     // write back the updated config
     await db.config.json.set('config', '$', current)
