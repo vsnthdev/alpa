@@ -17,10 +17,4 @@ export interface AlpaAPIConfig {
             config: number
         }
     }
-    server: {
-        host: string
-        port: string
-        secret: string
-        cors: string[]
-    }
 }

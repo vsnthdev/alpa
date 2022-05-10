@@ -1,5 +1,5 @@
 /*
- *  Sets up fastify API server.
+ *  Sets up & starts Fastify API server.
  *  Created On 30 January 2022
  */
 
@@ -12,8 +12,9 @@ import jwt from 'fastify-jwt'
 import glob from 'glob'
 import path from 'path'
 
-import { config } from '../config/index.js'
+import { config as configFile } from '../config/index.js'
 import { AlpaAPIConfig } from '../config/interface'
+import config from '../database/config.js'
 import { ConnectionsList } from '../database/index.js'
 import { db } from '../database/index.js'
 import { log } from '../logger.js'
@@ -68,38 +69,22 @@ const loadRoutes = async (
     }
 }
 
-const getCors = (): string[] => {
-    const devURL = 'http://localhost:3000'
+// fetches all the Cross-Origin allowed
+// domains, so that we can allow requests from them
+const getCors = async (): Promise<string[]> => {
+    const allowed = (await config.get('server.cors')) as string[]
 
+    // automatically allow localhost:3000 during development
     const prod = process.env.NODE_ENV == 'production'
-    if (prod == false && config.server.cors.includes(devURL) == false)
-        config.server.cors.push(devURL)
+    if (prod == false) allowed.push('http://localhost:3000')
 
-    return config.server.cors
+    return allowed
 }
 
-export default async (): Promise<void> =>
+const listen = (port, host): Promise<void> =>
     new Promise(resolve => {
-        fastify = Fastify({
-            // TODO: implement a custom logger, and attach it here
-            logger: false,
-        })
-
-        fastify.register(jwt, {
-            secret: config.server.secret,
-        })
-
-        fastify.register(cors, {
-            methods: ['GET', 'POST', 'DELETE'],
-            credentials: true,
-            origin: getCors(),
-            allowedHeaders: ['Authorization', 'Content-Type'],
-        })
-
-        fastify.register(boom)
-
-        loadRoutes(fastify, config, db).then(() =>
-            fastify.listen(config.server.port, config.server.host, err => {
+        loadRoutes(fastify, configFile, db).then(() =>
+            fastify.listen(port, host, err => {
                 // log the error and terminate execution
                 err && log.error(err, 2)
 
@@ -108,10 +93,42 @@ export default async (): Promise<void> =>
                     `${chalk.whiteBright.bold(
                         '@alpa/api',
                     )} listening at ${chalk.gray.underline(
-                        `http://${config.server.host}:${config.server.port}`,
+                        `http://${host}:${port}`,
                     )}`,
                 )
                 resolve()
             }),
         )
     })
+
+export default async (): Promise<void> => {
+    // get required variables to start the server
+    const host = (await config.get('server.host')) as string
+    const port = (await config.get('server.port')) as number
+    const secret = (await config.get('server.secret')) as string
+
+    // create a new Fastify server
+    fastify = Fastify({
+        // todo: implement a custom logger, and attach it here
+        logger: false,
+    })
+
+    // register the JWT plugin
+    fastify.register(jwt, {
+        secret: secret,
+    })
+
+    // register the Cross-Origin Resource Policy plugin
+    fastify.register(cors, {
+        methods: ['GET', 'POST', 'DELETE'],
+        credentials: true,
+        origin: await getCors(),
+        allowedHeaders: ['Authorization', 'Content-Type'],
+    })
+
+    // register the error handling plugin
+    fastify.register(boom)
+
+    // start listening for requests from the created Fastify server
+    await listen(port, host)
+}

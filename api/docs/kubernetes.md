@@ -187,13 +187,6 @@ data:
             codes: 0
             tokens: 1
             config: 2
-        server:
-          host: 0.0.0.0
-          port: 1727
-          secret: 3PWSzUzBRA722PdnyFwzVrXbangmFsQkLe98jjaEnDw9o8cW7fcWNkURc92GB5SF
-          cors:
-            - https://alpa.vercel.app
-            - http://localhost:3000
         
 ```
 

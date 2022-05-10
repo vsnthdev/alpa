@@ -9,7 +9,10 @@ import { db } from './index.js'
 
 const defaults = {
     server: {
+        host: 'localhost',
         port: 1727,
+        secret: '3PWSzUzBRA722PdnyFwzVrXbangmFsQkLe98jjaEnDw9o8cW7fcWNkURc92GB5SF',
+        cors: [],
     },
 }
 

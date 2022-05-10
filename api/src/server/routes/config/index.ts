@@ -9,18 +9,44 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 import config from '../../../database/config.js'
 import auth from '../../plugins/auth.js'
 
+interface AllowedConfigs {
+    [key: string]: {
+        restart: boolean
+    }
+}
+
 // these are config keys allowed to be changed
-// through the web API
-const allowed = ['server.host', 'server.port']
+// through the web API, along with a boolean that tells
+// whether a restart is required to take effect or not
+const allowed: AllowedConfigs = {
+    'server.host': {
+        restart: true,
+    },
+    'server.port': {
+        restart: true,
+    },
+    'server.secret': {
+        restart: false,
+    },
+    'server.cors': {
+        restart: true,
+    },
+}
 
 const getHandler = () => async (req: FastifyRequest, rep: FastifyReply) => {
-    // check if there are any restricted keys being set
+    let restart = false
+
     for (const key in req.body as any) {
-        if (allowed.includes(key) == false)
+        // check if there are any restricted keys being set
+        if (Object.keys(allowed).includes(key) == false)
             throw boom.forbidden(
                 `The key "${key}" is not allowed to be configured.`,
                 req.body,
             )
+
+        // determine whether a server restart is required for changes
+        // to fully take effect
+        if (restart != true) restart = allowed[key].restart
     }
 
     // write the changes to the database
@@ -28,6 +54,9 @@ const getHandler = () => async (req: FastifyRequest, rep: FastifyReply) => {
 
     return rep.status(201).send({
         message: 'Updated config accordingly',
+        data: {
+            restart,
+        },
     })
 }
 
