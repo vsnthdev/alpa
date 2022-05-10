@@ -14,8 +14,8 @@ import path from 'path'
 
 import { config } from '../config/index.js'
 import { AlpaAPIConfig } from '../config/interface'
-import { ConnectionsList } from '../database.js'
-import { db } from '../database.js'
+import { ConnectionsList } from '../database/index.js'
+import { db } from '../database/index.js'
 import { log } from '../logger.js'
 
 export interface RouteImpl {

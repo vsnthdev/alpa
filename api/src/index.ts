@@ -5,7 +5,7 @@
 
 import getApp from './app.js'
 import getConfig from './config/index.js'
-import getDatabase from './database.js'
+import getDatabase from './database/index.js'
 import getLog from './logger.js'
 import startServer from './server/index.js'
 

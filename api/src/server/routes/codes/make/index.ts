@@ -7,7 +7,7 @@ import boom from 'boom'
 import { FastifyReply, FastifyRequest } from 'fastify'
 
 import { AlpaAPIConfig } from '../../../../config/interface.js'
-import { ConnectionsList } from '../../../../database.js'
+import { ConnectionsList } from '../../../../database/index.js'
 import auth from '../../../plugins/auth.js'
 
 export interface CodeLink {

@@ -6,7 +6,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 
 import { AlpaAPIConfig } from '../../../../config/interface.js'
-import { ConnectionsList } from '../../../../database.js'
+import { ConnectionsList } from '../../../../database/index.js'
 import auth from '../../../plugins/auth.js'
 import { Code } from '../make/index.js'
 

@@ -7,7 +7,7 @@ import boom from 'boom'
 import { FastifyRequest } from 'fastify'
 import fp from 'fastify-plugin'
 
-import { db } from '../../database.js'
+import { db } from '../../database/index.js'
 
 const func: any = async (req: FastifyRequest) => {
     try {

@@ -5,8 +5,8 @@
 
 import { createClient, RedisClientType, SchemaFieldTypes } from 'redis'
 
-import { config } from './config/index.js'
-import { log } from './logger.js'
+import { config } from '../config/index.js'
+import { log } from '../logger.js'
 
 export interface ConnectionsList {
     codes: any
