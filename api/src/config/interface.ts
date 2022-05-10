@@ -14,6 +14,7 @@ export interface AlpaAPIConfig {
         channels: {
             codes: number
             tokens: number
+            config: number
         }
     }
     server: {

@@ -1,0 +1,26 @@
+# 
+#   Creates, updates an existing, or deletes configuration.
+#   Created On 10 May 2022
+# 
+
+POST http://localhost:1727/api/config
+Content-Type: application/json
+Authorization: Bearer {{$dotenv TOKEN}}
+
+{
+    "server.host": "0.0.0.0",
+    "server.port": 1727
+}
+
+###
+
+# to delete a config key, simply pass it with
+# the value set to null
+
+POST http://localhost:1727/api/config
+Content-Type: application/json
+Authorization: Bearer {{$dotenv TOKEN}}
+
+{
+    "server.port": null
+}

@@ -46,6 +46,7 @@ Refer to the [config example file](https://github.com/vsnthdev/alpa/blob/main/ap
 | `DELETE` | `/api/codes/:code` | Deletes a short code from the database. | ✅ |
 | `GET` | `/api/codes` | List out all short codes with pagination. | ✅ |
 | `POST` | `/api/codes` | Creates a new short code. | ✅ |
+| `POST` | `/api/config` | Creates, updates an existing, or deletes configuration. | ✅ |
 
 ## 🔮 Tech stack
 

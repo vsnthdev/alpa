@@ -11,6 +11,7 @@ import { log } from './logger.js'
 export interface ConnectionsList {
     codes: any
     tokens: RedisClientType<any>
+    config: any
 }
 
 export let db: ConnectionsList
@@ -48,6 +49,7 @@ export default async () => {
     db = {
         codes: null,
         tokens: null,
+        config: null,
     }
 
     for (const key in db) {

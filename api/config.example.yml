@@ -27,6 +27,9 @@ database:
         # storing authentication token blacklist
         tokens: 1
 
+        # storing additional critical configuration
+        config: 2
+
 # HTTP server configuration
 server:
     # the host to listen to

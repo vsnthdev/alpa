@@ -186,6 +186,7 @@ data:
           channels:
             codes: 0
             tokens: 1
+            config: 2
         server:
           host: 0.0.0.0
           port: 1727
