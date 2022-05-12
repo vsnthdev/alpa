@@ -9,9 +9,9 @@ import { config } from '../config/index.js'
 import { log } from '../logger.js'
 
 export interface ConnectionsList {
-    codes: any
-    tokens: RedisClientType<any>
-    config: any
+    codes: any | null
+    tokens: RedisClientType<any> | null
+    config: any | null
 }
 
 export let db: ConnectionsList

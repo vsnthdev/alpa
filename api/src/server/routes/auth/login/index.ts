@@ -8,16 +8,23 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 
 import { AlpaAPIConfig } from '../../../../config/interface.js'
 
+interface BodyImpl {
+    username: string
+    password: string
+}
+
 const getHandler =
     (config: AlpaAPIConfig) =>
     async (req: FastifyRequest, rep: FastifyReply): Promise<any> => {
+        const body = req.body as BodyImpl
+
         if (
-            !req.body ||
+            !body ||
             [
-                req.body['username'],
-                req.body['password'],
-                req.body['username'] == config.auth.username,
-                req.body['password'] == config.auth.password,
+                body.username,
+                body.password,
+                body.username == config.auth.username,
+                body.password == config.auth.password,
             ]
                 .map(elm => Boolean(elm))
                 .includes(false)

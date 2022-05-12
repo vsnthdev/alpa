@@ -72,7 +72,7 @@ const loadRoutes = async (
 // fetches all the Cross-Origin allowed
 // domains, so that we can allow requests from them
 const getCors = async (): Promise<string[]> => {
-    const allowed = (await config.get('server.cors')) as string[]
+    const allowed = ((await config.get('server.cors')) || []) as string[]
 
     // automatically allow localhost:3000 during development
     const prod = process.env.NODE_ENV == 'production'

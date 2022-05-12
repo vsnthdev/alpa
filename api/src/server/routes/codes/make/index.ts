@@ -18,7 +18,7 @@ export interface CodeLink {
 }
 
 export interface Code {
-    code: string
+    code?: string
     tags: string
     links: CodeLink[]
 }
@@ -28,13 +28,14 @@ const getHandler =
     async (req: FastifyRequest, rep: FastifyReply): Promise<any> => {
         const body = req.body as Code
         const code = body.code
+        const query = req.query as any
         delete body.code
 
         if (code == 'api')
             throw boom.notAcceptable('A code named api cannot be created.')
 
         const exists = await db.codes.exists(code)
-        if (exists && Boolean(req.query['force']) == false)
+        if (exists && Boolean(query['force']) == false)
             throw boom.conflict('That code already exists')
 
         await db.codes.json.set(code, '$', body)

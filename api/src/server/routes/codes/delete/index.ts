@@ -10,13 +10,19 @@ import { AlpaAPIConfig } from '../../../../config/interface'
 import { ConnectionsList } from '../../../../database'
 import auth from '../../../plugins/auth.js'
 
+export interface ParamsImpl {
+    code: string
+}
+
 const getHandler =
     (config: AlpaAPIConfig, db: ConnectionsList) =>
     async (req: FastifyRequest, rep: FastifyReply): Promise<any> => {
-        const exists = await db.codes.exists(req.params['code'])
+        const params = req.params as ParamsImpl
+
+        const exists = await db.codes.exists(params.code)
         if (!exists) throw boom.notFound()
 
-        await db.codes.del(req.params['code'])
+        await db.codes.del(params.code)
         return rep.status(204).send('')
     }
 

@@ -19,7 +19,7 @@ const keysToCodes = async (
     keys: string[],
     db: ConnectionsList,
 ): Promise<Code[]> => {
-    const codes = []
+    const codes: any[] = []
 
     for (const key of keys) {
         const code = await db.codes.json.get(key)
@@ -30,7 +30,7 @@ const keysToCodes = async (
 }
 
 const documentsToCodes = async (docs: any[]) => {
-    const codes = []
+    const codes: any[] = []
 
     for (const doc of docs) {
         doc.value['code'] = doc.id
@@ -60,7 +60,7 @@ const executeQuery = async ({ search }: RequestQuery, db: ConnectionsList) => {
         MATCH: `${search}*`,
     })
 
-    results.codes = results.codes.concat(await keysToCodes(keys, db))
+    results.codes = results.codes.concat((await keysToCodes(keys, db)) as any)
 
     // search for tags
     const { documents } = await db.codes.ft.search(
@@ -72,7 +72,9 @@ const executeQuery = async ({ search }: RequestQuery, db: ConnectionsList) => {
             .trim()} }`,
     )
 
-    results.codes = results.codes.concat(await documentsToCodes(documents))
+    results.codes = results.codes.concat(
+        (await documentsToCodes(documents)) as any,
+    )
 
     return results
 }

@@ -19,9 +19,11 @@ const defaults = {
 
 const get = async (key: string): Promise<any> => {
     try {
-        return await db.config.json.get('config', {
+        const inDb = (await db.config.json.get('config', {
             path: [`.${key}`],
-        })
+        })) as string
+
+        if (!inDb) return dot.pick(key, defaults)
     } catch {
         return dot.pick(key, defaults)
     }

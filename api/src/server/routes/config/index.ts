@@ -10,6 +10,11 @@ import config from '../../../database/config.js'
 import auth from '../../plugins/auth.js'
 import validate from './validate.js'
 
+export interface ResponseImpl {
+    message: string
+    data?: any
+}
+
 const ajvErrorResponseTransform = (func: any, err: any) => {
     err.output.payload['data'] = func.errors?.map((e: any) => {
         delete e.schemaPath

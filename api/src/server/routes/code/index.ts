@@ -10,10 +10,16 @@ import { AlpaAPIConfig } from '../../../config/interface'
 import { ConnectionsList } from '../../../database'
 import { CodeLink } from '../codes/make'
 
+export interface ParamsImpl {
+    code: string
+}
+
 const getHandler =
     (config: AlpaAPIConfig, db: ConnectionsList) =>
     async (req: FastifyRequest, rep: FastifyReply): Promise<any> => {
-        const links = (await db.codes.json.get(req.params['code'] || '_root', {
+        const params = req.params as ParamsImpl
+
+        const links = (await db.codes.json.get(params.code || '_root', {
             path: ['links'],
         })) as CodeLink[]
 
