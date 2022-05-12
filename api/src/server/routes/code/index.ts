@@ -6,34 +6,31 @@
 import boom from 'boom'
 import { FastifyReply, FastifyRequest } from 'fastify'
 
-import { AlpaAPIConfig } from '../../../config/interface'
-import { ConnectionsList } from '../../../database'
+import { db } from '../../../database/index.js'
 import { CodeLink } from '../codes/make'
 
 export interface ParamsImpl {
     code: string
 }
 
-const getHandler =
-    (config: AlpaAPIConfig, db: ConnectionsList) =>
-    async (req: FastifyRequest, rep: FastifyReply): Promise<any> => {
-        const params = req.params as ParamsImpl
+const handler = async (req: FastifyRequest, rep: FastifyReply) => {
+    const params = req.params as ParamsImpl
 
-        const links = (await db.codes.json.get(params.code || '_root', {
-            path: ['links'],
-        })) as CodeLink[]
+    const links = (await db.codes.json.get(params.code || '_root', {
+        path: ['links'],
+    })) as CodeLink[]
 
-        if (!links) throw boom.notFound()
+    if (!links) throw boom.notFound()
 
-        if (links.length == 1) {
-            return rep.redirect(307, links[0].url)
-        } else {
-            throw boom.notImplemented()
-        }
+    if (links.length == 1) {
+        return rep.redirect(307, links[0].url)
+    } else {
+        throw boom.notImplemented()
     }
+}
 
 export default {
-    path: ['/:code', '/'],
+    handler,
     method: 'GET',
-    getHandler,
+    url: ['/:code', '/'],
 }

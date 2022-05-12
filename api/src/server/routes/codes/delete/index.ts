@@ -6,31 +6,28 @@
 import boom from 'boom'
 import { FastifyReply, FastifyRequest } from 'fastify'
 
-import { AlpaAPIConfig } from '../../../../config/interface'
-import { ConnectionsList } from '../../../../database'
+import { db } from '../../../../database/index.js'
 import auth from '../../../plugins/auth.js'
 
 export interface ParamsImpl {
     code: string
 }
 
-const getHandler =
-    (config: AlpaAPIConfig, db: ConnectionsList) =>
-    async (req: FastifyRequest, rep: FastifyReply): Promise<any> => {
-        const params = req.params as ParamsImpl
+const handler = async (req: FastifyRequest, rep: FastifyReply) => {
+    const params = req.params as ParamsImpl
 
-        const exists = await db.codes.exists(params.code)
-        if (!exists) throw boom.notFound()
+    const exists = await db.codes.exists(params.code)
+    if (!exists) throw boom.notFound()
 
-        await db.codes.del(params.code)
-        return rep.status(204).send('')
-    }
+    await db.codes.del(params.code)
+    return rep.status(204).send('')
+}
 
 export default {
-    path: '/api/codes/:code',
+    handler,
     method: 'DELETE',
+    url: ['/api/codes/:code'],
     opts: {
         preValidation: [auth],
     },
-    getHandler,
 }

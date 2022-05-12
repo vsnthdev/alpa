@@ -9,7 +9,7 @@ Authorization: Bearer {{$dotenv TOKEN}}
 
 {
     "code": "twitter",
-    "tags": "official;social",
+    "tags": "Official;Social",
     "links": [
         {
             "url": "https://twitter.com/vsnthdev"

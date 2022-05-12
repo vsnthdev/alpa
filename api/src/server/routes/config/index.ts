@@ -23,7 +23,7 @@ const ajvErrorResponseTransform = (func: any, err: any) => {
     throw err
 }
 
-const getHandler = () => async (req: FastifyRequest, rep: FastifyReply) => {
+const handler = async (req: FastifyRequest, rep: FastifyReply) => {
     // validate user input
     if (!validate(req.body as any)) {
         const err = boom.badRequest('Invalid config request')
@@ -39,9 +39,9 @@ const getHandler = () => async (req: FastifyRequest, rep: FastifyReply) => {
 }
 
 export default {
-    path: '/api/config',
+    handler,
     method: 'POST',
-    getHandler,
+    url: ['/api/config'],
     opts: {
         preValidation: [auth],
     },

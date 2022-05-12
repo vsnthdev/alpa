@@ -18,12 +18,11 @@ const getRoutePath = (code: string) => {
 
     lines.pop()
 
-    let line = lines.find(line => line.match(/path: /g))
+    let line = lines.find(line => line.match(/url: /g))
     line = line.slice(5, -1).trim()
 
-    const value = eval(line)
-
-    return typeof value == 'string' ? value : value[0]
+    const value = eval(line) as string[]
+    return value.length == 0 ? value[0] : value.join(' & ')
 }
 
 const getRouteMethod = (code: string) => {

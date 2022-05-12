@@ -42,7 +42,7 @@ Refer to the [config example file](https://github.com/vsnthdev/alpa/blob/main/ap
 |---|---|---|---|
 | `POST` | `/api/auth/login` | Takes username, password and responds with a JWT token. | ❌ |
 | `DELETE` | `/api/auth/logout` | Blacklists the token until expired to prevent usage. | ✅ |
-| `GET` | `/:code` | Redirects if short code is found or returns 404. | ❌ |
+| `GET` | `/:code & /` | Redirects if short code is found or returns 404. | ❌ |
 | `DELETE` | `/api/codes/:code` | Deletes a short code from the database. | ✅ |
 | `GET` | `/api/codes` | List out all short codes with pagination. | ✅ |
 | `POST` | `/api/codes` | Creates a new short code. | ✅ |

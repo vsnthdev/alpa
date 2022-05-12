@@ -5,8 +5,7 @@
 
 import { FastifyReply, FastifyRequest } from 'fastify'
 
-import { AlpaAPIConfig } from '../../../../config/interface.js'
-import { ConnectionsList } from '../../../../database/index.js'
+import { db } from '../../../../database/index.js'
 import auth from '../../../plugins/auth.js'
 import { Code } from '../make/index.js'
 
@@ -15,10 +14,7 @@ interface RequestQuery {
     search: string
 }
 
-const keysToCodes = async (
-    keys: string[],
-    db: ConnectionsList,
-): Promise<Code[]> => {
+const keysToCodes = async (keys: string[]): Promise<Code[]> => {
     const codes: any[] = []
 
     for (const key of keys) {
@@ -40,18 +36,18 @@ const documentsToCodes = async (docs: any[]) => {
     return codes
 }
 
-const getRecentList = async (query: RequestQuery, db: ConnectionsList) => {
+const getRecentList = async (query: RequestQuery) => {
     if (typeof query.cursor != 'string') query.cursor = '0'
     const { cursor: now, keys } = await db.codes.scan(parseInt(query.cursor), {
         COUNT: 50,
     })
 
-    const codes = await keysToCodes(keys, db)
+    const codes = await keysToCodes(keys)
 
     return { cursor: now, codes }
 }
 
-const executeQuery = async ({ search }: RequestQuery, db: ConnectionsList) => {
+const executeQuery = async ({ search }: RequestQuery) => {
     // the result
     const results = { codes: [] }
 
@@ -60,7 +56,7 @@ const executeQuery = async ({ search }: RequestQuery, db: ConnectionsList) => {
         MATCH: `${search}*`,
     })
 
-    results.codes = results.codes.concat((await keysToCodes(keys, db)) as any)
+    results.codes = results.codes.concat((await keysToCodes(keys)) as any)
 
     // search for tags
     const { documents } = await db.codes.ft.search(
@@ -79,24 +75,22 @@ const executeQuery = async ({ search }: RequestQuery, db: ConnectionsList) => {
     return results
 }
 
-const getHandler =
-    (config: AlpaAPIConfig, db: ConnectionsList) =>
-    async (req: FastifyRequest, rep: FastifyReply): Promise<any> => {
-        const query = req.query as RequestQuery
-        const toSend = rep.status(200)
+const handler = async (req: FastifyRequest, rep: FastifyReply) => {
+    const query = req.query as RequestQuery
+    const toSend = rep.status(200)
 
-        if (query.search) {
-            return toSend.send(await executeQuery(query, db))
-        } else {
-            return toSend.send(await getRecentList(query, db))
-        }
+    if (query.search) {
+        return toSend.send(await executeQuery(query))
+    } else {
+        return toSend.send(await getRecentList(query))
     }
+}
 
 export default {
-    path: '/api/codes',
+    handler,
     method: 'GET',
+    url: ['/api/codes'],
     opts: {
         preValidation: [auth],
     },
-    getHandler,
 }

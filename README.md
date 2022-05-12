@@ -119,7 +119,7 @@ This is a [monorepo](https://monorepo.tools/#what-is-a-monorepo) containing mult
 | Name | Description |
 | --- | --- |
 | [@alpa/api](./api) | The core RESTful API 🛠️ that handles redirection in alpa. |
-| [@alpa/app](./app) | Dashboard ✨ to interact with alpa&#x27;s API. |
+| [@alpa/app](./app) | Dashboard ✨ to interact with alpa's API. |
 | [@alpa/docs](./docs) | Programmatically ⚡ builds docs 📚 of all projects 📂 under alpa. |
 
 ### 🛠️ Building all projects

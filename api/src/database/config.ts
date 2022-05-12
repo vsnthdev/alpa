@@ -23,7 +23,7 @@ const get = async (key: string): Promise<any> => {
             path: [`.${key}`],
         })) as string
 
-        if (!inDb) return dot.pick(key, defaults)
+        return inDb == null ? dot.pick(key, defaults) : inDb
     } catch {
         return dot.pick(key, defaults)
     }

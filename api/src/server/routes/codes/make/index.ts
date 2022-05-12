@@ -6,8 +6,7 @@
 import boom from 'boom'
 import { FastifyReply, FastifyRequest } from 'fastify'
 
-import { AlpaAPIConfig } from '../../../../config/interface.js'
-import { ConnectionsList } from '../../../../database/index.js'
+import { db } from '../../../../database/index.js'
 import auth from '../../../plugins/auth.js'
 
 export interface CodeLink {
@@ -23,39 +22,37 @@ export interface Code {
     links: CodeLink[]
 }
 
-const getHandler =
-    (config: AlpaAPIConfig, db: ConnectionsList) =>
-    async (req: FastifyRequest, rep: FastifyReply): Promise<any> => {
-        const body = req.body as Code
-        const code = body.code
-        const query = req.query as any
-        delete body.code
+const handler = async (req: FastifyRequest, rep: FastifyReply) => {
+    const body = req.body as Code
+    const code = body.code
+    const query = req.query as any
+    delete body.code
 
-        if (code == 'api')
-            throw boom.notAcceptable('A code named api cannot be created.')
+    if (code == 'api')
+        throw boom.notAcceptable('A code named api cannot be created.')
 
-        const exists = await db.codes.exists(code)
-        if (exists && Boolean(query['force']) == false)
-            throw boom.conflict('That code already exists')
+    const exists = await db.codes.exists(code)
+    if (exists && Boolean(query['force']) == false)
+        throw boom.conflict('That code already exists')
 
-        await db.codes.json.set(code, '$', body)
+    await db.codes.json.set(code, '$', body)
 
-        if (exists) {
-            return rep.status(200).send({
-                message: 'Updated the code',
-            })
-        } else {
-            return rep.status(201).send({
-                message: 'Created a new code',
-            })
-        }
+    if (exists) {
+        return rep.status(200).send({
+            message: 'Updated the code',
+        })
+    } else {
+        return rep.status(201).send({
+            message: 'Created a new code',
+        })
     }
+}
 
 export default {
-    path: '/api/codes',
+    handler,
     method: 'POST',
+    url: ['/api/codes'],
     opts: {
         preValidation: [auth],
     },
-    getHandler,
 }
