@@ -28,7 +28,10 @@ export const DashContent = ({
 }): ReactElement => {
     // pull codes from the store
     const codes = useSelector((state: AppState) => state.codes).filter(code =>
-        [code.code, code.links[0].url, code.tags].join(' ').includes(quickText),
+        [code.code, code.links[0].url, code.tags]
+            .join(' ')
+            .replace(/;/g, ' ')
+            .match(new RegExp(quickText, 'gi')),
     )
 
     // stop the progress bar
