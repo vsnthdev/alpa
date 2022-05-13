@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useDebouncedCallback } from 'use-debounce'
 
 import { AppState } from '../../store'
-import { Code, patch, update } from '../../store/codes'
+import { Code, patch } from '../../store/codes'
 import {
     CodeModalStateReturns,
     generateCodeString,
@@ -23,12 +23,14 @@ interface DashHeroOptions {
     quickText: string
     modalState: CodeModalStateReturns
     setQuickText: Dispatch<React.SetStateAction<string>>
+    searchAPI: () => Promise<void>
 }
 
 export const DashHero = ({
     loading,
-    modalState,
     quickText,
+    searchAPI,
+    modalState,
     setQuickText,
 }: DashHeroOptions): ReactElement => {
     const dispatch = useDispatch()
@@ -66,21 +68,11 @@ export const DashHero = ({
         }
     }
 
-    const searchAPI = useDebouncedCallback(async () => {
+    const triggerSearchAPI = useDebouncedCallback(async () => {
         if (Boolean(quickText) == false) return
 
-        progress.start()
-        axios({
-            method: 'GET',
-            url: `${auth.apiHost}/api/codes?search=${quickText}`,
-            headers: {
-                Authorization: `Bearer ${auth.apiToken}`,
-            },
-        })
-            .then(({ data }) => {
-                dispatch(update(data.codes))
-            })
-            .finally(() => progress.done())
+        // call search api api
+        searchAPI()
     }, 200)
 
     return (
@@ -94,7 +86,7 @@ export const DashHero = ({
                     value={quickText}
                     onChange={e => {
                         setQuickText(e.target.value)
-                        searchAPI()
+                        triggerSearchAPI()
                     }}
                     className={`w-full max-w-xl px-3 py-2 border-2 outline-none border-neutral-200 focus:border-primary rounded-md transition-colors ${
                         loading ? 'opacity-0' : 'opacity-100'

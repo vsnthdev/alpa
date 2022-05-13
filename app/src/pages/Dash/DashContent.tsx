@@ -4,25 +4,32 @@
  */
 
 import progress from 'nprogress'
-import { ReactElement, useEffect } from 'react'
+import { Dispatch, ReactElement, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import { CodeCard } from '../../components/CodeCard/CodeCard'
 import { CodeModal } from '../../components/CodeModal/CodeModal'
 import { CodeModalStateReturns } from '../../components/CodeModal/functions'
 import { AppState } from '../../store'
+import { Code } from '../../store/codes'
 
 export const DashContent = ({
-    modalState,
-    quickText,
     loading,
+    quickText,
+    searchAPI,
+    modalState,
+    setQuickText,
 }: {
-    modalState: CodeModalStateReturns
-    quickText: string
     loading: boolean
+    quickText: string
+    searchAPI: () => Promise<void>
+    modalState: CodeModalStateReturns
+    setQuickText: Dispatch<React.SetStateAction<string>>
 }): ReactElement => {
     // pull codes from the store
-    const codes = useSelector((state: AppState) => state.codes)
+    const codes = useSelector((state: AppState) => state.codes).filter(code =>
+        [code.code, code.links[0].url, code.tags].join(' ').includes(quickText),
+    )
 
     // stop the progress bar
     useEffect(() => {
@@ -38,20 +45,25 @@ export const DashContent = ({
             <h1 className="text-3xl font-bold mb-10 md:text-4xl">
                 Recently created
             </h1>
-            <div className="flex flex-col w-full max-w-3xl px-8 items-center space-y-8">
-                {codes
-                    .filter(code =>
-                        [code.code, code.links[0].url, code.tags]
-                            .join(' ')
-                            .includes(quickText),
-                    )
-                    .map(code => (
+            <div className="flex flex-col w-full max-w-6xl px-8 items-center space-y-8 lg:space-y-0">
+                {codes.map((code: Code, index: number) => (
+                    <div
+                        key={index}
+                        className="bg-white w-full flex flex-col rounded-xl overflow-hidden shadow-2xl shadow-neutral-200 lg:rounded-none first-of-type:rounded-t-xl last-of-type:rounded-b-xl"
+                    >
                         <CodeCard
-                            key={code.code}
                             code={code}
+                            searchAPI={searchAPI}
                             modalState={modalState}
+                            setQuickText={setQuickText}
                         ></CodeCard>
-                    ))}
+                        {index + 1 != codes.length && (
+                            <div className="mx-16">
+                                <hr className="hidden border-neutral-200 lg:block" />
+                            </div>
+                        )}
+                    </div>
+                ))}
             </div>
 
             {/* the code editing modal */}

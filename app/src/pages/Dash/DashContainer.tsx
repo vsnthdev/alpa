@@ -7,13 +7,14 @@
 import axios from 'axios'
 import progress from 'nprogress'
 import { ReactElement, useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { prepareModalState } from '../../components/CodeModal/functions'
 import { DashHero } from '../../components/DashHero/DashHero'
+import { AppState } from '../../store'
 import { login } from '../../store/auth'
-import { insert } from '../../store/codes'
+import { insert, update } from '../../store/codes'
 import { parseJWTPayload } from '../Login/index'
 import { DashContent } from './DashContent'
 import logout from './index'
@@ -24,6 +25,8 @@ export const Dash = (): ReactElement => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
+
+    const auth = useSelector((app: AppState) => app.auth)
 
     const [loading, setLoading] = useState(true)
     const [quickText, setQuickText] = useState('')
@@ -93,18 +96,37 @@ export const Dash = (): ReactElement => {
             })
     }, [])
 
+    // fetch new codes upon searching
+    const searchAPI = async () => {
+        progress.start()
+        axios({
+            method: 'GET',
+            url: `${auth.apiHost}/api/codes?search=${quickText}`,
+            headers: {
+                Authorization: `Bearer ${auth.apiToken}`,
+            },
+        })
+            .then(({ data }) => {
+                dispatch(update(data.codes))
+            })
+            .finally(() => progress.done())
+    }
+
     return (
         <main>
             <DashHero
                 loading={loading}
-                modalState={modalState}
                 quickText={quickText}
+                searchAPI={searchAPI}
+                modalState={modalState}
                 setQuickText={setQuickText}
             ></DashHero>
             <DashContent
-                modalState={modalState}
-                quickText={quickText}
                 loading={loading}
+                quickText={quickText}
+                searchAPI={searchAPI}
+                modalState={modalState}
+                setQuickText={setQuickText}
             ></DashContent>
         </main>
     )
