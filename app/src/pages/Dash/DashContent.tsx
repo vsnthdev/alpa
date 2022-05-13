@@ -31,7 +31,7 @@ export const DashContent = ({
         [code.code, code.links[0].url, code.tags]
             .join(' ')
             .replace(/;/g, ' ')
-            .match(new RegExp(quickText, 'gi')),
+            .match(new RegExp(quickText.trim(), 'gi')),
     )
 
     // stop the progress bar
