@@ -102,13 +102,13 @@ export const DashHero = ({
                 />
                 <div className="mt-16">
                     <button
-                        className={`w-32 h-10 relative font-semibold outline-none border border-transparent text-sm rounded-md transition-colors text-white bg-primary focus:ring-2 focus:ring-offset-2 focus:ring-primary hover:bg-primary-hover ${
+                        className={`w-32 h-10 relative font-bold outline-none border border-transparent text-sm rounded-md transition-colors text-white bg-primary focus:ring-2 focus:ring-offset-2 focus:ring-primary hover:bg-primary-hover ${
                             loading ? 'opacity-0' : 'opacity-100'
                         }`}
                         onClick={onClick}
                     >
                         <span
-                            className={`absolute transition-opacity inset-0 flex justify-center items-center ${
+                            className={`absolute transition-opacity bottom-[2px] left-0 right-0 top-0 flex justify-center items-center ${
                                 quickText.length == 0
                                     ? 'opacity-100'
                                     : 'opacity-0'
@@ -117,7 +117,7 @@ export const DashHero = ({
                             Create now
                         </span>
                         <span
-                            className={`absolute transition-opacity inset-0 flex justify-center items-center ${
+                            className={`absolute transition-opacity bottom-[2px] left-0 right-0 top-0 flex justify-center items-center ${
                                 quickText.length == 0
                                     ? 'opacity-0'
                                     : 'opacity-100'

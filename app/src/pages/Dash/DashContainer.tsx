@@ -15,8 +15,8 @@ import { DashHero } from '../../components/DashHero/DashHero'
 import { login } from '../../store/auth'
 import { insert } from '../../store/codes'
 import { parseJWTPayload } from '../Login/index'
-import logout from '.'
 import { DashContent } from './DashContent'
+import logout from './index'
 
 export const Dash = (): ReactElement => {
     const apiToken = localStorage.getItem('apiToken') as string

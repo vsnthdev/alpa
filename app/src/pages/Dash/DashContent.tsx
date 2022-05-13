@@ -35,7 +35,7 @@ export const DashContent = ({
                 loading ? 'opacity-0' : 'opacity-100'
             }`}
         >
-            <h1 className="text-3xl font-semibold mb-10 md:text-4xl">
+            <h1 className="text-3xl font-bold mb-10 md:text-4xl">
                 Recently created
             </h1>
             <div className="flex flex-col w-full max-w-3xl px-8 items-center space-y-8">

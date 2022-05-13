@@ -40,7 +40,7 @@ export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
         >
             <div className="flex justify-center items-center min-h-screen pt-4 px-4 pb-20 text-center">
                 <div
-                    className="fixed inset-0 bg-neutral-800 bg-opacity-75 transition-opacity"
+                    className="fixed inset-0 bg-neutral-900 bg-opacity-75 transition-opacity"
                     onClick={() => cancelAction(modalState)}
                 ></div>
 
@@ -82,7 +82,7 @@ export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
                             </div>
                             <div className="w-full mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                                 <h3
-                                    className="text-2xl font-semibold text-neutral-900"
+                                    className="text-2xl font-bold text-neutral-900"
                                     id="modal-title"
                                 >
                                     {isCreatingNew
@@ -165,7 +165,7 @@ export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
                                             id="tags"
                                             rows={3}
                                             className="appearance-none w-full px-3 py-2 border-2 outline-none transition-colors border-neutral-200 focus:border-primary rounded-md resize-none"
-                                            placeholder="Space separated words used to easily identify codes."
+                                            placeholder="Semicolon separated words used to easily identify codes."
                                             value={code.tags ? code.tags : ''}
                                             onChange={e =>
                                                 setTags(e.target.value)
@@ -180,7 +180,7 @@ export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
                     <div className="bg-neutral-200 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                         <button
                             type="button"
-                            className="w-full inline-flex justify-center rounded-md border border-transparent px-4 py-2 transition-colors bg-primary text-base font-medium text-neutral-100 hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:ml-3 sm:w-auto sm:text-sm"
+                            className="w-full inline-flex justify-center rounded-md border border-transparent px-4 pt-2 pb-[9px] transition-colors bg-primary font-bold text-neutral-100 hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:ml-3 sm:w-auto sm:text-sm"
                             onClick={() =>
                                 applyAction(modalState, dispatch, auth)
                             }
@@ -189,7 +189,7 @@ export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
                         </button>
                         <button
                             type="button"
-                            className="mt-3 w-full inline-flex justify-center rounded-md border border-neutral-300  px-4 py-2 transition-colors bg-white text-base font-medium text-neutral-700 hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                            className="mt-3 w-full inline-flex justify-center rounded-md border border-neutral-300  px-4 pt-2 pb-[9px] transition-colors bg-white font-bold text-neutral-700 hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                             onClick={() => cancelAction(modalState)}
                         >
                             Cancel

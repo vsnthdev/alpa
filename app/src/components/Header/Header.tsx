@@ -60,7 +60,7 @@ export const Header = (): ReactElement => {
                 {/* logout button */}
                 {auth.isLoggedIn ? (
                     <button
-                        className="font-semibold py-2 px-4 border border-transparent text-sm rounded-md transition-colors text-white bg-secondary hover:bg-secondary-hover outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-800"
+                        className="font-bold pt-2 pb-[9px] px-4 border border-transparent text-sm rounded-md transition-colors text-white bg-secondary hover:bg-secondary-hover outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-800"
                         onClick={() => logout({ auth, navigate, dispatch })}
                     >
                         Logout

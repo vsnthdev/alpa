@@ -64,10 +64,10 @@ export const Login = (): ReactElement => {
                 {/* login card */}
                 <div className="bg-white p-8 flex flex-col rounded-xl border-2 border-neutral-200 max-w-lg md:p-12">
                     {/* card information */}
-                    <h1 className="text-4xl font-bold mb-4 md:text-5xl">
+                    <h1 className="text-4xl font-extrabold mb-4 md:text-5xl">
                         Log in
                     </h1>
-                    <p className="mb-8 text-base">
+                    <p className="mb-4 text-base">
                         Welcome to{' '}
                         <a
                             className="text-primary"
@@ -86,7 +86,7 @@ export const Login = (): ReactElement => {
                         {/* host */}
                         <div className="flex flex-col items-center space-y-2">
                             <label className="mr-auto text-neutral-600">
-                                API Host
+                                Short domain
                             </label>
                             <input
                                 className="w-full px-3 py-2 border-2 outline-none border-neutral-200 focus:border-primary rounded-md transition-colors"
@@ -143,7 +143,7 @@ export const Login = (): ReactElement => {
                         {/* login button */}
                         <div className="pt-3 flex justify-center">
                             <button
-                                className="font-semibold py-2 px-4 border border-transparent text-sm rounded-md transition-colors text-white bg-primary hover:bg-primary-hover outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                                className="font-bold pt-2 pb-[9px] px-4 border border-transparent text-sm rounded-md transition-colors text-white bg-primary hover:bg-primary-hover outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                                 type="submit"
                             >
                                 Login
