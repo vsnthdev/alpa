@@ -22,7 +22,7 @@ module.exports = {
                 'sans-serif',
             ],
             mono: [
-                'Overpass Mono',
+                'IBM Plex Mono',
                 'ui-monospace',
                 'SFMono-Regular',
                 'Menlo',

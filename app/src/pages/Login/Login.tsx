@@ -62,7 +62,7 @@ export const Login = (): ReactElement => {
         <main className="h-full flex justify-center items-center px-10">
             <div className="-mt-20 w-full flex justify-center items-center">
                 {/* login card */}
-                <div className="bg-white p-8 flex flex-col rounded-xl border-2 border-neutral-200 max-w-lg md:p-12">
+                <div className="bg-white p-8 flex flex-col rounded-xl shadow-2xl shadow-neutral-200 max-w-lg md:p-12">
                     {/* card information */}
                     <h1 className="text-4xl font-extrabold mb-4 md:text-5xl">
                         Log in

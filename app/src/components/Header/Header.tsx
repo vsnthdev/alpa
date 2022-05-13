@@ -18,8 +18,8 @@ export const Header = (): ReactElement => {
     const auth = useSelector((state: AppState) => state.auth)
 
     return (
-        <header className="bg-white border-b-2 border-neutral-200 py-4">
-            <div className="container mx-auto flex justify-between items-center px-8">
+        <header className="py-8">
+            <div className="container mx-auto flex justify-between items-center px-10">
                 {/* brand */}
                 <a href="/">
                     <svg
