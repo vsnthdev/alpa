@@ -63,7 +63,7 @@ export const CodeCard = ({
             {/* tags & card actions */}
             <div className="flex flex-col lg:items-center lg:justify-between lg:flex-row lg:mt-2">
                 {/* render tags if exist */}
-                {code.tags && (
+                {code.tags ? (
                     <div className="mt-2 mb-6 text-xs flex flex-wrap lg:mb-0 lg:mt-0">
                         {code.tags.split(';').map(tag => (
                             <span
@@ -81,6 +81,10 @@ export const CodeCard = ({
                             </span>
                         ))}
                     </div>
+                ) : (
+                    <p className="hidden text-sm text-neutral-400 lg:inline-flex">
+                        Not tagged
+                    </p>
                 )}
 
                 {/* the card actions */}

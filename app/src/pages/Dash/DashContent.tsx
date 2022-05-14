@@ -48,7 +48,7 @@ export const DashContent = ({
             <h1 className="text-3xl font-bold mb-10 md:text-4xl">
                 Recently created
             </h1>
-            <div className="flex flex-col w-full max-w-6xl px-8 items-center space-y-8 lg:space-y-0">
+            <div className="flex flex-col w-full max-w-6xl items-center space-y-8 lg:space-y-0">
                 {codes.map((code: Code, index: number) => (
                     <div
                         key={index}
