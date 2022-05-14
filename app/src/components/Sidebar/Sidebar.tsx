@@ -8,8 +8,13 @@ import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
 import { AppState } from '../../store'
+import { CodeModalStateReturns, openCodeModal } from '../CodeModal/functions'
 
-export const Sidebar = (): ReactElement => {
+export const Sidebar = ({
+    modalState,
+}: {
+    modalState: CodeModalStateReturns
+}): ReactElement => {
     const auth = useSelector((state: AppState) => state.auth)
 
     return (
@@ -50,12 +55,14 @@ export const Sidebar = (): ReactElement => {
 
                     {/* navigation items */}
                     {auth.isLoggedIn && (
-                        <nav className="flex flex-col items-center my-8 space-y-1">
+                        <nav className="flex flex-col items-center mt-8 mb-4 space-y-1">
                             <NavLink
                                 to="/"
                                 className={isActive =>
-                                    `transition-colors p-1.5 rounded-xl hover:bg-white/20 md:p-2 ${
-                                        isActive && 'bg-white/20'
+                                    `transition-colors p-1.5 rounded-xl md:p-2 ${
+                                        isActive
+                                            ? 'bg-primary-hover'
+                                            : 'hover:bg-white/20'
                                     }`
                                 }
                             >
@@ -96,9 +103,32 @@ export const Sidebar = (): ReactElement => {
                                 ></path>
                             </svg>
                         </a> */}
+                            <div className="px-1 pt-3 w-full">
+                                <div className="bg-white/30 rounded-full h-0.5 w-full"></div>
+                            </div>
                         </nav>
                     )}
+
                     {/* add new button */}
+                    <button
+                        onClick={() => openCodeModal(null, modalState)}
+                        className="transition-colors p-1.5 rounded-xl text-primary-hover bg-white hover:bg-neutral-100 md:p-2"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 aspect-square"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                        >
+                            <path
+                                fillRule="evenodd"
+                                d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                                clipRule="evenodd"
+                                stroke="currentColor"
+                                strokeWidth="0.5"
+                            />
+                        </svg>
+                    </button>
                 </div>
 
                 {/* bottom content */}

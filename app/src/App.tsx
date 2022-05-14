@@ -8,6 +8,7 @@ import { HotKeys } from 'react-hotkeys'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
+import { prepareModalState } from './components/CodeModal/functions'
 import { Sidebar } from './components/Sidebar/Sidebar'
 import { Topbar } from './components/Topbar/Topbar'
 import { Dash } from './pages/Dash/DashContainer'
@@ -19,13 +20,16 @@ export const App = (): ReactElement => {
     const [loading, setLoading] = useState(true)
     const [quickText, setQuickText] = useState('')
 
+    // prepare modal's required state
+    const modalState = prepareModalState()
+
     return (
         <StrictMode>
             <Provider store={store}>
                 <BrowserRouter>
                     <HotKeys keyMap={hotkeyMap} handlers={hotkeyHandlers}>
                         {/* the sidebar */}
-                        <Sidebar />
+                        <Sidebar modalState={modalState} />
 
                         {/* the routes link to their pages */}
                         <div className="ml-20 mr-6 md:ml-24 md:mr-8 lg:ml-28 lg:mr-12 xl:ml-0 xl:mr-0">
@@ -49,6 +53,7 @@ export const App = (): ReactElement => {
                                             quickText={quickText}
                                             setQuickText={setQuickText}
                                             setLoading={setLoading}
+                                            modalState={modalState}
                                         />
                                     }
                                 ></Route>

@@ -10,8 +10,7 @@ import { Dispatch, ReactElement, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { prepareModalState } from '../../components/CodeModal/functions'
-import { DashHero } from '../../components/DashHero/DashHero'
+import { CodeModalStateReturns } from '../../components/CodeModal/functions'
 import { login } from '../../store/auth'
 import { insert } from '../../store/codes'
 import { parseJWTPayload } from '../Login/index'
@@ -23,20 +22,19 @@ export const Dash = ({
     quickText,
     setQuickText,
     setLoading,
+    modalState,
 }: {
     loading: boolean
     quickText: string
     setQuickText: Dispatch<React.SetStateAction<string>>
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
+    modalState: CodeModalStateReturns
 }): ReactElement => {
     const apiToken = localStorage.getItem('apiToken') as string
     const apiHost = localStorage.getItem('apiHost') as string
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
-
-    // prepare modal's required state
-    const modalState = prepareModalState()
 
     // check if the token is valid, while fetching
     // the codes of using the token
@@ -102,12 +100,6 @@ export const Dash = ({
 
     return (
         <main>
-            <DashHero
-                loading={loading}
-                quickText={quickText}
-                modalState={modalState}
-                setQuickText={setQuickText}
-            ></DashHero>
             <DashContent
                 loading={loading}
                 quickText={quickText}

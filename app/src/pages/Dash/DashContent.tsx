@@ -47,14 +47,12 @@ export const DashContent = ({
 
     return (
         <div
-            className={`pb-24 container mx-auto flex flex-col items-center transition-opacity ${
+            className={`container mx-auto flex flex-col items-center transition-opacity lg:mt-16 ${
                 loading ? 'opacity-0' : 'opacity-100'
             }`}
         >
-            <h1 className="text-3xl font-bold mb-10 md:text-4xl">
-                Recently created
-            </h1>
-            <div className="flex flex-col w-full max-w-6xl items-center space-y-8 lg:space-y-0">
+            <div className="flex flex-col w-full max-w-6xl items-center">
+                {/* short codes */}
                 {codes.length == 0 ? (
                     <div className="mt-16 w-full h-full flex flex-col space-y-8 items-center justify-center lg:space-y-16">
                         <svg
@@ -236,7 +234,7 @@ export const DashContent = ({
                     codes.map((code: Code, index: number) => (
                         <div
                             key={index}
-                            className="bg-white w-full flex flex-col rounded-xl overflow-hidden shadow-2xl shadow-neutral-200 lg:rounded-none first-of-type:rounded-t-xl last-of-type:rounded-b-xl"
+                            className="bg-white my-4 w-full flex flex-col rounded-xl overflow-hidden shadow-2xl shadow-neutral-200 lg:rounded-none lg:my-0 first-of-type:rounded-t-xl last-of-type:rounded-b-xl"
                         >
                             <CodeCard
                                 code={code}
