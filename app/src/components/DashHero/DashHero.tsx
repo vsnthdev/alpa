@@ -8,7 +8,6 @@ import axios from 'axios'
 import progress from 'nprogress'
 import { Dispatch, ReactElement } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useDebouncedCallback } from 'use-debounce'
 
 import { AppState } from '../../store'
 import { Code, patch } from '../../store/codes'
@@ -18,21 +17,17 @@ import {
     openCodeModal,
 } from '../CodeModal/functions'
 
-interface DashHeroOptions {
+export const DashHero = ({
+    loading,
+    quickText,
+    modalState,
+    setQuickText,
+}: {
     loading: boolean
     quickText: string
     modalState: CodeModalStateReturns
     setQuickText: Dispatch<React.SetStateAction<string>>
-    searchAPI: () => Promise<void>
-}
-
-export const DashHero = ({
-    loading,
-    quickText,
-    searchAPI,
-    modalState,
-    setQuickText,
-}: DashHeroOptions): ReactElement => {
+}): ReactElement => {
     const dispatch = useDispatch()
     const auth = useSelector((app: AppState) => app.auth)
 
@@ -68,31 +63,10 @@ export const DashHero = ({
         }
     }
 
-    const triggerSearchAPI = useDebouncedCallback(async () => {
-        if (Boolean(quickText) == false) return
-
-        // call search api api
-        searchAPI()
-    }, 200)
-
     return (
         <div className="mb-16 mt-16 md:mt-24 px-12">
             <div className="flex flex-col justify-center items-center">
-                <input
-                    autoFocus={true}
-                    type="text"
-                    id="searchOrCreate"
-                    placeholder="Search or quickly create"
-                    value={quickText}
-                    onChange={e => {
-                        setQuickText(e.target.value)
-                        triggerSearchAPI()
-                    }}
-                    className={`w-full max-w-xl px-3 py-2 border-2 outline-none border-neutral-200 focus:border-primary rounded-md transition-colors ${
-                        loading ? 'opacity-0' : 'opacity-100'
-                    }`}
-                />
-                <div className="mt-16">
+                <div>
                     <button
                         className={`w-32 h-10 relative font-bold outline-none border border-transparent text-sm rounded-md transition-colors text-white bg-primary focus:ring-2 focus:ring-offset-2 focus:ring-primary hover:bg-primary-hover ${
                             loading ? 'opacity-0' : 'opacity-100'

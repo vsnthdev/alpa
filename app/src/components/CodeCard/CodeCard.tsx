@@ -9,34 +9,23 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { AppState } from '../../store'
 import { Code } from '../../store/codes'
+import { searchAPI } from '../../util/searchAPI'
 import { CodeModalStateReturns, openCodeModal } from '../CodeModal/functions'
-import { copyShortURL, del } from './functions'
-
-interface CodeCardOptions {
-    code: Code
-    searchAPI: () => Promise<void>
-    modalState: CodeModalStateReturns
-    setQuickText: Dispatch<React.SetStateAction<string>>
-}
-
-// copied from 👇
-// https://stackoverflow.com/questions/3426404/create-a-hexadecimal-colour-based-on-a-string-with-javascript
-const getColorFromTag = (tag: string) => {
-    const stringUniqueHash = [...tag].reduce((acc, char) => {
-        return char.charCodeAt(0) + ((acc << 5) - acc)
-    }, 0)
-
-    return `hsla(${stringUniqueHash % 360}, 95%, 35%, 0.15)`
-}
+import { copyShortURL, del, getColorFromTag } from './functions'
 
 export const CodeCard = ({
     code,
-    searchAPI,
     modalState,
+    quickText,
     setQuickText,
-}: CodeCardOptions): ReactElement => {
+}: {
+    code: Code
+    quickText: string
+    modalState: CodeModalStateReturns
+    setQuickText: Dispatch<React.SetStateAction<string>>
+}): ReactElement => {
     const [showCopiedTooltip, setShowCopiedToolTip] = useState(false)
-    const { apiHost, apiToken } = useSelector((state: AppState) => state.auth)
+    const auth = useSelector((state: AppState) => state.auth)
     const dispatch = useDispatch()
 
     return (
@@ -70,7 +59,11 @@ export const CodeCard = ({
                                 key={tag}
                                 onClick={() => {
                                     setQuickText(tag)
-                                    searchAPI()
+                                    searchAPI({
+                                        auth,
+                                        dispatch,
+                                        quickText,
+                                    })
                                 }}
                                 className="cursor-pointer text-black px-3 py-1 mr-2 rounded-full"
                                 style={{
@@ -110,7 +103,7 @@ export const CodeCard = ({
                                     className="outline-none transition-colors hover:text-primary"
                                     onClick={() =>
                                         copyShortURL({
-                                            apiHost,
+                                            apiHost: auth.apiHost,
                                             code,
                                             setShowCopiedToolTip,
                                         })
@@ -170,8 +163,8 @@ export const CodeCard = ({
                             className="outline-none transition-colors hover:text-primary"
                             onClick={() =>
                                 del({
-                                    apiHost,
-                                    apiToken,
+                                    apiHost: auth.apiHost,
+                                    apiToken: auth.apiToken,
                                     dispatch,
                                     code: code.code,
                                 })
