@@ -23,7 +23,9 @@ export const searchAPI = ({
         progress.start()
         axios({
             method: 'GET',
-            url: `${auth.apiHost}/api/codes?search=${quickText}`,
+            url: `${auth.apiHost}/api/codes?search=${encodeURIComponent(
+                quickText,
+            )}`,
             headers: {
                 Authorization: `Bearer ${auth.apiToken}`,
             },

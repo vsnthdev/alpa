@@ -46,6 +46,7 @@ export const Topbar = ({
                     {auth.isLoggedIn && loading == false && (
                         <input
                             type="text"
+                            id="txtSearch"
                             placeholder="Search for codes, tags and links"
                             className="w-full max-w-md px-3.5 py-2 border-2 outline-none border-neutral-200 focus:border-neutral-300 focus:shadow-lg focus:shadow-neutral-200 rounded-xl transition-all md:text-sm"
                             onChange={e => {
