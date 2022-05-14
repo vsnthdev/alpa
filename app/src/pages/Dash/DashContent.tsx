@@ -25,12 +25,20 @@ export const DashContent = ({
     setQuickText: Dispatch<React.SetStateAction<string>>
 }): ReactElement => {
     // pull codes from the store and implement searching
-    const codes = useSelector((state: AppState) => state.codes).filter(code =>
-        [code.code, code.links[0].url, code.tags]
-            .join(' ')
-            .replace(/;/g, ' ')
-            .match(new RegExp(quickText.trim(), 'gi')),
-    )
+    let codes = useSelector((state: AppState) => state.codes)
+
+    // try to search in existing codes loaded into the frontend
+    try {
+        codes = codes.filter(code =>
+            [code.code, code.links[0].url, code.tags]
+                .join(' ')
+                .replace(/;/g, ' ')
+                .match(new RegExp(quickText.trim(), 'gi')),
+        )
+    } catch {
+        // simply suppress the errors
+        false
+    }
 
     // stop the progress bar
     useEffect(() => {

@@ -48,12 +48,19 @@ const getRecentList = async (query: RequestQuery) => {
 }
 
 const executeQuery = async ({ search }: RequestQuery) => {
+    // remove any special characters since
+    // that crashes the server
+    search = search.replace(/[^a-zA-Z0-9 ]/g, '')
+
     // the result
     const results = { codes: [] }
 
+    // don't perform a search, if input is nothing
+    if (!search) return results
+
     // search for direct keys
     const { keys } = await db.codes.scan(0, {
-        MATCH: `${search}*`,
+        MATCH: `"${search}*"`,
     })
 
     results.codes = results.codes.concat((await keysToCodes(keys)) as any)
