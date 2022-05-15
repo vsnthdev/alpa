@@ -54,9 +54,9 @@ export const DashContent = ({
             <div className="flex flex-col w-full max-w-6xl items-center">
                 {/* short codes */}
                 {codes.length == 0 ? (
-                    <div className="mt-16 w-full h-full flex flex-col space-y-8 items-center justify-center lg:space-y-16">
+                    <div className="mt-16 w-full h-full flex flex-col space-y-8 items-center justify-center lg:space-y-16 xl:space-y-20">
                         <svg
-                            className="w-48 aspect-square md:w-60 lg:w-[18rem]"
+                            className="w-48 aspect-square md:w-60 lg:w-[18rem] xl:w-[22rem]"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 485.83373 483.5"
                             xmlnsXlink="http://www.w3.org/1999/xlink"

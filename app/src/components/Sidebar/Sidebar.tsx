@@ -111,8 +111,9 @@ export const Sidebar = ({
 
                     {/* add new button */}
                     <button
+                        id="btnNew"
                         onClick={() => openCodeModal(null, modalState)}
-                        className="transition-colors p-1.5 rounded-xl text-primary-hover bg-white hover:bg-neutral-100 md:p-2"
+                        className="outline-none transition-colors p-1.5 rounded-xl text-primary-hover bg-white hover:bg-neutral-100 md:p-2"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
