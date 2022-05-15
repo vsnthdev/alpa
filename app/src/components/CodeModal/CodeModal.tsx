@@ -5,6 +5,7 @@
 
 import { ReactElement } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Tag, WithContext as ReactTags } from 'react-tag-input'
 
 import { AppState } from '../../store'
 import { Code } from '../../store/codes'
@@ -15,6 +16,20 @@ import {
     generateCodeString,
 } from './functions'
 
+const tagsTransformerUp = (tags: string): Tag[] =>
+    tags
+        .split(';')
+        .filter(str => Boolean(str))
+        .map(str => {
+            return {
+                id: str,
+                text: str,
+            }
+        })
+
+const tagsTransformerDown = (tags: Tag[]): string =>
+    tags.map(tag => tag.text.trim()).join(';')
+
 interface CodeModalOptions {
     modalState: CodeModalStateReturns
 }
@@ -24,12 +39,30 @@ export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
     const dispatch = useDispatch()
     const auth = useSelector((state: AppState) => state.auth)
 
+    const handleAddition = (tag: Tag) => {
+        const newTags = tagsTransformerUp(code.tags)
+        newTags.push(tag)
+
+        setCode({ ...code, ...{ tags: tagsTransformerDown(newTags) } } as Code)
+    }
+
+    const handleDelete = (index: number) => {
+        const newTags = tagsTransformerUp(code.tags)
+        newTags.splice(index, 1)
+        setCode({ ...code, ...{ tags: tagsTransformerDown(newTags) } } as Code)
+    }
+
+    const handleDrag = (tag: Tag, currPos: number, newPos: number) => {
+        const newTags = tagsTransformerUp(code.tags)
+        newTags.splice(currPos, 1)
+        newTags.splice(newPos, 0, tag)
+        setCode({ ...code, ...{ tags: tagsTransformerDown(newTags) } } as Code)
+    }
+
     const setCodeValue = (codeString: string) =>
         setCode({ ...code, ...{ code: codeString } } as Code)
     const setTarget = (targetURL: string) =>
         setCode({ ...code, ...{ links: [{ url: targetURL }] } } as Code)
-    const setTags = (tagsString: string) =>
-        setCode({ ...code, ...{ tags: tagsString } } as Code)
 
     return (
         <div
@@ -45,9 +78,9 @@ export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
                 ></div>
 
                 <div className="w-full inline-block align-bottom rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg">
-                    <div className="bg-neutral-100 relative px-6 pt-8 sm:px-8">
+                    <div className="bg-neutral-100 relative pl-6 pr-6 pt-8 sm:pl-7.5 sm:pr-8">
                         <div className="sm:flex sm:items-start">
-                            <div className="mx-auto z-10 flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-primary/[0.1] sm:mx-0 sm:h-10 sm:w-10">
+                            <div className="mx-auto z-10 flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-primary/[0.1] sm:ml-0 sm:mr-1 sm:h-10 sm:w-10">
                                 {isCreatingNew ? (
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -163,16 +196,22 @@ export const CodeModal = ({ modalState }: CodeModalOptions): ReactElement => {
                                         <label className="ml-0.5 mr-auto">
                                             Tags
                                         </label>
-                                        <textarea
-                                            id="tags"
-                                            rows={3}
-                                            className="appearance-none w-full px-3 py-2 border-2 outline-none transition-colors border-neutral-200 focus:border-neutral-500 rounded-xl resize-none"
-                                            placeholder="Semicolon separated words used to easily identify codes."
-                                            value={code.tags ? code.tags : ''}
-                                            onChange={e =>
-                                                setTags(e.target.value)
-                                            }
-                                        ></textarea>
+                                        <div className="bg-white w-full px-3 py-2 border-2 outline-none transition-colors border-neutral-200 focus-within:border-neutral-500 rounded-xl">
+                                            <ReactTags
+                                                tags={tagsTransformerUp(
+                                                    code.tags,
+                                                )}
+                                                handleAddition={handleAddition}
+                                                handleDelete={handleDelete}
+                                                handleDrag={handleDrag}
+                                                classNames={{
+                                                    tagInputField:
+                                                        'outline-none w-full px-1 my-1',
+                                                    remove: 'outline-none pb-[3px] pl-[3px]',
+                                                    tag: 'bg-neutral-100 border mb-2 mx-0.5 px-3 py-1 text-xs inline-flex items-center justify-center rounded-full',
+                                                }}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>

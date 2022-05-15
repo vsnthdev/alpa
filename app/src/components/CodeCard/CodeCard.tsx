@@ -65,7 +65,7 @@ export const CodeCard = ({
                                         quickText,
                                     })
                                 }}
-                                className="cursor-pointer text-black px-3 py-1 mr-2 rounded-full"
+                                className="cursor-pointer text-black px-3 py-1 mr-2 mb-2 rounded-full lg:mb-0"
                                 style={{
                                     backgroundColor: getColorFromTag(tag),
                                 }}
