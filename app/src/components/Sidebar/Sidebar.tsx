@@ -110,26 +110,28 @@ export const Sidebar = ({
                     )}
 
                     {/* add new button */}
-                    <button
-                        id="btnNew"
-                        onClick={() => openCodeModal(null, modalState)}
-                        className="outline-none transition-colors p-1.5 rounded-xl text-primary-hover bg-white hover:bg-neutral-100 md:p-2"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 aspect-square"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
+                    {auth.isLoggedIn && (
+                        <button
+                            id="btnNew"
+                            onClick={() => openCodeModal(null, modalState)}
+                            className="outline-none transition-colors p-1.5 rounded-xl text-primary-hover bg-white hover:bg-neutral-100 md:p-2"
                         >
-                            <path
-                                fillRule="evenodd"
-                                d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                                clipRule="evenodd"
-                                stroke="currentColor"
-                                strokeWidth="0.5"
-                            />
-                        </svg>
-                    </button>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 aspect-square"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                            >
+                                <path
+                                    fillRule="evenodd"
+                                    d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                                    clipRule="evenodd"
+                                    stroke="currentColor"
+                                    strokeWidth="0.5"
+                                />
+                            </svg>
+                        </button>
+                    )}
                 </div>
 
                 {/* bottom content */}

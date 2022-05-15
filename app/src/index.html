@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,20 +9,23 @@
 
     <!-- additional metadata -->
     <meta name="title" content="alpa — A fast ⚡ self-hosted link 🔗 shortener." />
-    <meta name="description" content="alpa takes long & hard to remember URLs and converts them into short & easy to remember links using your own server & domain. Made with 💖 by Vasanth Srivatsa."/>
+    <meta name="description"
+        content="alpa takes long & hard to remember URLs and converts them into short & easy to remember links using your own server & domain. Made with 💖 by Vasanth Srivatsa." />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://alpa.vercel.app" />
     <meta property="og:title" content="alpa — A fast ⚡ self-hosted link 🔗 shortener." />
-    <meta property="og:description" content="alpa takes long & hard to remember URLs and converts them into short & easy to remember links using your own server & domain. Made with 💖 by Vasanth Srivatsa." />
+    <meta property="og:description"
+        content="alpa takes long & hard to remember URLs and converts them into short & easy to remember links using your own server & domain. Made with 💖 by Vasanth Srivatsa." />
     <meta property="og:image" content="/cover.png" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://alpa.vercel.app" />
     <meta property="twitter:title" content="alpa — A fast ⚡ self-hosted link 🔗 shortener." />
-    <meta property="twitter:description" content="alpa takes long & hard to remember URLs and converts them into short & easy to remember links using your own server & domain. Made with 💖 by Vasanth Srivatsa." />
+    <meta property="twitter:description"
+        content="alpa takes long & hard to remember URLs and converts them into short & easy to remember links using your own server & domain. Made with 💖 by Vasanth Srivatsa." />
     <meta property="twitter:image" content="/cover.png" />
 
     <!-- favicon & theme color -->
@@ -31,21 +35,30 @@
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
 
     <!-- TypeScript bundle -->
     <script src="./index.tsx" type="module"></script>
 </head>
-<body class="h-full font-medium flex flex-col text-secondary">
+
+<body class="h-full font-medium flex flex-col text-secondary selection:bg-black/5">
     <!-- background color -->
     <div class="fixed top-0 left-0 right-0 max-h-screen h-screen bg-gradient-to-b from-neutral-100 to-white"></div>
 
     <!-- background elements -->
-    <div class="hidden absolute w-[25rem] -top-24 -left-24 aspect-square rounded-full shadow-2xl shadow-neutral-200 bg-gradient-to-b from-white to-neutral-100 md:inline lg:w-[30rem]"></div>
-    <div class="hidden absolute w-[15rem] -bottom-10 -right-20 aspect-square rounded-full shadow-2xl shadow-neutral-200 bg-gradient-to-b from-white to-neutral-100 md:inline md:-bottom-20 md:w-[20rem] md:right-44 lg:w-[27rem] lg:right-56 xl:right-80"></div>
-    <div class="hidden absolute w-[15rem] -top-10 -right-10 aspect-square rounded-full shadow-2xl shadow-neutral-200 bg-gradient-to-b from-white to-neutral-100 md:inline"></div>
+    <div
+        class="hidden absolute w-[25rem] -top-24 -left-24 aspect-square rounded-full shadow-2xl shadow-neutral-200 bg-gradient-to-b from-white to-neutral-100 md:inline lg:w-[30rem]">
+    </div>
+    <div
+        class="hidden absolute w-[15rem] -bottom-10 -right-20 aspect-square rounded-full shadow-2xl shadow-neutral-200 bg-gradient-to-b from-white to-neutral-100 md:inline md:-bottom-20 md:w-[20rem] md:right-44 lg:w-[27rem] lg:right-56 xl:right-80">
+    </div>
+    <div
+        class="hidden absolute w-[15rem] -top-10 -right-10 aspect-square rounded-full shadow-2xl shadow-neutral-200 bg-gradient-to-b from-white to-neutral-100 md:inline">
+    </div>
 
     <!-- dash app -->
     <div id="app" class="h-full flex flex-col z-10"></div>
 </body>
+
 </html>

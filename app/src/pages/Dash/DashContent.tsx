@@ -53,7 +53,7 @@ export const DashContent = ({
         >
             <div className="flex flex-col w-full max-w-6xl items-center">
                 {/* short codes */}
-                {codes.length == 0 ? (
+                {codes.length == 0 && loading == false ? (
                     <div className="mt-16 w-full h-full flex flex-col space-y-8 items-center justify-center lg:space-y-16 xl:space-y-20">
                         <svg
                             className="w-48 aspect-square md:w-60 lg:w-[18rem] xl:w-[22rem]"

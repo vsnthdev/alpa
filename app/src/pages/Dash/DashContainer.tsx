@@ -80,6 +80,7 @@ export const Dash = ({
                         },
                         dispatch,
                         navigate,
+                        setLoading,
                     })
                 }
             })
@@ -91,6 +92,7 @@ export const Dash = ({
                     },
                     dispatch,
                     navigate,
+                    setLoading,
                 })
             })
             .finally(() => {

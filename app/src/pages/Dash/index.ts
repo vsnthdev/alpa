@@ -18,9 +18,10 @@ interface LogoutOptions {
     }
     navigate: NavigateFunction
     dispatch: Dispatch<any>
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default ({ auth, navigate, dispatch }: LogoutOptions) => {
+export default ({ auth, navigate, dispatch, setLoading }: LogoutOptions) => {
     const { apiHost, apiToken } = auth
 
     // the logout procedure
@@ -35,6 +36,9 @@ export default ({ auth, navigate, dispatch }: LogoutOptions) => {
         // go back to login page
         navigate('/login')
         progress.done()
+
+        // set the loading state back to true
+        setLoading(true)
     }
 
     progress.start()

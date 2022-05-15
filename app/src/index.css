@@ -13,11 +13,6 @@
     display: none;
 }
 
-/* text selection color */
-*::selection {
-    @apply bg-primary/10;
-}
-
 /* prevent blue color highlight on clicking in mobile devices */
 
 * {

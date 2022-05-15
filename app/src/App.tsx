@@ -27,17 +27,22 @@ export const App = (): ReactElement => {
         <StrictMode>
             <Provider store={store}>
                 <BrowserRouter>
-                    <HotKeys keyMap={hotkeyMap} handlers={hotkeyHandlers}>
+                    <HotKeys
+                        className="h-full"
+                        keyMap={hotkeyMap}
+                        handlers={hotkeyHandlers}
+                    >
                         {/* the sidebar */}
                         <Sidebar modalState={modalState} />
 
                         {/* the routes link to their pages */}
-                        <div className="ml-20 mr-6 md:ml-24 md:mr-8 lg:ml-28 lg:mr-12 xl:ml-0 xl:mr-0">
+                        <div className="h-full ml-20 mr-6 md:ml-24 md:mr-8 lg:ml-28 lg:mr-12 xl:ml-0 xl:mr-0">
                             {/* the topbar */}
                             <Topbar
                                 loading={loading}
                                 quickText={quickText}
                                 setQuickText={setQuickText}
+                                setLoading={setLoading}
                             />
 
                             <Routes>

@@ -17,10 +17,12 @@ export const Topbar = ({
     loading,
     quickText,
     setQuickText,
+    setLoading,
 }: {
     loading: boolean
     quickText: string
     setQuickText: Dispatch<React.SetStateAction<string>>
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
 }): ReactElement => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -60,7 +62,11 @@ export const Topbar = ({
 
                 {/* logout button */}
                 {auth.isLoggedIn ? (
-                    <a onClick={() => logout({ auth, navigate, dispatch })}>
+                    <a
+                        onClick={() =>
+                            logout({ auth, navigate, dispatch, setLoading })
+                        }
+                    >
                         <button className="text-black font-bold py-2 rounded-md transition items-center space-x-1 focus:outline-none active:transform-gpu active:scale-95 md:flex">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
