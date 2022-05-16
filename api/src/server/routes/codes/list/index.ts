@@ -14,6 +14,11 @@ interface RequestQuery {
     search: string
 }
 
+interface ResponseImpl {
+    total: number
+    codes: Code[]
+}
+
 const keysToCodes = async (keys: string[]): Promise<Code[]> => {
     const codes: any[] = []
 
@@ -36,15 +41,35 @@ const documentsToCodes = async (docs: any[]) => {
     return codes
 }
 
-const getRecentList = async (query: RequestQuery) => {
+const getRecentList = async (query: RequestQuery): Promise<ResponseImpl> => {
+    // get the number of total keys in the database
+    const total: number = await db.codes.dbSize()
+
+    // create a response skeleton object
+    const res: ResponseImpl = {
+        total: -1,
+        codes: [],
+    }
+
+    // handle when there are no codes in the database
+    if (total == 0) return { ...res, ...{ total: 0 } }
+
+    // initialize the cursor variable
     if (typeof query.cursor != 'string') query.cursor = '0'
-    const { cursor: now, keys } = await db.codes.scan(parseInt(query.cursor), {
-        COUNT: 50,
+
+    // now fetch keys from our sorted set in Redis
+    const count = 10
+    const start = count * parseInt(query.cursor)
+    const end = start + (count - 1)
+
+    const keys = await db.config.zRange('codes', start, end, {
+        REV: true,
     })
 
+    // convert database keys to actual codes
     const codes = await keysToCodes(keys)
 
-    return { cursor: now, codes }
+    return { ...res, ...{ total: Math.round(total / count), codes } }
 }
 
 const executeQuery = async ({ search }: RequestQuery) => {

@@ -42,6 +42,21 @@ const handler = async (req: FastifyRequest, rep: FastifyReply) => {
             message: 'Updated the code',
         })
     } else {
+        // fetch the last value in sorted list and it's score
+        let lastScore: number
+        try {
+            const [last] = await db.config.zRangeWithScores('codes', 0, 0, {
+                REV: true,
+            })
+
+            lastScore = last.score
+        } catch {
+            lastScore = 0
+        }
+
+        // add the newly created code to our sorted set
+        await db.config.zAdd('codes', { score: lastScore + 1, value: code })
+
         return rep.status(201).send({
             message: 'Created a new code',
         })
