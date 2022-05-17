@@ -5,7 +5,10 @@ import codes, { Code } from './codes.js'
 
 export interface AppState {
     auth: AuthState
-    codes: Code[]
+    codes: {
+        pages: number
+        codes: Code[]
+    }
 }
 
 export const store = configureStore({

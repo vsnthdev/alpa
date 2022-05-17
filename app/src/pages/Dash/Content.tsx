@@ -25,7 +25,7 @@ export const Content = ({
     setQuickText: Dispatch<React.SetStateAction<string>>
 }): ReactElement => {
     // pull codes from the store and implement searching
-    let codes = useSelector((state: AppState) => state.codes)
+    let { codes } = useSelector((state: AppState) => state.codes)
 
     // try to search in existing codes loaded into the frontend
     try {

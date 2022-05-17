@@ -27,7 +27,7 @@ export const del = ({
         },
     }).then(() => {
         // update our application state
-        dispatch(_del({ code }))
+        dispatch(_del(code))
     })
 
 export const copyShortURL = ({

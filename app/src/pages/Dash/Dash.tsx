@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { CodeModalStateReturns } from '../../components/CodeModal'
 import { login } from '../../store/auth'
-import { insert } from '../../store/codes'
+import { insert, setPages } from '../../store/codes'
 import { parseJWTPayload } from '../Login/index'
 import { Content } from './Content'
 import logout from './index'
@@ -70,6 +70,7 @@ export const Dash = ({
                         }),
                     )
 
+                    dispatch(setPages(data.pages))
                     dispatch(insert(data.codes))
                     setLoading(false)
                 } else {
