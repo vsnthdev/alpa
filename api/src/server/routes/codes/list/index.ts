@@ -10,12 +10,12 @@ import auth from '../../../plugins/auth.js'
 import { Code } from '../make/index.js'
 
 interface RequestQuery {
-    cursor: string
+    page: string
     search: string
 }
 
 interface ResponseImpl {
-    total: number
+    pages: number
     codes: Code[]
 }
 
@@ -47,19 +47,19 @@ const getRecentList = async (query: RequestQuery): Promise<ResponseImpl> => {
 
     // create a response skeleton object
     const res: ResponseImpl = {
-        total: -1,
+        pages: -1,
         codes: [],
     }
 
     // handle when there are no codes in the database
-    if (total == 0) return { ...res, ...{ total: 0 } }
+    if (total == 0) return { ...res, ...{ pages: 0 } }
 
     // initialize the cursor variable
-    if (typeof query.cursor != 'string') query.cursor = '0'
+    if (typeof query.page != 'string') query.page = '0'
 
     // now fetch keys from our sorted set in Redis
     const count = 10
-    const start = count * parseInt(query.cursor)
+    const start = count * parseInt(query.page)
     const end = start + (count - 1)
 
     const keys = await db.config.zRange('codes', start, end, {
@@ -69,7 +69,7 @@ const getRecentList = async (query: RequestQuery): Promise<ResponseImpl> => {
     // convert database keys to actual codes
     const codes = await keysToCodes(keys)
 
-    return { ...res, ...{ total: Math.round(total / count), codes } }
+    return { ...res, ...{ pages: Math.round(total / count), codes } }
 }
 
 const executeQuery = async ({ search }: RequestQuery) => {
