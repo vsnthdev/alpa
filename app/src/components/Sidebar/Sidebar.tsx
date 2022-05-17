@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
 import { AppState } from '../../store'
-import { CodeModalStateReturns, openCodeModal } from '../CodeModal/functions'
+import { CodeModalStateReturns, openCodeModal } from '../CodeModal'
 
 export const Sidebar = ({
     modalState,

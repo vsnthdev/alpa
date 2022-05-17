@@ -14,7 +14,7 @@ import {
     cancelAction,
     CodeModalStateReturns,
     generateCodeString,
-} from './functions'
+} from '.'
 
 const tagsTransformerUp = (tags: string): Tag[] =>
     tags

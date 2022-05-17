@@ -8,12 +8,12 @@ import { Dispatch, ReactElement, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import { CodeCard } from '../../components/CodeCard/CodeCard'
+import { CodeModalStateReturns } from '../../components/CodeModal'
 import { CodeModal } from '../../components/CodeModal/CodeModal'
-import { CodeModalStateReturns } from '../../components/CodeModal/functions'
 import { AppState } from '../../store'
 import { Code } from '../../store/codes'
 
-export const DashContent = ({
+export const Content = ({
     loading,
     quickText,
     modalState,

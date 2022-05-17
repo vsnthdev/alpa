@@ -10,11 +10,11 @@ import { Dispatch, ReactElement, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { CodeModalStateReturns } from '../../components/CodeModal/functions'
+import { CodeModalStateReturns } from '../../components/CodeModal'
 import { login } from '../../store/auth'
 import { insert } from '../../store/codes'
 import { parseJWTPayload } from '../Login/index'
-import { DashContent } from './DashContent'
+import { Content } from './Content'
 import logout from './index'
 
 export const Dash = ({
@@ -102,12 +102,12 @@ export const Dash = ({
 
     return (
         <main>
-            <DashContent
+            <Content
                 loading={loading}
                 quickText={quickText}
                 modalState={modalState}
                 setQuickText={setQuickText}
-            ></DashContent>
+            ></Content>
         </main>
     )
 }

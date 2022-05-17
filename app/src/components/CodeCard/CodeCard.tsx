@@ -10,8 +10,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppState } from '../../store'
 import { Code } from '../../store/codes'
 import { searchAPI } from '../../util/searchAPI'
-import { CodeModalStateReturns, openCodeModal } from '../CodeModal/functions'
-import { copyShortURL, del, getColorFromTag } from './functions'
+import { CodeModalStateReturns, openCodeModal } from '../CodeModal'
+import { copyShortURL, del, getColorFromTag } from './index'
 
 export const CodeCard = ({
     code,
