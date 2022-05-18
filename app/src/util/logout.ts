@@ -8,8 +8,8 @@ import axios from 'axios'
 import progress from 'nprogress'
 import { NavigateFunction } from 'react-router-dom'
 
-import { logout } from '../../store/auth'
-import { clear } from '../../store/codes'
+import { logout } from '../store/auth'
+import { clear } from '../store/codes'
 
 interface LogoutOptions {
     auth: {

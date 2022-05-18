@@ -9,8 +9,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useDebouncedCallback } from 'use-debounce'
 
-import logout from '../../pages/Dash'
 import { AppState } from '../../store/index'
+import logout from '../../util/logout'
 import { searchAPI } from '../../util/searchAPI'
 
 export const Topbar = ({
