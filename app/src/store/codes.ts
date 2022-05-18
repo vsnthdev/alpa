@@ -59,13 +59,21 @@ const codes = createSlice({
         patch: (state, action) => {
             const { pages, codes } = state
 
+            const index = codes.indexOf(
+                codes.find(
+                    (code: Code) => code.code == action.payload.code,
+                ) as any,
+            )
+
+            const newCodes = codes.filter(
+                (code: Code) => code.code != action.payload.code,
+            )
+
+            newCodes.splice(index, 0, action.payload)
+
             return {
                 pages,
-                codes: [action.payload].concat(
-                    codes.filter(
-                        (code: Code) => code.code != action.payload.code,
-                    ),
-                ),
+                codes: newCodes,
             }
         },
 
