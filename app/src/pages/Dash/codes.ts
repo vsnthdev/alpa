@@ -11,6 +11,7 @@ import { NavigateFunction } from 'react-router-dom'
 import { login } from '../../store/auth'
 import { insert, setPages } from '../../store/codes'
 import logout from '../../util/logout'
+import scrolling from '../../util/scrolling'
 import { parseJWTPayload } from '../Login/index'
 
 const fetchCodes = async ({
@@ -27,7 +28,7 @@ const fetchCodes = async ({
     dispatch: Dispatch<any>
     navigate: NavigateFunction
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
-}) => {
+}): Promise<number> => {
     try {
         // fetch the codes
         const { data } = await axios({
@@ -43,6 +44,8 @@ const fetchCodes = async ({
         dispatch(insert(data.codes))
         setLoading(false)
         progress.done()
+
+        return data.pages
     } catch {
         //
         logout({
@@ -54,6 +57,8 @@ const fetchCodes = async ({
             navigate,
             setLoading,
         })
+
+        return -1
     }
 }
 
@@ -84,7 +89,7 @@ export default async ({
 
     const getCodesURL = () => `${apiHost}/api/codes?page=${page[0]}`
 
-    await fetchCodes({
+    const pages = await fetchCodes({
         apiToken,
         getCodesURL,
         apiHost,
@@ -105,5 +110,11 @@ export default async ({
         }),
     )
 
-    // todo: attach intersection observer
+    // attach intersection observer
+    scrolling({
+        dispatch,
+        apiHost,
+        apiToken,
+        pages,
+    })
 }

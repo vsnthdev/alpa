@@ -51,7 +51,10 @@ export const Content = ({
                 loading ? 'opacity-0' : 'opacity-100'
             }`}
         >
-            <div className="flex flex-col w-full max-w-6xl items-center">
+            <div
+                id="codes"
+                className="flex flex-col w-full max-w-6xl items-center"
+            >
                 {/* short codes */}
                 {codes.length == 0 && loading == false ? (
                     <div className="mt-16 w-full h-full flex flex-col space-y-8 items-center justify-center lg:space-y-16 xl:space-y-20">
