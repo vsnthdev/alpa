@@ -47,7 +47,7 @@ export const Content = ({
 
     return (
         <div
-            className={`container mx-auto flex flex-col items-center transition-opacity lg:mt-16 ${
+            className={`container mx-auto flex flex-col items-center transition-opacity lg:mt-16 lg:pb-28 ${
                 loading ? 'opacity-0' : 'opacity-100'
             }`}
         >

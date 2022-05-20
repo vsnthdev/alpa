@@ -19,6 +19,12 @@
     -webkit-tap-highlight-color: transparent;
 }
 
+/* prevent black outline on focus */
+
+* {
+    outline: none !important;
+}
+
 /* Tippy.js styles */
 
 .tippy-box[data-theme~='primary'] {

@@ -38,7 +38,7 @@ export const CodeCard = ({
             </div>
 
             {/* the link */}
-            <div className="mb-4 max-w-full flex">
+            <div className="mb-4 max-w-xl flex">
                 <a
                     className="text-sm truncate"
                     href={code.links[0].url}
