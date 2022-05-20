@@ -73,7 +73,7 @@ services:
     
     # @alpa/api Docker image
     alpa-api:
-        image: vsnthdev/alpa-api:v1.1.0
+        image: vsnthdev/alpa-api:v1.1.1
         container_name: alpa-api
         ports:
             - 1727:1727

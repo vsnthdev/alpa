@@ -226,7 +226,7 @@ spec:
                       name: alpa-api-config
             containers:
                 - name: alpa
-                  image: vsnthdev/alpa-api:v1.1.0
+                  image: vsnthdev/alpa-api:v1.1.1
                   imagePullPolicy: Always
                   volumeMounts:
                       - mountPath: /opt/alpa/api/config.yml

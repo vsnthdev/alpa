@@ -1,7 +1,7 @@
 {
     "name": "@alpa/api",
     "description": "The core RESTful API 🛠️ that handles redirection in alpa.",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "type": "module",
     "scripts": {
         "clean": "rimraf dist tsconfig.tsbuildinfo",
