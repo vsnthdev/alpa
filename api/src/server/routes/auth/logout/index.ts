@@ -3,32 +3,31 @@
  *  Created On 02 February 2022
  */
 
-import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
+import { FastifyReply, FastifyRequest } from 'fastify'
+import { DecodePayloadType } from 'fastify-jwt'
 
-import { AlpaAPIConfig } from '../../../../config/interface'
-import { ConnectionsList } from '../../../../database'
+import { db } from '../../../../database/index.js'
+import { fastify } from '../../../index.js'
 import auth from '../../../plugins/auth.js'
 
-const getHandler =
-    (config: AlpaAPIConfig, db: ConnectionsList, fastify: FastifyInstance) =>
-    async (req: FastifyRequest, rep: FastifyReply): Promise<any> => {
-        const token = req.headers.authorization.slice(7)
-        const decoded = fastify.jwt.decode(token)
-        const secondsRemaining =
-            decoded['exp'] - Math.round(new Date().getTime() / 1000)
+const handler = async (req: FastifyRequest, rep: FastifyReply) => {
+    const token = req.headers.authorization?.slice(7) as string
+    const decoded = fastify.jwt.decode(token) as DecodePayloadType
+    const secondsRemaining =
+        decoded['exp'] - Math.round(new Date().getTime() / 1000)
 
-        await db.tokens.set(token, 1, {
-            EX: secondsRemaining,
-        })
+    await db.tokens?.set(token, 1, {
+        EX: secondsRemaining,
+    })
 
-        return rep.status(204).send('')
-    }
+    return rep.status(204).send('')
+}
 
 export default {
-    path: '/api/auth/logout',
+    handler,
     method: 'DELETE',
+    url: ['/api/auth/logout'],
     opts: {
         preValidation: [auth],
     },
-    getHandler,
 }

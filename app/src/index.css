@@ -13,20 +13,21 @@
     display: none;
 }
 
-/* text selection color */
-*::selection {
-    @apply bg-primary/10;
-}
-
 /* prevent blue color highlight on clicking in mobile devices */
 
 * {
     -webkit-tap-highlight-color: transparent;
 }
 
+/* prevent black outline on focus */
+
+* {
+    outline: none !important;
+}
+
 /* Tippy.js styles */
 
-.tippy-box[data-theme~='primary']  {
+.tippy-box[data-theme~='primary'] {
     @apply bg-primary border-2 border-solid border-primary font-medium;
 }
 
@@ -34,7 +35,7 @@
     @apply text-primary;
 }
 
-.tippy-box[data-theme~='light']  {
+.tippy-box[data-theme~='light'] {
     @apply bg-white text-neutral-900 border-2 border-solid border-neutral-300 font-medium;
 }
 

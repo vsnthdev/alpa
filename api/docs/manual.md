@@ -125,7 +125,7 @@ Provided example config file is best suitable for development & testing purposes
 
 3. 🔑 **Changing server's secret key**
 
-    This secret key is used to sign the JWT authentication tokens, since the default (`3PWSzUzBRA722PdnyFwzVrXbangmFsQkLe98jjaEnDw9o8cW7fcWNkURc92GB5SF`) is already known to everyone. It is insecure to use it.
+    This secret key is used to sign the JWT authentication tokens, since the default (``) is already known to everyone. It is insecure to use it.
 
     Preferably use a password generator to generate a 64 character long random string here.
 

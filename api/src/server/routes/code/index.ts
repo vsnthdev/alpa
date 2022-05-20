@@ -6,28 +6,40 @@
 import boom from 'boom'
 import { FastifyReply, FastifyRequest } from 'fastify'
 
-import { AlpaAPIConfig } from '../../../config/interface'
-import { ConnectionsList } from '../../../database'
+import { db } from '../../../database/index.js'
 import { CodeLink } from '../codes/make'
 
-const getHandler =
-    (config: AlpaAPIConfig, db: ConnectionsList) =>
-    async (req: FastifyRequest, rep: FastifyReply): Promise<any> => {
-        const links = (await db.codes.json.get(req.params['code'] || '_root', {
-            path: ['links'],
-        })) as CodeLink[]
+export interface ParamsImpl {
+    code: string
+}
 
-        if (!links) throw boom.notFound()
+const handler = async (req: FastifyRequest, rep: FastifyReply) => {
+    // read the URL parameters
+    const params = req.params as ParamsImpl
 
-        if (links.length == 1) {
-            return rep.redirect(307, links[0].url)
-        } else {
-            throw boom.notImplemented()
-        }
+    // determine the code, or use _root if no code is provided
+    const links = (await db.codes.json.get(params.code || '_root', {
+        path: ['links'],
+    })) as CodeLink[]
+
+    // handle when links don't exist
+    if (!links) throw boom.notFound()
+
+    // apply caching headers
+    rep.header('Cache-Control', 'max-age=60')
+
+    // only single link redirection has been implemented till now
+    // for multiple, we either send a JavaScript response
+    // or a full HTML page rendered on the server
+    if (links.length == 1) {
+        return rep.redirect(301, links[0].url)
+    } else {
+        throw boom.notImplemented()
     }
+}
 
 export default {
-    path: ['/:code', '/'],
+    handler,
     method: 'GET',
-    getHandler,
+    url: ['/:code', '/'],
 }

@@ -8,14 +8,17 @@ import axios from 'axios'
 
 import { Code, del as _del } from '../../store/codes'
 
-interface DelOptions {
+export const del = ({
+    apiHost,
+    apiToken,
+    code,
+    dispatch,
+}: {
     apiHost: string
     apiToken: string
     code: string
     dispatch: Dispatch
-}
-
-export const del = ({ apiHost, apiToken, code, dispatch }: DelOptions) =>
+}) =>
     axios({
         method: 'DELETE',
         url: `${apiHost}/api/codes/${code}`,
@@ -24,7 +27,7 @@ export const del = ({ apiHost, apiToken, code, dispatch }: DelOptions) =>
         },
     }).then(() => {
         // update our application state
-        dispatch(_del({ code }))
+        dispatch(_del(code))
     })
 
 export const copyShortURL = ({
@@ -40,3 +43,13 @@ export const copyShortURL = ({
         setShowCopiedToolTip(true)
         setTimeout(() => setShowCopiedToolTip(false), 1000)
     })
+
+// copied from 👇
+// https://stackoverflow.com/questions/3426404/create-a-hexadecimal-colour-based-on-a-string-with-javascript
+export const getColorFromTag = (tag: string) => {
+    const stringUniqueHash = [...tag].reduce((acc, char) => {
+        return char.charCodeAt(0) + ((acc << 5) - acc)
+    }, 0)
+
+    return `hsla(${stringUniqueHash % 360}, 95%, 35%, 0.15)`
+}

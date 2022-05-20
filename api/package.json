@@ -1,7 +1,7 @@
 {
     "name": "@alpa/api",
     "description": "The core RESTful API 🛠️ that handles redirection in alpa.",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "type": "module",
     "scripts": {
         "clean": "rimraf dist tsconfig.tsbuildinfo",
@@ -13,7 +13,10 @@
     "dependencies": {
         "@node-redis/json": "^1.0.2",
         "@node-redis/search": "^1.0.2",
+        "ajv": "^8.11.0",
         "boom": "^7.3.0",
+        "deepmerge": "^4.2.2",
+        "dot-object": "^2.1.4",
         "fastify": "^3.27.0",
         "fastify-boom": "^1.0.0",
         "fastify-cors": "^6.0.2",
@@ -24,6 +27,7 @@
     },
     "devDependencies": {
         "@types/boom": "^7.3.1",
+        "@types/dot-object": "^2.1.2",
         "@types/gravatar": "^1.8.3",
         "nodemon": "^2.0.15"
     }

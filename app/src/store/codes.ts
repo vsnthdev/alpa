@@ -10,28 +10,100 @@ export interface Code {
     tags: string
 }
 
+interface InitialState {
+    pages: number
+    codes: Code[]
+}
+
 const codes = createSlice({
     name: 'codes',
-    initialState: [],
+    initialState: {
+        pages: 0,
+        codes: [],
+    } as InitialState,
     reducers: {
-        insert: (state, action) => state.concat(action.payload),
-        del: (state, action) =>
-            state.filter((code: Code) => code.code != action.payload.code),
-        patch: (state, action) =>
-            [action.payload as never].concat(
-                state.filter((code: Code) => code.code != action.payload.code),
-            ),
-        update: (state, { payload }) =>
-            state.concat(
-                payload.filter(
-                    (code: Code) =>
-                        Boolean(state.find((c: Code) => c.code == code.code)) ==
-                        false,
+        // sets the total number of pages while
+        // querying the API for infinite scrolling
+        setPages: (state, action) => {
+            const { codes } = state
+
+            return {
+                codes,
+                pages: action.payload,
+            }
+        },
+
+        // inserts the initial codes into the app store
+        insert: (state, action) => {
+            const { pages, codes } = state
+
+            return {
+                pages,
+                codes: codes.concat(action.payload),
+            }
+        },
+
+        // deletes a given short code given it's code string
+        del: (state, action) => {
+            const { pages, codes } = state
+
+            return {
+                pages,
+                codes: codes.filter(
+                    (code: Code) => code.code != action.payload,
                 ),
-            ),
-        clear: () => [],
+            }
+        },
+
+        // used to mutate an individual code object
+        patch: (state, action) => {
+            const { pages, codes } = state
+
+            const index = codes.indexOf(
+                codes.find(
+                    (code: Code) => code.code == action.payload.code,
+                ) as any,
+            )
+
+            const newCodes = codes.filter(
+                (code: Code) => code.code != action.payload.code,
+            )
+
+            newCodes.splice(index, 0, action.payload)
+
+            return {
+                pages,
+                codes: newCodes,
+            }
+        },
+
+        // used to update the entire codes array at once
+        update: (state, { payload }) => {
+            const { pages, codes } = state
+
+            return {
+                pages,
+                codes: codes.concat(
+                    payload.filter(
+                        (code: Code) =>
+                            Boolean(
+                                codes.find((c: Code) => c.code == code.code),
+                            ) == false,
+                    ),
+                ),
+            }
+        },
+
+        // resets the state to initial and deletes all the
+        // data from the frontend
+        clear: () => {
+            return {
+                pages: 0,
+                codes: [],
+            }
+        },
     },
 })
 
-export const { insert, clear, del, patch, update } = codes.actions
+export const { insert, clear, del, patch, update, setPages } = codes.actions
 export default codes.reducer

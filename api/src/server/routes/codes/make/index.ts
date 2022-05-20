@@ -6,8 +6,7 @@
 import boom from 'boom'
 import { FastifyReply, FastifyRequest } from 'fastify'
 
-import { AlpaAPIConfig } from '../../../../config/interface.js'
-import { ConnectionsList } from '../../../../database.js'
+import { db } from '../../../../database/index.js'
 import auth from '../../../plugins/auth.js'
 
 export interface CodeLink {
@@ -18,43 +17,57 @@ export interface CodeLink {
 }
 
 export interface Code {
-    code: string
+    code?: string
     tags: string
     links: CodeLink[]
 }
 
-const getHandler =
-    (config: AlpaAPIConfig, db: ConnectionsList) =>
-    async (req: FastifyRequest, rep: FastifyReply): Promise<any> => {
-        const body = req.body as Code
-        const code = body.code
-        delete body.code
+const handler = async (req: FastifyRequest, rep: FastifyReply) => {
+    const body = req.body as Code
+    const code = body.code
+    const query = req.query as any
+    delete body.code
 
-        if (code == 'api')
-            throw boom.notAcceptable('A code named api cannot be created.')
+    if (code == 'api')
+        throw boom.notAcceptable('A code named api cannot be created.')
 
-        const exists = await db.codes.exists(code)
-        if (exists && Boolean(req.query['force']) == false)
-            throw boom.conflict('That code already exists')
+    const exists = await db.codes.exists(code)
+    if (exists && Boolean(query['force']) == false)
+        throw boom.conflict('That code already exists')
 
-        await db.codes.json.set(code, '$', body)
+    await db.codes.json.set(code, '$', body)
 
-        if (exists) {
-            return rep.status(200).send({
-                message: 'Updated the code',
+    if (exists) {
+        return rep.status(200).send({
+            message: 'Updated the code',
+        })
+    } else {
+        // fetch the last value in sorted list and it's score
+        let lastScore: number
+        try {
+            const [last] = await db.config.zRangeWithScores('codes', 0, 0, {
+                REV: true,
             })
-        } else {
-            return rep.status(201).send({
-                message: 'Created a new code',
-            })
+
+            lastScore = last.score
+        } catch {
+            lastScore = 0
         }
+
+        // add the newly created code to our sorted set
+        await db.config.zAdd('codes', { score: lastScore + 1, value: code })
+
+        return rep.status(201).send({
+            message: 'Created a new code',
+        })
     }
+}
 
 export default {
-    path: '/api/codes',
+    handler,
     method: 'POST',
+    url: ['/api/codes'],
     opts: {
         preValidation: [auth],
     },
-    getHandler,
 }

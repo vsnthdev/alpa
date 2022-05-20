@@ -14,12 +14,7 @@ export interface AlpaAPIConfig {
         channels: {
             codes: number
             tokens: number
+            config: number
         }
-    }
-    server: {
-        host: string
-        port: string
-        secret: string
-        cors: string[]
     }
 }

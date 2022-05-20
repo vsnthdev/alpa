@@ -8,8 +8,8 @@ import axios from 'axios'
 import progress from 'nprogress'
 import { NavigateFunction } from 'react-router-dom'
 
-import { logout } from '../../store/auth'
-import { clear } from '../../store/codes'
+import { logout } from '../store/auth'
+import { clear } from '../store/codes'
 
 interface LogoutOptions {
     auth: {
@@ -18,9 +18,10 @@ interface LogoutOptions {
     }
     navigate: NavigateFunction
     dispatch: Dispatch<any>
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default ({ auth, navigate, dispatch }: LogoutOptions) => {
+export default ({ auth, navigate, dispatch, setLoading }: LogoutOptions) => {
     const { apiHost, apiToken } = auth
 
     // the logout procedure
@@ -35,6 +36,9 @@ export default ({ auth, navigate, dispatch }: LogoutOptions) => {
         // go back to login page
         navigate('/login')
         progress.done()
+
+        // set the loading state back to true
+        setLoading(true)
     }
 
     progress.start()
@@ -50,6 +54,7 @@ export default ({ auth, navigate, dispatch }: LogoutOptions) => {
             // if the token is no longer authorized, we simply
             // clean up the token and redirect to login page
             if (JSON.parse(JSON.stringify(e)).status == 401) procedure()
+            if (JSON.parse(JSON.stringify(e)).status == 500) procedure()
         })
         .finally(() => {
             progress.done()

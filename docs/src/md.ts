@@ -43,7 +43,9 @@ export default async (md: string, data: any) => {
     )
 
     // create a handlebars template
-    const template = handlebars.compile(doc.content)
+    const template = handlebars.compile(doc.content, {
+        noEscape: true,
+    })
 
     // render it
     const render = template({ ...data, ...{ isIndex: getIsIndex(md) } })

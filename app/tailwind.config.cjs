@@ -8,8 +8,8 @@ module.exports = {
     content: ['./src/**/*.{js,jsx,ts,tsx,html}'],
     theme: {
         fontFamily: {
-            body: [
-                'Sora',
+            sans: [
+                'Plus Jakarta Sans',
                 'ui-sans-serif',
                 'system-ui',
                 '-apple-system',
@@ -20,6 +20,17 @@ module.exports = {
                 'Arial',
                 '"Noto Sans"',
                 'sans-serif',
+            ],
+            mono: [
+                'IBM Plex Mono',
+                'ui-monospace',
+                'SFMono-Regular',
+                'Menlo',
+                'Monaco',
+                'Consolas',
+                '"Liberation Mono"',
+                '"Courier New"',
+                'monospace',
             ],
         },
         extend: {

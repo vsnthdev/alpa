@@ -79,17 +79,16 @@ export const openCodeModal = (
 const closeModal = (state: CodeModalStateReturns) => state.setIsOpen(false)
 
 const clearState = (state: CodeModalStateReturns) =>
-    setTimeout(() => {
-        state.setCode({
-            code: '',
-            links: [{ url: '' }],
-            tags: '',
-        })
-    }, 500)
+    state.setCode({
+        code: '',
+        links: [{ url: '' }],
+        tags: '',
+    })
 
 export const cancelAction = (state: CodeModalStateReturns) => {
     closeModal(state)
     clearState(state)
+    ;(document.querySelector('#btnNew') as any).focus()
 }
 
 export const applyAction = (

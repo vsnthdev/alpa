@@ -27,23 +27,5 @@ database:
         # storing authentication token blacklist
         tokens: 1
 
-# HTTP server configuration
-server:
-    # the host to listen to
-    host: 0.0.0.0
-
-    # at the port to listen on
-    port: 1727
-
-    # the secret key used to encrypt JWT tokens
-    # while using for production, change this key to a random 64 character
-    # string for stronger security
-    secret: 3PWSzUzBRA722PdnyFwzVrXbangmFsQkLe98jjaEnDw9o8cW7fcWNkURc92GB5SF
-
-    # allowed URLs for the API to be access from
-    # while using for production, remove the localhost ones
-    # tip: remove https://alpa.vercel.app if you don't want to use the public
-    # dashboard hosted my me
-    cors:
-        - https://alpa.vercel.app
-        - http://localhost:3000
+        # storing additional critical configuration
+        config: 2
