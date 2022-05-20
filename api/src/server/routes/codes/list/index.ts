@@ -122,7 +122,5 @@ export default {
     handler,
     method: 'GET',
     url: ['/api/codes'],
-    opts: {
-        preValidation: [auth],
-    },
+    preValidation: [auth],
 }

@@ -55,5 +55,9 @@ export default async ({
         }
     })
 
-    observer.observe(lastOne)
+    try {
+        observer.observe(lastOne)
+    } catch {
+        return
+    }
 }

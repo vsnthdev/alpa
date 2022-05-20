@@ -27,7 +27,5 @@ export default {
     handler,
     method: 'DELETE',
     url: ['/api/auth/logout'],
-    opts: {
-        preValidation: [auth],
-    },
+    preValidation: [auth],
 }

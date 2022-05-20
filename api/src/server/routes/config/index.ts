@@ -42,7 +42,5 @@ export default {
     handler,
     method: 'POST',
     url: ['/api/config'],
-    opts: {
-        preValidation: [auth],
-    },
+    preValidation: [auth],
 }
