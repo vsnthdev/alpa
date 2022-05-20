@@ -33,7 +33,5 @@ export default {
     handler,
     method: 'DELETE',
     url: ['/api/codes/:code'],
-    opts: {
-        preValidation: [auth],
-    },
+    preValidation: [auth],
 }

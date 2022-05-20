@@ -67,7 +67,5 @@ export default {
     handler,
     method: 'POST',
     url: ['/api/codes'],
-    opts: {
-        preValidation: [auth],
-    },
+    preValidation: [auth],
 }
