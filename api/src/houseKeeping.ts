@@ -5,8 +5,8 @@
  */
 
 import createSearchIndex from './database/houseKeeping/createSearchIndex/index.js'
-import { db } from './database/index.js'
+import reflectSortedList from './database/houseKeeping/reflectSortedList/index.js'
 
 export default async (): Promise<void> => {
-    await createSearchIndex(db)
+    await Promise.all([createSearchIndex(), reflectSortedList()])
 }

@@ -6,9 +6,11 @@
 import { SchemaFieldTypes } from 'redis'
 
 import { log } from '../../../logger.js'
-import { ConnectionsList } from '../../index.js'
+import { db } from '../../index.js'
 
-export default async ({ codes }: ConnectionsList) => {
+export default async () => {
+    const { codes } = db
+
     const existing = await codes.ft._list()
     if (existing.includes('codes') == false) {
         // clear all existing indexes
